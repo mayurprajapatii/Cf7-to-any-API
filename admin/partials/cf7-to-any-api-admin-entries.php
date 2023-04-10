@@ -45,13 +45,10 @@
 			
 			$data_sorted = $Cf7_To_Any_Api->cf7toanyapi_sortdata($result);
 			$fields = $Cf7_To_Any_Api->cf7toanyapi_get_db_fields($cf_id);
-			$display_character = (int) apply_filters('cf7toanyapi_display_character_count',30);
+			$display_character = (int) apply_filters('cf7toanyapi_display_character_count',500);
 			$arr_field_type_info = $Cf7_To_Any_Api->cf7toanyapi_field_type_info($cf_id);
 
-			if($result){
-				
-			?>
-				
+			if($result){?>				
 				<div id="table_data">
 				<!-- <input type="submit" class="btn-delete cf7toanyapi_btn_delete" value="Delete"> -->
 					<table class="tbl table table-striped table-bordered cf7toanyapi_table" id="cf7toanyapi_table">
@@ -101,12 +98,12 @@
 												echo '<td data-head="'.$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v2).'"><a href="'.get_the_permalink($_value).'" target="_blank">'.get_the_title($_value).'</a></td>';
 											}
 											else{
-												$_value = esc_html(html_entity_decode($_value));
-												if(strlen($_value) > $display_character){
+												$_values = esc_html(html_entity_decode($_value));
+												if(strlen($_values) > $display_character){
 
-													echo '<td data-head="'.$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v2).'">'.esc_html(substr($_value, 0, $display_character)).'...</td>';
+													echo '<td data-head="'.$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v2).'">'.esc_html(substr($_values, 0, $display_character)).'...</td>';
 												}else{
-													echo '<td data-head="'.$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v2).'">'.esc_html($_value).'</td>';
+													echo '<td data-head="'.$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v2).'">'.htmlspecialchars_decode($_value).'</td>';
 												}
 											}
 										}//Close foreach
