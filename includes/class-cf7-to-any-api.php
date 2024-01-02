@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The file that defines the core plugin class
  *
@@ -158,22 +159,15 @@ class Cf7_To_Any_Api {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Cf7_To_Any_Api_Admin($this->get_plugin_name(), $this->get_version());
-		$this->loader->add_action('admin_notices', $plugin_admin, 'cf7_to_any_api_verify_dependencies');
+		$this->loader->add_action('admin_init', $plugin_admin, 'cf7_to_any_api_verify_dependencies');
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 		$this->loader->add_action('init', $plugin_admin,'cf7anyapi_custom_post_type', 10);
 		$this->loader->add_action('add_meta_boxes', $plugin_admin,'cf7anyapi_metabox');
 		$this->loader->add_action('save_post',$plugin_admin,'cf7anyapi_update_settings',10,2);
 		$this->loader->add_action('wp_ajax_cf7_to_any_api_get_form_field',$plugin_admin,'cf7_to_any_api_get_form_field_function');
-		$this->loader->add_action('wp_ajax_cf7_to_any_api_bulk_log_delete',$plugin_admin,'cf7_to_any_api_bulk_log_delete_function');
 		$this->loader->add_action('wpcf7_mail_sent',$plugin_admin,'cf7_to_any_api_send_data_to_api');
 		$this->loader->add_action('admin_menu', $plugin_admin, 'cf7anyapi_register_submenu', 90);
-		$this->loader->add_filter('plugin_action_links',$plugin_admin,'cf7anyapi_add_settings_link',10,2);
-		$this->loader->add_filter('manage_cf7_to_any_api_posts_columns',$plugin_admin,'cf7_to_any_api_filter_posts_columns');
-		$this->loader->add_action('manage_cf7_to_any_api_posts_custom_column',$plugin_admin,'cf7_to_any_api_table_content',10,2);
-		$this->loader->add_filter('manage_edit-cf7_to_any_api_sortable_columns',$plugin_admin,'cf7_to_any_api_sortable_columns');
-		$this->loader->add_action('plugins_loaded',$plugin_admin,'cf7toanyapi_add_new_table',10, 2);
-		$this->loader->add_action('wp_ajax_delete_records',$plugin_admin,'delete_cf7_records',10, 2);
 	}
 
 	/**
@@ -240,7 +234,6 @@ class Cf7_To_Any_Api {
 	public function Cf7_To_Any_Api_get_options() {
 		global $post;
 		$options = [];
-		$field_array = array();
 		$options['cf7anyapi_selected_form'] = get_post_meta($post->ID,'cf7anyapi_selected_form',true);
 		$options['cf7anyapi_base_url'] = get_post_meta($post->ID,'cf7anyapi_base_url',true);
 		$options['cf7anyapi_basic_auth'] = get_post_meta($post->ID,'cf7anyapi_basic_auth',true);
@@ -248,18 +241,23 @@ class Cf7_To_Any_Api {
 		$options['cf7anyapi_input_type'] = get_post_meta($post->ID,'cf7anyapi_input_type',true);
 		$options['cf7anyapi_method'] = get_post_meta($post->ID,'cf7anyapi_method',true);
 		$options['cf7anyapi_form_field'] = get_post_meta($post->ID,'cf7anyapi_form_field',true);
-		$options['cf7anyapi_header_request'] = get_post_meta($post->ID,'cf7anyapi_header_request',true);
-		if(!empty($options['cf7anyapi_selected_form'])){
-			$ContactForm = WPCF7_ContactForm::get_instance($options['cf7anyapi_selected_form']);
-			$form_fields = $ContactForm->scan_form_tags();
-			foreach($form_fields as $form_fields_value){
-				if($form_fields_value->basetype != 'submit'){
-					$field_array[$form_fields_value->raw_name] = (isset($options['cf7anyapi_form_field'][$form_fields_value->raw_name]) ? $options['cf7anyapi_form_field'][$form_fields_value->raw_name] : '');
-				}
-			}
-			$options['cf7anyapi_form_field'] = $field_array;
-		}
 		return $options;
+	}
+
+	/**
+	 * Sanitize Array Value
+	 *
+	 * @since     1.0.0
+	 * @return    string
+	 */
+	public function Cf7_To_Any_Api_sanitize_array($array){
+		$sanitize_array = array();
+
+		foreach($array as $key => $value) {
+			$sanitize_array[sanitize_text_field($key)] = sanitize_text_field($value);
+		}
+
+		return $sanitize_array;
 	}
 
 	/**
@@ -283,102 +281,5 @@ class Cf7_To_Any_Api {
     		$data['fields'] = 'No form Found';
     	}
 		return $data;
-	}
-
-	public function cf7toanyapi_sortdata($data){
-	    $data_sorted = array();
-		//Set submitted id wise form information
-	    foreach ($data as $k => $v) {
-	        if(!isset($data_sorted[$v->data_id])){
-	            $data_sorted[$v->data_id] = array();
-	        }
-	        $data_sorted[$v->data_id][$v->field_name] = (string) apply_filters('cf7toanyapi_entry_value', trim(wp_unslash($v->field_value)), $v->field_name);
-	    }
-
-	    return $data_sorted;
-	}
-
-	public function cf7toanyapi_get_db_fields($fid, $filter = true){
-
-	    global $wpdb;
-		$fid = (int)$fid;
-		$data_entry_table_name = sanitize_text_field($wpdb->prefix.'cf7anyapi_entries');
-	    $sql = $wpdb->prepare("SELECT `field_name` FROM `{$data_entry_table_name}` WHERE form_id = %d GROUP BY `field_name` ORDER BY `id`", $fid);
-	    $data = $wpdb->get_results($sql);
-	    $fields = array();
-		if(!empty($data)){
-			foreach ($data as $k => $v) {
-				if(defined('vsz_cf7_display_ip')){
-					if($v->field_name != 'submit_ip'){
-						$fields[$v->field_name] = htmlspecialchars_decode($v->field_name);
-					}
-				}
-				else{
-					$fields[$v->field_name] = htmlspecialchars_decode($v->field_name);
-				}
-			}
-		}
-
-		//Check if filter is true or not
-	    if ($filter) {
-			//Get all fields information as per Setting screen
-	        $fields = (array) apply_filters('cf7toanyapi_admin_fields', $fields, $fid);
-	    }
-
-	    return $fields;
-	}
-
-	public function cf7toanyapi_admin_get_field_name($field){
-	    return esc_html($field);
-	}
-
-	public function cf7toanyapi_field_type_info($fid){
-
-		if(empty($fid) || !intval($fid)) return ;
-
-		$fid = intval($fid);
-		$obj_form = self::cf7toanyapi_get_the_form_list($fid);
-		//get pre define fields information
-		$arr_form_tag = $obj_form[0]->scan_form_tags();
-		$arr_field_type = array();
-		if(!empty($arr_form_tag)){
-			//Get all fields related information
-			foreach($arr_form_tag as $key => $arr_type){
-				//Check if tag type is submit then ignore tag info
-				if($arr_type['basetype'] == 'submit') continue;
-				//get field type information
-				$arr_field_type[$arr_type['name']] = $arr_type['basetype'];
-			}
-		}
-
-		return $arr_field_type;
-	}
-
-	public function cf7toanyapi_get_the_form_list($fid = ''){
-
-		//Get All form information
-		$forms = WPCF7_ContactForm::find();
-		$form = array();
-		//fetch each form information
-
-		foreach ($forms as $k => $v){
-			//Check if form id not empty then get specific form related information
-			if(!empty($fid)){
-				if($v->id() == $fid){
-					$form[] = $v;
-					return $form;
-				}
-			}
-			else{
-				$form[] = $v;
-			}
-	    }
-
-		if(count($form)>1){
-			// New function Added to sort the array by CF7 Name
-			usort($form, "cmp_sort_form_name");
-		}
-
-		return $form;
 	}
 }

@@ -22,12 +22,11 @@ $cf7anyapi_bearer_auth = (empty($cf7anyapi_options['cf7anyapi_bearer_auth']) ? '
 $cf7anyapi_input_type = (empty($cf7anyapi_options['cf7anyapi_input_type']) ? '' : $cf7anyapi_options['cf7anyapi_input_type']);
 $cf7anyapi_method = (empty($cf7anyapi_options['cf7anyapi_method']) ? '' : $cf7anyapi_options['cf7anyapi_method']);
 $cf7anyapi_form_field = (empty($cf7anyapi_options['cf7anyapi_form_field']) ? '' : $cf7anyapi_options['cf7anyapi_form_field']);
-$cf7anyapi_header_request = (empty($cf7anyapi_options['cf7anyapi_header_request']) ? '' : $cf7anyapi_options['cf7anyapi_header_request']);
 
 if(!class_exists('WPCF7_ContactForm')){
 ?>
 <div id="cf7anyapi_admin" class="cf7anyapi_wrap">
-    <p><?php esc_html_e( 'Contact form 7 api integrations requires CONTACT FORM 7 Plugin to be installed and active', 'contact-form-to-any-api' ); ?></p>
+    <p>Contact form 7 api integrations requires CONTACT FORM 7 Plugin to be installed and active</p>
 </div>
 <?php
 }
@@ -38,7 +37,7 @@ else{
         if($form_field['status'] == 404){
             ?>
                 <div id="cf7anyapi_admin" class="cf7anyapi_wrap">
-                    <p><?php esc_html_e( 'Your Selected Contact Form was not found Please try to add new data in this API', 'contact-form-to-any-api' ); ?></p>
+                    <p>Your Selected Contact Form was not found Please try to add new data in this API</p>
                 </div>
             <?php
             $selected_form = '';
@@ -48,7 +47,6 @@ else{
             $cf7anyapi_input_type = '';
             $cf7anyapi_method = '';
             $cf7anyapi_form_field = '';
-            $cf7anyapi_header_request = '';
         }
     }
 ?>
@@ -57,11 +55,21 @@ else{
 
 <div id="cf7anyapi_admin" class="cf7anyapi_wrap">
 
+    <div class="cf7anyapi_full_width">
+        <p>IN JSON format we are support below format</p>
+        <code>
+            {"Your API Key":"Your Form Field Data","Your API Key":"Your Form Field Data"}
+        </code>
+        <code>
+            {"name":"your-name", "email":"your-email"}
+        </code>
+    </div>
+
     <div class="cf7anyapi_field">
         <?php wp_nonce_field('cf7_to_any_api_cpt_nonce','cf7_to_any_api_cpt_nonce' ); ?>
-        <label for="cf7anyapi_selected_form"><?php esc_html_e( 'Select Contact Form', 'contact-form-to-any-api' ); ?></label>
-        <select name="cf7anyapi_selected_form" id="cf7anyapi_selected_form" required> 
-            <option value=""><?php esc_html_e( 'Select Form', 'contact-form-to-any-api' ); ?></option>
+        <label for="cf7anyapi_selected_form">Select Contact Form</label>
+        <select name="cf7anyapi_selected_form" id="cf7anyapi_selected_form"> 
+            <option value="">Select Form</option>
             <?php
                 $posts = get_posts(
                     array(
@@ -79,66 +87,50 @@ else{
     </div>
 
     <div class="cf7anyapi_field">
-        <label for="cf7anyapi_base_url"><?php esc_html_e( 'API url', 'contact-form-to-any-api' ); ?></label>
-        <input type="text" id="cf7anyapi_base_url" name="cf7anyapi_base_url" value="<?php echo esc_url($cf7anyapi_base_url); ?>" placeholder="<?php esc_attr_e( 'Enter Your API URL', 'contact-form-to-any-api' ); ?>" required>
-    </div>
-
-    <div class="cf7anyapi_full_width">
-        <label for="cf7anyapi_header_request"><?php esc_html_e( 'Header Request', 'contact-form-to-any-api' ); ?></label>
-        <textarea id="cf7anyapi_header_request" name="cf7anyapi_header_request" placeholder="<?php esc_attr_e( 'Authorization: MY_API_KEY 
-Authorization : Bearer xxxxxxx
-Authorization : Basic xxxxxx
-Content-Type: application/json
-
-All your header Parameters set here.', 'contact-form-to-any-api' ); ?>
-"><?php echo esc_textarea($cf7anyapi_header_request); if($cf7anyapi_basic_auth){ echo "Authorization : Basic ".esc_html($cf7anyapi_basic_auth); } if($cf7anyapi_bearer_auth){ echo "Authorization : Bearer ".esc_html($cf7anyapi_bearer_auth); }?></textarea>
+        <label for="cf7anyapi_base_url">Base url</label>
+        <input type="text" id="cf7anyapi_base_url" name="cf7anyapi_base_url" value="<?php echo esc_url($cf7anyapi_base_url); ?>" placeholder="Enter Your API URL">
     </div>
 
     <div class="cf7anyapi_field">
-        <label for="cf7anyapi_input_type"><?php esc_html_e( 'Input type', 'contact-form-to-any-api' ); ?></label>
-        <select id="cf7anyapi_input_type" name="cf7anyapi_input_type" required>
-            <option value="params" <?php echo ($cf7anyapi_input_type == 'params' ? esc_html('selected="selected"') : ''); ?>><?php esc_html_e( 'Parameters - GET/POST', 'contact-form-to-any-api' ); ?></option>
-            <option value="json" <?php echo ($cf7anyapi_input_type == 'json' || $cf7anyapi_input_type == '' ? esc_html('selected="selected"') : ''); ?>><?php esc_html_e( 'json', 'contact-form-to-any-api' ); ?></option>
+        <label for="cf7anyapi_basic_auth">Basic auth</label>
+        <input type="text" id="cf7anyapi_basic_auth" name="cf7anyapi_basic_auth" value="<?php echo esc_html($cf7anyapi_basic_auth); ?>" placeholder="e.g. user:secret">
+    </div>
+
+    <div class="cf7anyapi_field">
+        <label for="cf7anyapi_bearer_auth">Bearer auth key</label>
+        <input type="text" id="cf7anyapi_bearer_auth" name="cf7anyapi_bearer_auth" value="<?php echo esc_html($cf7anyapi_bearer_auth); ?>" placeholder="e.g. a94a8fe5ccb19ba61c4c0873d391e987982fbbd3">
+    </div>
+
+    <div class="cf7anyapi_field">
+        <label for="cf7anyapi_input_type">Input type</label>
+        <select id="cf7anyapi_input_type" name="cf7anyapi_input_type">
+            <option value="params" <?php echo ($cf7anyapi_input_type == 'params' ? esc_html('selected="selected"') : ''); ?>>Parameters - GET/POST</option>
+            <option value="json" <?php echo ($cf7anyapi_input_type == 'json' ? esc_html('selected="selected"') : ''); ?>>json</option>
         </select>
     </div>
 
     <div class="cf7anyapi_field">
-        <label for="cf7anyapi_method"><?php esc_html_e( 'Method', 'contact-form-to-any-api' ); ?></label>
-        <select id="cf7anyapi_method" name="cf7anyapi_method" required>
-            <option value=""><?php esc_html_e( 'Select Method', 'contact-form-to-any-api' ); ?></option>
+        <label for="cf7anyapi_method">Method</label>
+        <select id="cf7anyapi_method" name="cf7anyapi_method">
+            <option value="">Select Method</option>
             <option value="GET" <?php echo ($cf7anyapi_method == 'GET' ? esc_html('selected="selected"') : ''); ?>>GET</option>
-            <option value="POST" <?php echo ($cf7anyapi_method == 'POST' || $cf7anyapi_method == '' ? esc_html('selected="selected"') : ''); ?>>POST</option>
+            <option value="POST" <?php echo ($cf7anyapi_method == 'POST' ? esc_html('selected="selected"') : ''); ?>>POST</option>
         </select>
     </div>
-</div>
 
-<div class="cf7anyapi-form-mapping-fields">
-    <h3><?php esc_html_e( 'Map your Fields', 'contact-form-to-any-api' ); ?></h3>
-    <hr>
-    <div id="cf7anyapi-form-fields" class="form-fields">        
+    <div id="cf7anyapi-form-fields" class="form-fields">
         <?php
             if($cf7anyapi_form_field){
                 foreach($cf7anyapi_form_field as $cf7anyapi_form_field_key => $cf7anyapi_form_field_value){
         ?>
                     <div class="cf7anyapi_field">
                         <label for="cf7anyapi_<?php echo esc_html($cf7anyapi_form_field_key); ?>"><?php echo esc_html($cf7anyapi_form_field_key); ?></label>
-                        <input type="text" id="cf7anyapi_<?php echo esc_html($cf7anyapi_form_field_key); ?>" name="cf7anyapi_form_field[<?php echo esc_html($cf7anyapi_form_field_key); ?>]" value="<?php echo esc_html($cf7anyapi_form_field_value); ?>" placeholder="<?php esc_attr_e( 'Enter Mapping Key Field Name', 'contact-form-to-any-api' ); ?>"> 
+                        <input type="text" id="cf7anyapi_<?php echo esc_html($cf7anyapi_form_field_key); ?>" name="cf7anyapi_form_field[<?php echo esc_html($cf7anyapi_form_field_key); ?>]" value="<?php echo esc_html($cf7anyapi_form_field_value); ?>" placeholder="Enter Mapping Key Field Name"> 
                     </div>
         <?php
                 }
             }
         ?>
     </div>
-</div>
-
-<div class="cf7anyapi-bottom-image">
-    <a href="https://www.itpathsolutions.com/contact-us/" target="_blank">
-        <img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/need-help-with-your-website.jpg';?>" alt="need help with your website">
-    </a>
-</div>
-<div class="cf7anyapi-right-image">
-    <a href="https://www.itpathsolutions.com/contact-us/" target="_blank">
-        <img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/need-help-with-your-website2.jpg';?>" alt="need help with your website">
-    </a>
 </div>
 <?php } ?>

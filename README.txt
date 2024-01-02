@@ -1,20 +1,15 @@
 === Contact Form to Any API ===
-Contributors: itpathsolutions,mayur8991,vickymakwana1111
-Tags: rest api, api, contact form, crm, lead, database, export, contact form 7
+Contributors: itpathsolutions,vickymakwana1111,mayur8991
+Tags: CF7 to any api , CF7 to CRM , CF7 to Rest API , Contact form 
 Requires at least: 4.7 or higher
-Tested up to: 6.2
+Tested up to: 6.1
 Requires PHP: 5.6 or higher
-Stable tag: 1.0.8
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Contact form 7 to Any API is most powerful plugin to send cf7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings. It also Save Contact Form 7 form submitted data to the database with advanced features like search and export data to csv or excel.
-
 == Description ==
-
-https://youtu.be/1K-JdXwDH_k
-
-Contact form 7 to Any API is most powerful plugin to send cf7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings. It also Save Contact Form 7 form submitted data to the database with advanced features like search and export data to csv or excel.
+Contact form 7 to Any API is most powerful plugin to send cf7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings
 
 = Features =
 * Send CF7 Leads to Remote API's such as CRM and other API using POST/GET
@@ -24,9 +19,7 @@ Contact form 7 to Any API is most powerful plugin to send cf7 data to any third 
 * Supports Basic Auth
 * Supports Bearer Auth
 * Logs Management
-* Save Contact Form 7 form submitted data to the database.
-* Export Contact Form 7 Data in CSV , EXCEL , PDF , Print
-* Single Or Multiple delete cf7 entries  
+
 
 == Set your own Header Request Parameter ==
 
@@ -38,7 +31,7 @@ Content-Type: application/json
 
 <strong> NOTE  : Basic & Bearer Authentication can be set from Header Request Parameter input. </strong>
 
-<strong>Do you want Custom Development for any API/CRM from our Development Team ? Please connect with us <a href="mailto:info@itpathsolutions.com">info@itpathsolutions.com</a></strong>
+<strong>Do you want Custom Development for any paid API/CRM from our Development Team ? Please Connect with us <a href="mailto:info@itpathsolutions.com">info@itpathsolutions.com</a></strong>
 
 
 
@@ -74,68 +67,20 @@ We are committed to top-notch Community and Customer support because we know if 
 3. You will find CF7 to Any API in your WordPress admin screen.
 
 == Frequently Asked Questions ==
-= How many API connection i can add? =
+= <span id="faq">How many API connection i can add?</span> =
 Unlimited, There is no limit of creation of API you can send data to CRM and any other API url. You can even use same form to send data to multiple api.
-
-= Where i can find documentation for plugin usage ? =
-Once you activate the plugin you will find documentation link.
-
-= Can I Customize this Plugin ? =
-Absolutely. Please Connect with us on <a href="mailto:info@itpathsolutions.com">info@itpathsolutions.com</a>
-
 
 == Screenshots ==
 1. Contact Form 7 to Any API settings
 2. Logs Management
-3. Entries
 
 == Changelog ==
 
-= 1.0.8 =
-* Enhancement - Compatibility updated for WordPress 6.2
-* New - Delete entries option added for entries menu
-* Improvement - User IP column added in entries menu
-
-= 1.0.7 =
-* New - Added form data column in logs 
-* New - Submitted from new column added in entries 
-* Improvement - Integer value condition update for API calls. 
-
-= 1.0.6 =
-* Fix - Database entries not visible for some users
-* Fix - I18N issue fix for entries
-
-= 1.0.5 =
-* New - Save Contact Form 7 form submitted data to the database.
-* New - Export Contact Form 7 Data in CSV , EXCEL , PDF , Print
-* New - Search feature for cf7 submitted data
-
-= 1.0.4 =
-* New - Added delete all log feature
-* Improvement - Set default value for Input type and Method
-* Improvement - Added Title validation
-* Improvement - New added fields willl automatically appear in API settings screen 
-* Improvement - Mapped fields value now remain on form change from API setting screen
-* Improvement - Form name column added in API List
-* Improvement - Documentation update
-* Fix - I18n Issues
-
-= 1.0.3 =
-* Improvement - Validation added for major fields
-* Improvement - Sanitization function updates
-* Fix - Field map issue with GET method
-
-
-= 1.0.2 =
-* Improvement - CF7 pipe sign support added for Radio , Select & Checkbox fields
-* Fix - Fatal error fixes while activating the plugin for some users
-* Fix - Other small fixes and update
-
-
 = 1.0.1 =
-* Improvement - Set your own Header Request
-* Improvement - Added documentation link
-* Improvement - Compatible with latest wordpress version 6.1
+* Release Date 7th November 2022*
+* Set your own Header Request
+* Added documentation link
+* Compatible with latest wordpress version 6.1
 
 = 1.0.0 =
-* Initial Release
+* Release Date 7th July 2022*

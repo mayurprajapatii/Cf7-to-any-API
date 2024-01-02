@@ -11,8 +11,8 @@ class cf7anyapi_List_Table extends WP_List_Table{
     	global $status, $page;
         parent::__construct(
         	array(
-            	'singular'  => __( 'cf7anyapi_logs', 'contact-form-to-any-api' ),     //singular name of the listed records
-            	'plural'    => __( 'cf7anyapi_logs', 'contact-form-to-any-api' ),   //plural name of the listed records
+            	'singular'  => __( 'cf7anyapi_logs', 'cf7-to-any-api' ),     //singular name of the listed records
+            	'plural'    => __( 'cf7anyapi_logs', 'cf7-to-any-api' ),   //plural name of the listed records
             	'ajax'      => false,        //does this table support ajax?
     		)
         );
@@ -24,7 +24,6 @@ class cf7anyapi_List_Table extends WP_List_Table{
         		return '<a href="'.site_url()."/wp-admin/admin.php?page=wpcf7&post=".$item[ $column_name ]."&action=edit".'" target="_blank">'.get_the_title($item[$column_name]).'</a>';
         	case 'post_id':
         		return '<a href="'.get_edit_post_link($item[$column_name]).'" target="_blank">'.get_the_title($item[$column_name]).'</a>';
-        	case 'form_data':
         	case 'log':
             case 'created_date':
             	return $item[ $column_name ];
@@ -35,11 +34,10 @@ class cf7anyapi_List_Table extends WP_List_Table{
 
 	public function get_columns(){
         $columns = array(
-            'form_id' => __( 'Form Name', 'contact-form-to-any-api' ),
-            'post_id' => __( 'API Name', 'contact-form-to-any-api' ),
-            'form_data' => __( 'Submitted Data', 'contact-form-to-any-api' ),
-            'log' => __( 'API Response', 'contact-form-to-any-api' ),
-            'created_date' => __( 'Created Date', 'contact-form-to-any-api' )
+            'form_id' => __( 'Form Name', 'cf7-to-any-api' ),
+            'post_id' => __( 'API Name', 'cf7-to-any-api' ),
+            'log' => __( 'Log', 'cf7-to-any-api' ),
+            'created_date' => __( 'Created Date', 'cf7-to-any-api' )
         );
         return $columns;
     }
