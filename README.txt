@@ -1,10 +1,10 @@
 === Contact Form to Any API ===
 Contributors: itpathsolutions,vickymakwana1111,mayur8991
-Tags: CF7 to any api , CF7 to CRM , CF7 to Rest API , Contact form 
+Tags: Contact form to CRM , Contact form to Rest API , Contact form
 Requires at least: 4.7 or higher
 Tested up to: 6.1
 Requires PHP: 5.6 or higher
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,7 +31,7 @@ Content-Type: application/json
 
 <strong> NOTE  : Basic & Bearer Authentication can be set from Header Request Parameter input. </strong>
 
-<strong>Do you want Custom Development for any paid API/CRM from our Development Team ? Please Connect with us <a href="mailto:info@itpathsolutions.com">info@itpathsolutions.com</a></strong>
+<strong>Do you want Custom Development for any API/CRM from our Development Team ? Please connect with us <a href="mailto:info@itpathsolutions.com">info@itpathsolutions.com</a></strong>
 
 
 
@@ -76,11 +76,15 @@ Unlimited, There is no limit of creation of API you can send data to CRM and any
 
 == Changelog ==
 
+= 1.0.2 =
+* Fatal error fixes while activating the plugin for some users
+* Other small fixes and update
+* CF7 pipe sign support added for Radio , Select & Checkbox fields 
+
 = 1.0.1 =
-* Release Date 7th November 2022*
 * Set your own Header Request
 * Added documentation link
 * Compatible with latest wordpress version 6.1
 
 = 1.0.0 =
-* Release Date 7th July 2022*
+* Initial Release

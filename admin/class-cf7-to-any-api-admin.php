@@ -287,6 +287,8 @@ class Cf7_To_Any_Api_Admin {
 	 */
 	public static function cf7_to_any_api_send_data_to_api($WPCF7_ContactForm){
 		global $wpdb;
+		$submission = WPCF7_Submission::get_instance();
+		$posted_data = $submission->get_posted_data();
 		$form_id = (int)stripslashes($_POST['_wpcf7']);
 		$args = array(
 			'post_type' => 'cf7_to_any_api',
@@ -321,7 +323,7 @@ class Cf7_To_Any_Api_Admin {
 				$cf7anyapi_header_request = get_post_meta(get_the_ID(),'cf7anyapi_header_request',true);
 
 		        foreach($cf7anyapi_form_field as $key => $value){
-		        	$api_post_array[$value] = (is_array($_POST[$key]) ? implode(',', Cf7_To_Any_Api::Cf7_To_Any_Api_sanitize_array($_POST[$key])) : sanitize_text_field($_POST[$key]));
+		        	$api_post_array[$value] = (is_array($posted_data[$key]) ? implode(',', Cf7_To_Any_Api::Cf7_To_Any_Api_sanitize_array($posted_data[$key])) : sanitize_text_field($posted_data[$key]));
 		        }
 		        
 		        self::cf7anyapi_send_lead($api_post_array, $cf7anyapi_base_url, $cf7anyapi_input_type, $cf7anyapi_method, $form_id, get_the_ID(), $cf7anyapi_basic_auth, $cf7anyapi_bearer_auth,$cf7anyapi_header_request);
@@ -403,19 +405,7 @@ class Cf7_To_Any_Api_Admin {
       			$args['headers'] = $header_request;
       		}
 			
-			if($input_type == "xml"){
-				if(!isset($header_request) && $header_request === ''){
-					$args['headers']['Content-Type'] = 'text/xml';
-				}
-				$xml = self::Cf7_To_Any_Api_get_xml($data);
-
-				if(is_wp_error($xml)){
-					return $xml;
-				}
-
-				$args['body'] = $xml->asXML();
-			}
-			elseif($input_type == "json"){
+			if($input_type == "json"){
 				if(!isset($header_request) && $header_request === ''){
         			$args['headers']['Content-Type'] = 'application/json';
         		}
@@ -441,27 +431,6 @@ class Cf7_To_Any_Api_Admin {
 	 */
 	public static function Cf7_To_Any_Api_parse_json($string){
 		return json_encode($string);
-  	}
-
-  	/**
-	 * Form Data convert into XML formate
-	 *
-	 * @since    1.0.0
-	 */
-  	public static function Cf7_To_Any_Api_get_xml( $lead ){
-    	$xml = "";
-    	if(function_exists('simplexml_load_string')){
-      		libxml_use_internal_errors(true);
-      		$xml = simplexml_load_string( $lead );
-	      	if( $xml == false){
-	        	$xml = new WP_Error(
-	          		'xml',
-	          		__( "XML Structure is incorrect" , 'cf7-to-any-api' )
-	    		);
-	      	}
-    	}
-
-    	return $xml;
   	}
 
   	/**
