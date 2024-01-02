@@ -241,6 +241,7 @@ class Cf7_To_Any_Api {
 		$options['cf7anyapi_input_type'] = get_post_meta($post->ID,'cf7anyapi_input_type',true);
 		$options['cf7anyapi_method'] = get_post_meta($post->ID,'cf7anyapi_method',true);
 		$options['cf7anyapi_form_field'] = get_post_meta($post->ID,'cf7anyapi_form_field',true);
+		$options['cf7anyapi_header_request'] = get_post_meta($post->ID,'cf7anyapi_header_request',true);
 		return $options;
 	}
 

@@ -163,7 +163,7 @@ class Cf7_To_Any_Api_Admin {
 	 * @since    1.0.0
 	 */
 	public function cf7anyapi_metabox(){
-		add_meta_box(
+	    add_meta_box(
 	        'cf7anyapi-setting',
 	        __( 'Contact Form 7 Any Api Setting', 'cf7-to-any-api' ),
 	        array($this,'cf7anyapi_settings'),
@@ -185,6 +185,15 @@ class Cf7_To_Any_Api_Admin {
 	        'cf7anyapi_logs',
 	        array(&$this,'cf7anyapi_submenu_callback')
 	    );
+
+	    add_submenu_page(
+	        'edit.php?post_type=cf7_to_any_api',
+	        __('Documentation', 'cf7-to-any-api'),
+	        __('Documentation', 'cf7-to-any-api'),
+	        'manage_options',
+	        'cf7anyapi_docs',
+	        array(&$this,'cf7anyapi_submenu_docs_callback')
+	    );
 	}
 
 	/**
@@ -200,13 +209,16 @@ class Cf7_To_Any_Api_Admin {
 	  	echo '</div>';
 	}
 
+	public function cf7anyapi_submenu_docs_callback(){
+		include dirname(__FILE__).'/partials/cf7-to-any-api-admin-display-docs.php';
+	}
+
 	/**
 	 * Registered Metaboxes Fields
 	 *
 	 * @since    1.0.0
 	 */
 	public static function cf7anyapi_settings() {
-
 		include dirname(__FILE__).'/partials/cf7-to-any-api-admin-display.php';
 	}
 
@@ -228,6 +240,7 @@ class Cf7_To_Any_Api_Admin {
 				$options['cf7anyapi_input_type'] = sanitize_text_field($_POST['cf7anyapi_input_type']);
 				$options['cf7anyapi_method'] = sanitize_text_field($_POST['cf7anyapi_method']);
 				$options['cf7anyapi_form_field'] = $Cf7_To_Any_Api->Cf7_To_Any_Api_sanitize_array($_POST['cf7anyapi_form_field']);
+				$options['cf7anyapi_header_request'] = sanitize_textarea_field($_POST['cf7anyapi_header_request']);
 
 				foreach($options as $options_key => $options_value){
         				$response = update_post_meta( $cf7_to_any_api_id, $options_key, $options_value );
@@ -305,11 +318,13 @@ class Cf7_To_Any_Api_Admin {
 		        $cf7anyapi_input_type = get_post_meta(get_the_ID(),'cf7anyapi_input_type',true);
 				$cf7anyapi_method = get_post_meta(get_the_ID(),'cf7anyapi_method',true);
 
+				$cf7anyapi_header_request = get_post_meta(get_the_ID(),'cf7anyapi_header_request',true);
+
 		        foreach($cf7anyapi_form_field as $key => $value){
 		        	$api_post_array[$value] = (is_array($_POST[$key]) ? implode(',', Cf7_To_Any_Api::Cf7_To_Any_Api_sanitize_array($_POST[$key])) : sanitize_text_field($_POST[$key]));
 		        }
 		        
-		        self::cf7anyapi_send_lead($api_post_array, $cf7anyapi_base_url, $cf7anyapi_input_type, $cf7anyapi_method, $form_id, get_the_ID(), $cf7anyapi_basic_auth, $cf7anyapi_bearer_auth);
+		        self::cf7anyapi_send_lead($api_post_array, $cf7anyapi_base_url, $cf7anyapi_input_type, $cf7anyapi_method, $form_id, get_the_ID(), $cf7anyapi_basic_auth, $cf7anyapi_bearer_auth,$cf7anyapi_header_request);
 		    }
 		}
 		wp_reset_postdata();
@@ -320,7 +335,7 @@ class Cf7_To_Any_Api_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function cf7anyapi_send_lead($data, $url, $input_type, $method, $form_id, $post_id, $basic_auth = '', $bearer_auth = ''){
+	public static function cf7anyapi_send_lead($data, $url, $input_type, $method, $form_id, $post_id, $basic_auth = '', $bearer_auth = '',$header_request = ''){
 		
 		if($method == 'GET' && ($input_type == 'params' || $input_type == 'json')){
 			$args = array(
@@ -383,9 +398,15 @@ class Cf7_To_Any_Api_Admin {
       		if(isset($bearer_auth) && $bearer_auth !== ''){
     			$args['headers']['Authorization'] = 'Bearer ' . $bearer_auth;
       		}
+
+      		if(isset($header_request) && $header_request !== ''){
+      			$args['headers'] = $header_request;
+      		}
 			
 			if($input_type == "xml"){
-				$args['headers']['Content-Type'] = 'text/xml';
+				if(!isset($header_request) && $header_request === ''){
+					$args['headers']['Content-Type'] = 'text/xml';
+				}
 				$xml = self::Cf7_To_Any_Api_get_xml($data);
 
 				if(is_wp_error($xml)){
@@ -395,7 +416,9 @@ class Cf7_To_Any_Api_Admin {
 				$args['body'] = $xml->asXML();
 			}
 			elseif($input_type == "json"){
-        		$args['headers']['Content-Type'] = 'application/json';
+				if(!isset($header_request) && $header_request === ''){
+        			$args['headers']['Content-Type'] = 'application/json';
+        		}
         		$json = self::Cf7_To_Any_Api_parse_json($data);
         	
         		if(is_wp_error($json)){
@@ -452,7 +475,7 @@ class Cf7_To_Any_Api_Admin {
   		$data = array(
   			'form_id' => $form_id,
   			'post_id' => $post_id,
-  			'log' => maybe_serialize($response),
+  			'log' => $response,
   		);
 
   		$wpdb->insert($table,$data);

@@ -22,6 +22,7 @@ $cf7anyapi_bearer_auth = (empty($cf7anyapi_options['cf7anyapi_bearer_auth']) ? '
 $cf7anyapi_input_type = (empty($cf7anyapi_options['cf7anyapi_input_type']) ? '' : $cf7anyapi_options['cf7anyapi_input_type']);
 $cf7anyapi_method = (empty($cf7anyapi_options['cf7anyapi_method']) ? '' : $cf7anyapi_options['cf7anyapi_method']);
 $cf7anyapi_form_field = (empty($cf7anyapi_options['cf7anyapi_form_field']) ? '' : $cf7anyapi_options['cf7anyapi_form_field']);
+$cf7anyapi_header_request = (empty($cf7anyapi_options['cf7anyapi_header_request']) ? '' : $cf7anyapi_options['cf7anyapi_header_request']);
 
 if(!class_exists('WPCF7_ContactForm')){
 ?>
@@ -47,6 +48,7 @@ else{
             $cf7anyapi_input_type = '';
             $cf7anyapi_method = '';
             $cf7anyapi_form_field = '';
+            $cf7anyapi_header_request = '';
         }
     }
 ?>
@@ -54,16 +56,6 @@ else{
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 
 <div id="cf7anyapi_admin" class="cf7anyapi_wrap">
-
-    <div class="cf7anyapi_full_width">
-        <p>IN JSON format we are support below format</p>
-        <code>
-            {"Your API Key":"Your Form Field Data","Your API Key":"Your Form Field Data"}
-        </code>
-        <code>
-            {"name":"your-name", "email":"your-email"}
-        </code>
-    </div>
 
     <div class="cf7anyapi_field">
         <?php wp_nonce_field('cf7_to_any_api_cpt_nonce','cf7_to_any_api_cpt_nonce' ); ?>
@@ -87,11 +79,24 @@ else{
     </div>
 
     <div class="cf7anyapi_field">
-        <label for="cf7anyapi_base_url">Base url</label>
+        <label for="cf7anyapi_base_url">API url</label>
         <input type="text" id="cf7anyapi_base_url" name="cf7anyapi_base_url" value="<?php echo esc_url($cf7anyapi_base_url); ?>" placeholder="Enter Your API URL">
     </div>
 
-    <div class="cf7anyapi_field">
+    <div class="cf7anyapi_full_width">
+        <label for="cf7anyapi_header_request">Header Request</label>
+        <textarea id="cf7anyapi_header_request" name="cf7anyapi_header_request" placeholder="Authorization: MY_API_KEY 
+Authorization : Bearer xxxxxxx
+Authorization : Basic xxxxxx
+Content-Type: application/json
+
+All your header Parameters set here.
+"><?php echo esc_textarea($cf7anyapi_header_request); if($cf7anyapi_basic_auth){ echo "Authorization : Basic ".esc_html($cf7anyapi_basic_auth); } if($cf7anyapi_bearer_auth){ echo "Authorization : Bearer ".esc_html($cf7anyapi_bearer_auth); }?></textarea>
+    </div>
+
+    
+
+    <?php /*<div class="cf7anyapi_field">
         <label for="cf7anyapi_basic_auth">Basic auth</label>
         <input type="text" id="cf7anyapi_basic_auth" name="cf7anyapi_basic_auth" value="<?php echo esc_html($cf7anyapi_basic_auth); ?>" placeholder="e.g. user:secret">
     </div>
@@ -99,7 +104,7 @@ else{
     <div class="cf7anyapi_field">
         <label for="cf7anyapi_bearer_auth">Bearer auth key</label>
         <input type="text" id="cf7anyapi_bearer_auth" name="cf7anyapi_bearer_auth" value="<?php echo esc_html($cf7anyapi_bearer_auth); ?>" placeholder="e.g. a94a8fe5ccb19ba61c4c0873d391e987982fbbd3">
-    </div>
+    </div> */ ?>
 
     <div class="cf7anyapi_field">
         <label for="cf7anyapi_input_type">Input type</label>
@@ -117,8 +122,11 @@ else{
             <option value="POST" <?php echo ($cf7anyapi_method == 'POST' ? esc_html('selected="selected"') : ''); ?>>POST</option>
         </select>
     </div>
-
-    <div id="cf7anyapi-form-fields" class="form-fields">
+</div>
+<div class="cf7anyapi-form-mapping-fields">
+    <h3>Map your Fields</h3>
+    <hr>
+    <div id="cf7anyapi-form-fields" class="form-fields">        
         <?php
             if($cf7anyapi_form_field){
                 foreach($cf7anyapi_form_field as $cf7anyapi_form_field_key => $cf7anyapi_form_field_value){

@@ -16,7 +16,7 @@
  * Plugin Name:       Contact Form to Any API
  * Plugin URI:        https://wordpress.org/plugins/contact-form-to-any-api/
  * Description:       Send CF7 Lead/Data to CRM or Any REST API.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            IT Path Solutions PVT LTD
  * Author URI:        https://www.itpathsolutions.com/
  * License:           GPL-2.0+
