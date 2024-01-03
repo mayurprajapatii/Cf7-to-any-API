@@ -122,7 +122,7 @@
          <!-- contact us -->
          <div class="tab-pane fade cf7anyapi_full_width" id="v-pills-contact-us" role="tabpanel" aria-labelledby="v-pills-contact-us-tab">
         <h5>Contact Us</h5> <br>
-           <h5>Email : <a href="mailto:enquiry@itpathsolutions.com">enquiry@itpathsolutions.com</a></h5>
+           <h5>Email : <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a></h5>
            <p>Need Help with Plugin Integration ? <a target="_blank" href="https://www.itpathsolutions.com/contact-us/"> Click to Connect us</a></p>
         </div>
         </div>
@@ -131,6 +131,9 @@
         <div class="tab-content" id="v-pills-tabContent">
         <a href="https://www.itpathsolutions.com/contact-us/" target="_blank">
             <img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/need-help-with-your-website2.jpg';?>" alt="" style="width:100%;">
+        </a>
+        <a href="https://wordpress.org/support/plugin/contact-form-to-any-api/reviews/" target="_blank">
+        <img height="400" width="100%" src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/rating.png';?>" alt="rating.png">
         </a>
         </div>
     </div>

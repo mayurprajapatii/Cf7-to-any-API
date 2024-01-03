@@ -140,5 +140,8 @@ All your header Parameters set here.', 'contact-form-to-any-api' ); ?>
     <a href="https://www.itpathsolutions.com/contact-us/" target="_blank">
         <img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/need-help-with-your-website2.jpg';?>" alt="need help with your website">
     </a>
+    <a href="https://wordpress.org/support/plugin/contact-form-to-any-api/reviews/" target="_blank">
+        <img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/rating.png';?>" alt="rating.png">
+    </a>
 </div>
 <?php } ?>
