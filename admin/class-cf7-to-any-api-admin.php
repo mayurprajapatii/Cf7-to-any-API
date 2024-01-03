@@ -50,7 +50,7 @@ class Cf7_To_Any_Api_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
+		add_action( 'admin_footer', array( $this, '_cf7_api_deactivation_feedback_popup' ) );
 	}
 
 	/**
@@ -550,6 +550,8 @@ class Cf7_To_Any_Api_Admin {
 	 */
 	public static function cf7anyapi_send_lead($data, $url, $input_type, $method, $form_id, $post_id, $basic_auth = '', $bearer_auth = '',$header_request = '', $posted_data = ''){
 		
+		global $wp_version;
+
 		if($method == 'GET' && ($input_type == 'params' || $input_type == 'json')){
 			$args = array(
 				'timeout'     => 5,
@@ -688,4 +690,12 @@ class Cf7_To_Any_Api_Admin {
   		}
   		exit();
   	}
+  	public function _cf7_api_deactivation_feedback_popup(){
+		$screen = get_current_screen();
+		if ($screen->base === 'plugins') {
+			if ( is_file( dirname(__FILE__) . '/partials/cf7-to-any-api-feedback.php') ) {
+				include dirname(__FILE__).'/partials/cf7-to-any-api-feedback.php';
+            }
+        }
+	}
 }

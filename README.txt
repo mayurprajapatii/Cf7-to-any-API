@@ -1,10 +1,10 @@
 === Contact Form to Any API ===
-Contributors: itpathsolutions,mayur8991,vickymakwana1111
+Contributors: itpathsolutions,mayur8991,pateljaymin,vickymakwana1111
 Tags: rest api, api, contact form, crm, lead, database, export, contact form 7
 Requires at least: 4.7 or higher
 Tested up to: 6.2
 Requires PHP: 5.6 or higher
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,7 +40,7 @@ Content-Type: application/json
 
 <strong> NOTE  : Basic & Bearer Authentication can be set from Header Request Parameter input. </strong>
 
-<strong>Do you want Custom Development for any API/CRM from our Development Team ? Please connect with us <a href="mailto:info@itpathsolutions.com">info@itpathsolutions.com</a></strong>
+<strong>Do you want Custom Development for any API/CRM from our Development Team ? Please connect with us <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a></strong>
 
 
 
@@ -83,7 +83,7 @@ Unlimited, There is no limit of creation of API you can send data to CRM and any
 Once you activate the plugin you will find documentation link.
 
 = Can I Customize this Plugin ? =
-Absolutely. Please Connect with us on <a href="mailto:info@itpathsolutions.com">info@itpathsolutions.com</a>
+Absolutely. Please Connect with us on <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com`</a>
 
 
 == Screenshots ==
@@ -92,6 +92,10 @@ Absolutely. Please Connect with us on <a href="mailto:info@itpathsolutions.com">
 3. Entries
 
 == Changelog ==
+
+= 1.1.2 =
+* Fix - Minor fixes and update 
+* Fix - I18N issue fix
 
 = 1.1.1 =
 * Improvement - Plugin configuration documentation improvement 

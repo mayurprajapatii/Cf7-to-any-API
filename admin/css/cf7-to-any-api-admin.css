@@ -189,11 +189,16 @@
     position: absolute;
     right: -297px;
     bottom: 0;
+    top: 166px;
+    display: flex;
+    flex-direction: column;
 }
 .cf7anyapi-right-image img {
-    width: 270px;
+    width: 271px;
     object-fit: contain;
-    max-height: 541px;
+    background: aqua;
+    margin-bottom: 11px;
+    height: auto;
 }
 .dataTables_info .select-info{display: none;}
 /*CF7 Entries CSS*/
@@ -239,11 +244,101 @@
 
 .cf7_to_any_api_page_cf7anyapi_docs .cf7anyapi_full_width pre { margin:15px 15px; }
 .cf7_to_any_api_page_cf7anyapi_docs .cf7anyapi_full_width ol li{margin-bottom:15px;  }
-.cf7_to_any_api_page_cf7anyapi_docs .cf7anyapi_full_width {  }
+
+.cf7-any-api-modal {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 100000;
+    display: none;
+    background: rgba(0,0,0,.8);
+}
+.cf7-any-api-modal .cf7-any-api-modal-dialog {
+    background: transparent;
+    position: absolute;
+    z-index: 100001;
+    width: 596px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.cf7-any-api-modal .cf7-any-api-modal-header {
+    border-bottom: #eee solid 1px;
+    background: #fbfbfb;
+    padding: 15px 20px;
+    position: relative;
+    margin-bottom: -10px;
+}
+.cf7-any-api-modal .cf7-any-api-modal-body, .cf7-any-api-modal .cf7-any-api-modal-footer {
+    border: 0;
+    background: #fefefe;
+    padding: 20px;
+}
+.cf7-any-api-modal input[type="radio"]:checked ~ textarea {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 100px;
+}
+.cf7-any-api-modal .reason textarea{
+    display: none;
+}
+.cf7-any-api-modal .cf7-any-api-modal-header h4 {
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #515962;
+    text-shadow: 1px 1px 1px #fff;
+    letter-spacing: .6px;
+    -webkit-font-smoothing: antialiased;
+}
+.cf7-any-api-modal h3 {
+    margin-top: 0;
+    font-size: 15px;
+    line-height: 1.4;
+    font-weight: 700;
+    color: #515962;
+}
+.cf7-any-api-modal h3 strong {
+    font-weight: 700;
+}
+.cf7-any-api-modal-footer {
+    border-top: #eee solid 1px !important;
+    text-align: right;
+}
+.cf7-any-api-modal .reason input[type="email"] {
+    margin-top: 8px;
+    width: 100%;
+}
+ul#cf7-any-api-list li{
+    margin-bottom: 10px;
+}
+ul#cf7-any-api-list li label span {
+    font-size: 13px;
+    color: #515962;
+}
+ul#cf7-any-api-list li.reason.email span {
+    font-weight: 700;
+    margin-right: 32px;
+}
+ul#cf7-any-api-list li.reason.email {
+    margin-top: 20px;
+}
+ul#cf7-any-api-list {
+    margin-bottom: 13px;
+}
 /* CF7 documentation CSS */
 @media screen and (max-width: 1500px){
-    .cf7anyapi-right-image img {
-        max-height: 400px;
+    
+}
+@media(min-width: 961px) {
+    .cf7-any-api-modal {
+        height: calc(100vh - 32px);
     }
 }
 @media screen and (max-width:782px){
