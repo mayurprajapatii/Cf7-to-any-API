@@ -112,7 +112,7 @@ class Cf7_To_Any_Api_Admin {
 	public function cf7_to_any_api_verify_dependencies(){
 		if(!is_plugin_active('contact-form-7/wp-contact-form-7.php')){
       		echo '<div class="notice notice-warning is-dismissible">
-	             <p>Contact form 7 api integrations requires CONTACT FORM 7 Plugin to be installed and active</p>
+	             <p>'.esc_html_e( 'Contact form 7 api integrations requires CONTACT FORM 7 Plugin to be installed and active', 'contact-form-to-any-api' ).'</p>
 	         </div>';
     	}
 	}
@@ -127,17 +127,17 @@ class Cf7_To_Any_Api_Admin {
 			'title', // Custom Post Type Title
 		);
 		$labels = array(
-			'name' => _x('CF7 to API', 'plural'),
-			'singular_name' => _x('cf7 to api', 'singular'),
-			'menu_name' => _x('CF7 to Any API', 'admin menu'),
-			'name_admin_bar' => _x('CF7 to Any API', 'admin bar'),
-			'add_new' => _x('Add New CF7 API', 'add new'),
-			'add_new_item' => __('Add New CF7 API'),
-			'new_item' => __('New CF7 API'),
-			'edit_item' => __('Edit CF7 API'),
-			'view_item' => __('View CF7 API'),
-			'all_items' => __('All CF7 API'),
-			'not_found' => __('No CF7 API found.'),
+			'name' => _x('CF7 to API', 'plural', 'contact-form-to-any-api'),
+			'singular_name' => _x('cf7 to api', 'singular', 'contact-form-to-any-api'),
+			'menu_name' => _x('CF7 to Any API', 'admin menu', 'contact-form-to-any-api'),
+			'name_admin_bar' => _x('CF7 to Any API', 'admin bar', 'contact-form-to-any-api'),
+			'add_new' => _x('Add New CF7 API', 'add new', 'contact-form-to-any-api'),
+			'add_new_item' => __('Add New CF7 API', 'contact-form-to-any-api'),
+			'new_item' => __('New CF7 API', 'contact-form-to-any-api'),
+			'edit_item' => __('Edit CF7 API', 'contact-form-to-any-api'),
+			'view_item' => __('View CF7 API', 'contact-form-to-any-api'),
+			'all_items' => __('All CF7 API', 'contact-form-to-any-api'),
+			'not_found' => __('No CF7 API found.', 'contact-form-to-any-api'),
 			'register_meta_box_cb' => 'aps_metabox',
 		);
 		$args = array(
@@ -165,10 +165,46 @@ class Cf7_To_Any_Api_Admin {
 	public function cf7anyapi_metabox(){
 	    add_meta_box(
 	        'cf7anyapi-setting',
-	        __( 'Contact Form 7 Any Api Setting', 'cf7-to-any-api' ),
+	        __( 'Contact Form 7 Any Api Setting', 'contact-form-to-any-api' ),
 	        array($this,'cf7anyapi_settings'),
 	        'cf7_to_any_api'
 	    );
+	}
+	
+	public function cf7anyapi_add_settings_link($links,$file){
+		if($file === 'contact-form-to-any-api/cf7-to-any-api.php' && current_user_can('manage_options')){
+			$url = admin_url('edit.php?post_type=cf7_to_any_api');
+			$documentation = admin_url('edit.php?post_type=cf7_to_any_api&page=cf7anyapi_docs');
+			$links = (array) $links;
+			$links[] = sprintf('<a href="%s">%s</a>', $url, __('Settings','contact-form-to-any-api'));
+			$links[] = sprintf('<a href="%s">%s</a>', $documentation, __('Documentation','contact-form-to-any-api'));
+		}
+		return $links;
+	}
+	
+	public function cf7_to_any_api_filter_posts_columns($columns){
+		$columns = array(
+			'cb' => $columns['cb'],
+			'title' => __('Title'),
+			'cf7form' => __('Form Name','contact-form-to-any-api'),
+			'date' => __('Date','contact-form-to-any-api'),
+		);
+		return $columns;
+	}
+
+	public function cf7_to_any_api_table_content($column_name,$post_id){
+		if($column_name == 'cf7form'){
+	    	$form_name = get_post_meta($post_id,'cf7anyapi_selected_form',true);
+	    	if($form_name){
+	    		echo '<a href="'.site_url()."/wp-admin/admin.php?page=wpcf7&post=".$form_name."&action=edit".'" target="_blank">'.get_the_title($form_name).'</a>';
+	    	}
+	      	
+	    }
+	}
+
+	public function cf7_to_any_api_sortable_columns($columns){
+		$columns['cf7form'] = 'cf7anyapi_selected_form';
+  		return $columns;
 	}
 
 	/**
@@ -179,8 +215,8 @@ class Cf7_To_Any_Api_Admin {
 	public function cf7anyapi_register_submenu(){
 	    add_submenu_page(
 	        'edit.php?post_type=cf7_to_any_api',
-	        __('Logs', 'cf7-to-any-api'),
-	        __('Logs', 'cf7-to-any-api'),
+	        __('Logs', 'contact-form-to-any-api'),
+	        __('Logs', 'contact-form-to-any-api'),
 	        'manage_options',
 	        'cf7anyapi_logs',
 	        array(&$this,'cf7anyapi_submenu_callback')
@@ -188,8 +224,8 @@ class Cf7_To_Any_Api_Admin {
 
 	    add_submenu_page(
 	        'edit.php?post_type=cf7_to_any_api',
-	        __('Documentation', 'cf7-to-any-api'),
-	        __('Documentation', 'cf7-to-any-api'),
+	        __('Documentation', 'contact-form-to-any-api'),
+	        __('Documentation', 'contact-form-to-any-api'),
 	        'manage_options',
 	        'cf7anyapi_docs',
 	        array(&$this,'cf7anyapi_submenu_docs_callback')
@@ -203,10 +239,24 @@ class Cf7_To_Any_Api_Admin {
 	 */
 	public function cf7anyapi_submenu_callback(){
 		$myListTable = new cf7anyapi_List_Table();
-	  	echo '<div class="wrap"><h2>CF7 To Any API Log Data</h2>';
+	  	echo '<div class="wrap"><h2>' . __( 'CF7 To Any API Log Data', 'contact-form-to-any-api' ) . '</h2>';
+	  		echo '<div class="cf7anyapi_log_button">';
+	  			echo '<a href="javascript:void(0);" class="cf7anyapi_bulk_log_delete">'.__( 'Delete All Log', 'contact-form-to-any-api' ).'</a>';
+	  		echo '</div>';
 	  	$myListTable->prepare_items();
 	  	$myListTable->display(); 
 	  	echo '</div>';
+	}
+
+	/**
+	 * Delete all log in a one click
+	 *
+	 * @since    1.0.0
+	 */
+	public static function cf7_to_any_api_bulk_log_delete_function(){
+		global $wpdb;
+		$wpdb->query('TRUNCATE TABLE '.$wpdb->prefix.'cf7anyapi_logs');
+		exit();
 	}
 
 	public function cf7anyapi_submenu_docs_callback(){
@@ -267,22 +317,37 @@ class Cf7_To_Any_Api_Admin {
 		}
 		$html = '';
 		$form_ID     = (int)stripslashes($_POST['form_id']); # change the 80 to your CF7 form ID 
-		$ContactForm = WPCF7_ContactForm::get_instance( $form_ID );
+		$post_id     = (int)stripslashes($_POST['post_id']); # change the 80 to your CF7 form ID 
+		$ContactForm = WPCF7_ContactForm::get_instance($form_ID);
 		$form_fields = $ContactForm->scan_form_tags();
 
-		foreach($form_fields as $form_fields_key => $form_fields_value){
-
-			if($form_fields_value->basetype != 'submit'){
-				$html .= '<div class="cf7anyapi_field">';
-					$html .= '<label for="cf7anyapi_'.$form_fields_value->raw_name.'">'.$form_fields_value->name.'</label>';
-					$html .= '<input type="text" id="cf7anyapi_'.$form_fields_value->raw_name.'" name="cf7anyapi_form_field['.$form_fields_value->name.']" placeholder="Enter Mapping Key Field Name">'; 
-				$html .= '</div>';
+		$post_form_id = get_post_meta($post_id,'cf7anyapi_selected_form',true);
+		$post_form_field = get_post_meta($post_id,'cf7anyapi_form_field',true);
+		
+		if(!empty($post_form_field) && $post_form_id == $form_ID){
+			foreach($form_fields as $form_fields_key => $form_fields_value){
+				if($form_fields_value->basetype != 'submit'){
+					$html .= '<div class="cf7anyapi_field">';
+						$html .= '<label for="cf7anyapi_'.$form_fields_value->raw_name.'">'.$form_fields_value->name.'</label>';
+						$html .= '<input type="text" id="cf7anyapi_'.$form_fields_value->raw_name.'" name="cf7anyapi_form_field['.$form_fields_value->name.']" value="'.$post_form_field[$form_fields_value->raw_name].'" placeholder="'. __( 'Enter Mapping Key Field Name', 'contact-form-to-any-api' ). '">'; 
+					$html .= '</div>';
+				}
+			}
+		}
+		else{
+			foreach($form_fields as $form_fields_key => $form_fields_value){
+				if($form_fields_value->basetype != 'submit'){
+					$html .= '<div class="cf7anyapi_field">';
+						$html .= '<label for="cf7anyapi_'.$form_fields_value->raw_name.'">'.$form_fields_value->name.'</label>';
+						$html .= '<input type="text" id="cf7anyapi_'.$form_fields_value->raw_name.'" name="cf7anyapi_form_field['.$form_fields_value->name.']" placeholder="'. __( 'Enter Mapping Key Field Name', 'contact-form-to-any-api' ). '">'; 
+					$html .= '</div>';
+				}
 			}
 		}
 		echo json_encode($html);
 		exit();
 	}
-
+	
 	/**
 	 * Sanitize Array Value
 	 *

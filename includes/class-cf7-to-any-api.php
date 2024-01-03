@@ -166,8 +166,13 @@ class Cf7_To_Any_Api {
 		$this->loader->add_action('add_meta_boxes', $plugin_admin,'cf7anyapi_metabox');
 		$this->loader->add_action('save_post',$plugin_admin,'cf7anyapi_update_settings',10,2);
 		$this->loader->add_action('wp_ajax_cf7_to_any_api_get_form_field',$plugin_admin,'cf7_to_any_api_get_form_field_function');
+		$this->loader->add_action('wp_ajax_cf7_to_any_api_bulk_log_delete',$plugin_admin,'cf7_to_any_api_bulk_log_delete_function');
 		$this->loader->add_action('wpcf7_mail_sent',$plugin_admin,'cf7_to_any_api_send_data_to_api');
 		$this->loader->add_action('admin_menu', $plugin_admin, 'cf7anyapi_register_submenu', 90);
+		$this->loader->add_filter('plugin_action_links',$plugin_admin,'cf7anyapi_add_settings_link',10,2);
+		$this->loader->add_filter('manage_cf7_to_any_api_posts_columns',$plugin_admin,'cf7_to_any_api_filter_posts_columns');
+		$this->loader->add_action('manage_cf7_to_any_api_posts_custom_column',$plugin_admin,'cf7_to_any_api_table_content',10,2);
+		$this->loader->add_filter('manage_edit-cf7_to_any_api_sortable_columns',$plugin_admin,'cf7_to_any_api_sortable_columns');
 	}
 
 	/**
@@ -234,6 +239,7 @@ class Cf7_To_Any_Api {
 	public function Cf7_To_Any_Api_get_options() {
 		global $post;
 		$options = [];
+		$field_array = array();
 		$options['cf7anyapi_selected_form'] = get_post_meta($post->ID,'cf7anyapi_selected_form',true);
 		$options['cf7anyapi_base_url'] = get_post_meta($post->ID,'cf7anyapi_base_url',true);
 		$options['cf7anyapi_basic_auth'] = get_post_meta($post->ID,'cf7anyapi_basic_auth',true);
@@ -242,6 +248,16 @@ class Cf7_To_Any_Api {
 		$options['cf7anyapi_method'] = get_post_meta($post->ID,'cf7anyapi_method',true);
 		$options['cf7anyapi_form_field'] = get_post_meta($post->ID,'cf7anyapi_form_field',true);
 		$options['cf7anyapi_header_request'] = get_post_meta($post->ID,'cf7anyapi_header_request',true);
+		if(!empty($options['cf7anyapi_selected_form'])){
+			$ContactForm = WPCF7_ContactForm::get_instance($options['cf7anyapi_selected_form']);
+			$form_fields = $ContactForm->scan_form_tags();
+			foreach($form_fields as $form_fields_value){
+				if($form_fields_value->basetype != 'submit'){
+					$field_array[$form_fields_value->raw_name] = (isset($options['cf7anyapi_form_field'][$form_fields_value->raw_name]) ? $options['cf7anyapi_form_field'][$form_fields_value->raw_name] : '');
+				}
+			}
+			$options['cf7anyapi_form_field'] = $field_array;
+		}
 		return $options;
 	}
 

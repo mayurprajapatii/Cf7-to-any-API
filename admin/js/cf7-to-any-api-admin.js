@@ -31,20 +31,47 @@
 	$(document).ready(function(){
 		$('#cf7anyapi_selected_form').on('change',function(){
 			var form_id = $(this).val();
+			var post_id = $('#post_ID').val();
+			var data = {
+				'form_id': form_id,
+				'post_id': post_id,
+	            'action': 'cf7_to_any_api_get_form_field'
+			};
 
-			jQuery.ajax({
-	            type: "POST",
-	            url: ajax_object.ajax_url,
-	            data: {
-	                'form_id': form_id,
-	                'action': 'cf7_to_any_api_get_form_field'
-	            },
-	            success: function(data) {
-	                var json_obj = JSON.parse(data);
-	                $('#cf7anyapi-form-fields').html(json_obj);
-	            }
-	        });
+			var cf7anyapi_response = cf7anyapi_ajax_request(data);
+			cf7anyapi_response.done(function(result){
+				var json_obj = JSON.parse(result);
+                $('#cf7anyapi-form-fields').html(json_obj);
+			});
+		});
+		
+		$('.post-type-cf7_to_any_api #publish').on('click',function(){
+			if($("#title").val().replace( / /g, '' ).length === 0){
+				window.alert('A title is required.');
+				$('#major-publishing-actions .spinner').hide();
+				$('#major-publishing-actions').find(':button, :submit, a.submitdelete, #post-preview').removeClass('disabled');
+				$("#title").focus();
+				return false;
+			}
+		});
+
+		$('.cf7anyapi_bulk_log_delete').on('click',function(){
+			var data = {
+	                'action': 'cf7_to_any_api_bulk_log_delete'
+	            };
+
+			var cf7anyapi_response = cf7anyapi_ajax_request(data);
+			cf7anyapi_response.done(function(result){
+				window.location.reload();
+			});
 		});
 	});
 
 })( jQuery );
+function cf7anyapi_ajax_request(cf7anyapi_data){
+	return jQuery.ajax({
+            type: "POST",
+            url: ajax_object.ajax_url,
+            data: cf7anyapi_data,
+        });
+}

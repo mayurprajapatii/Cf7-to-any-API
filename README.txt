@@ -1,12 +1,14 @@
 === Contact Form to Any API ===
 Contributors: itpathsolutions,vickymakwana1111,mayur8991
-Tags: rest api, api, Contact form, crm, lead
+Tags: rest api, api, contact form, crm, lead, contact form 7
 Requires at least: 4.7 or higher
 Tested up to: 6.1
 Requires PHP: 5.6 or higher
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+Contact form 7 to Any API is most powerful plugin to send cf7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings
 
 == Description ==
 
@@ -86,20 +88,32 @@ Absolutely. Please Connect with us on <a href="mailto:info@itpathsolutions.com">
 
 == Changelog ==
 
+= 1.0.4 =
+* New - Added delete all log feature
+* Improvement - Set default value for Input type and Method
+* Improvement - Added Title validation
+* Improvement - New added fields willl automatically appear in API settings screen 
+* Improvement - Mapped fields value now remain on form change from API setting screen
+* Improvement - Form name column added in API List
+* Improvement - Documentation update
+* Fix - I18n Issues
+
 = 1.0.3 =
-* Field map issue with GET method fixes and update
-* Validation added for major fields
-* Sanitization function updates
+* Improvement - Validation added for major fields
+* Improvement - Sanitization function updates
+* Fix - Field map issue with GET method
+
 
 = 1.0.2 =
-* Fatal error fixes while activating the plugin for some users
-* Other small fixes and update
-* CF7 pipe sign support added for Radio , Select & Checkbox fields 
+* Improvement - CF7 pipe sign support added for Radio , Select & Checkbox fields
+* Fix - Fatal error fixes while activating the plugin for some users
+* Fix - Other small fixes and update
+
 
 = 1.0.1 =
-* Set your own Header Request
-* Added documentation link
-* Compatible with latest wordpress version 6.1
+* Improvement - Set your own Header Request
+* Improvement - Added documentation link
+* Improvement - Compatible with latest wordpress version 6.1
 
 = 1.0.0 =
 * Initial Release

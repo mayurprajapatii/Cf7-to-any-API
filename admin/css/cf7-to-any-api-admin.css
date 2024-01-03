@@ -3,6 +3,28 @@
  * included in this file.
  */
 
+.cf7anyapi_bulk_log_delete{
+    margin-left: 4px;
+    padding: 4px 8px;
+    position: relative;
+    top: 15px;
+    text-decoration: none;
+    border: 1px solid #2271b1;
+    border-radius: 2px;
+    text-shadow: none;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: normal;
+    color: #2271b1;
+    background: #f6f7f7;
+    cursor: pointer;
+}
+
+.cf7anyapi_bulk_log_delete:hover{
+    background: #f0f0f1;
+    border-color: #0a4b78;
+    color: #0a4b78;
+}
 .post-type-cf7_to_any_api .cf7anyapi_documentation{
     background: #fff;
     padding: 50px;
