@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file that defines the core plugin class
  *
@@ -173,6 +172,7 @@ class Cf7_To_Any_Api {
 		$this->loader->add_filter('manage_cf7_to_any_api_posts_columns',$plugin_admin,'cf7_to_any_api_filter_posts_columns');
 		$this->loader->add_action('manage_cf7_to_any_api_posts_custom_column',$plugin_admin,'cf7_to_any_api_table_content',10,2);
 		$this->loader->add_filter('manage_edit-cf7_to_any_api_sortable_columns',$plugin_admin,'cf7_to_any_api_sortable_columns');
+		$this->loader->add_action('plugins_loaded',$plugin_admin,'cf7toanyapi_add_new_table',10, 2);
 	}
 
 	/**
@@ -282,5 +282,106 @@ class Cf7_To_Any_Api {
     		$data['fields'] = 'No form Found';
     	}
 		return $data;
+	}
+
+	public function cf7toanyapi_sortdata($data){
+	    $data_sorted = array();
+		//Set submitted id wise form information
+	    foreach ($data as $k => $v) {
+	        if(!isset($data_sorted[$v->data_id])){
+	            $data_sorted[$v->data_id] = array();
+	        }
+	        $data_sorted[$v->data_id][$v->field_name] = (string) apply_filters('cf7toanyapi_entry_value', trim(wp_unslash($v->field_value)), $v->field_name);
+	    }
+
+	    return $data_sorted;
+	}
+
+	public function cf7toanyapi_get_db_fields($fid, $filter = true){
+
+	    global $wpdb;
+		$fid = (int)$fid;
+		$data_entry_table_name = sanitize_text_field($wpdb->prefix.'cf7anyapi_entries');
+
+	    $sql = $wpdb->prepare("SELECT `field_name` FROM `{$data_entry_table_name}` WHERE form_id = %d GROUP BY `field_name`", $fid);
+	    $data = $wpdb->get_results($sql);
+
+		//Set each field value in array
+	    $fields = array();
+		if(!empty($data)){
+
+			foreach ($data as $k => $v) {
+				if(defined('vsz_cf7_display_ip')){
+					if($v->field_name != 'submit_ip'){
+						$fields[$v->field_name] = htmlspecialchars_decode($v->field_name);
+					}
+				}
+				else{
+					$fields[$v->field_name] = htmlspecialchars_decode($v->field_name);
+				}
+			}
+		}
+
+		//Check if filter is true or not
+	    if ($filter) {
+			//Get all fields information as per Setting screen
+	        $fields = (array) apply_filters('cf7toanyapi_admin_fields', $fields, $fid);
+	    }
+
+	    return $fields;
+	}
+
+	public function cf7toanyapi_admin_get_field_name($field){
+	    return esc_html($field);
+	}
+
+	public function cf7toanyapi_field_type_info($fid){
+
+		if(empty($fid) || !intval($fid)) return ;
+
+		$fid = intval($fid);
+		$obj_form = self::cf7toanyapi_get_the_form_list($fid);
+		//get pre define fields information
+		$arr_form_tag = $obj_form[0]->scan_form_tags();
+		$arr_field_type = array();
+		if(!empty($arr_form_tag)){
+			//Get all fields related information
+			foreach($arr_form_tag as $key => $arr_type){
+				//Check if tag type is submit then ignore tag info
+				if($arr_type['basetype'] == 'submit') continue;
+				//get field type information
+				$arr_field_type[$arr_type['name']] = $arr_type['basetype'];
+			}
+		}
+
+		return $arr_field_type;
+	}
+
+	public function cf7toanyapi_get_the_form_list($fid = ''){
+
+		//Get All form information
+		$forms = WPCF7_ContactForm::find();
+		$form = array();
+		//fetch each form information
+
+		foreach ($forms as $k => $v){
+			//Check if form id not empty then get specific form related information
+			if(!empty($fid)){
+				if($v->id() == $fid){
+					$form[] = $v;
+					return $form;
+				}
+			}
+			else{
+				$form[] = $v;
+			}
+	    }
+
+		if(count($form)>1){
+			// New function Added to sort the array by CF7 Name
+			usort($form, "cmp_sort_form_name");
+		}
+
+		return $form;
 	}
 }

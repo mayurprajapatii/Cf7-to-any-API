@@ -65,6 +65,40 @@
 				window.location.reload();
 			});
 		});
+
+		if($('#form_id').length){
+			$('#form_id').on('change',function(){
+				var value = $(this).val();
+				var url = window.location.href;
+				if(value != ''){
+					if(url.includes('?')){
+						url=url+"&form_id="+value;
+					}
+					else{
+						url=url+"?form_id="+value;
+					}
+				}
+				else{
+					url = url.replace('form_id','');
+				}
+				location.assign(url);
+			});
+		}
+
+		if(jQuery('#cf7toanyapi_table').length){
+			jQuery('#cf7toanyapi_table').DataTable({
+				dom: 'Blfrtip',
+			    autoWidth: false,
+				scrollX: true,
+				order: [],
+		        buttons: [
+		            'csv', 'excel', 'pdf', 'print'
+		        ]
+			});
+			// merge filter , buttons , search into one div
+			jQuery('.dt-buttons, .dataTables_length, .dataTables_filter').wrapAll( jQuery('<div>').addClass('cf7toanyapi_table_wrap') );
+
+		}
 	});
 
 })( jQuery );

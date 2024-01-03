@@ -9,9 +9,6 @@
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdn.datatables.net/select/1.6.1/js/dataTables.select.min.js"></script>
-<script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
-
 <?php
 	global $wpdb;
 	$Cf7_To_Any_Api = new Cf7_To_Any_Api();
@@ -20,9 +17,9 @@
 
 <div class="cf_entries" id="cf_entries">
 	<form name="form_entries" id="form_entries" class="cf7toanyapi_entries" method="get">
-		<label for="form" class="cf7toanyapi_select_form"><?php esc_html_e( 'Choose a form:', 'contact-form-to-any-api' ); ?></label>
+		<label for="form" class="cf7toanyapi_select_form">Choose a form:</label>
 		<select name="form" id="form_id" class="form_id cf7toanyapi_forms">
-			<option value=""><?php esc_html_e( 'Select Form', 'contact-form-to-any-api' ); ?></option>
+			<option value="">Select Form</option>
 			<?php
 			$posts = get_posts(
                 array(
@@ -40,40 +37,38 @@
 	</form>
 	<?php
 		if(isset($cf_id) && $cf_id != ''){
-			
-			$result = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cf7anyapi_entries WHERE `form_id` = '.$cf_id.' AND data_id IN( SELECT * FROM ( SELECT data_id FROM '.$wpdb->prefix.'cf7anyapi_entries WHERE 1 = 1 AND `form_id` = '.$cf_id.' GROUP BY `data_id` ORDER BY `data_id` DESC) temp_table) ORDER BY `data_id` DESC');
-			
+			$result = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cf7anyapi_entries WHERE `form_id` = '.$cf_id.' AND data_id IN( SELECT * FROM ( SELECT data_id FROM '.$wpdb->prefix.'cf7anyapi_entry_id WHERE 1 = 1 AND `form_id` = '.$cf_id.' GROUP BY `data_id` ORDER BY `data_id` DESC) temp_table) ORDER BY `data_id` DESC');
+
 			$data_sorted = $Cf7_To_Any_Api->cf7toanyapi_sortdata($result);
+
 			$fields = $Cf7_To_Any_Api->cf7toanyapi_get_db_fields($cf_id);
+
 			$display_character = (int) apply_filters('cf7toanyapi_display_character_count',30);
 			$arr_field_type_info = $Cf7_To_Any_Api->cf7toanyapi_field_type_info($cf_id);
 
 			if($result){
-				
 			?>
-				
 				<div id="table_data">
-				<!-- <input type="submit" class="btn-delete cf7toanyapi_btn_delete" value="Delete"> -->
 					<table class="tbl table table-striped table-bordered cf7toanyapi_table" id="cf7toanyapi_table">
 						<thead>
-							<tr class="cf7toanyapi_dataid_all">								
+							<tr>
 								<?php
-								
-										echo '<th class="manage-column">checkbox</th>';
 									foreach ($fields as $k => $v){
-										echo '<th class="manage-column" data-key="'.esc_html($v).'">'.ucfirst(str_replace('_',' ',$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v))).'</th>';
+										echo '<th class="manage-column" data-key="'.esc_html($v).'">'.vsz_cf7_admin_get_field_name($v).'</th>';
 									}
 								?>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							
 								if(!empty($data_sorted)){
-									foreach ($data_sorted as $k => $v )   {					
-										echo '<tr data-id="'.$k.'" class="cf7toanyapi_dataid">';
+									foreach ($data_sorted as $k => $v) {
 										$k = (int)$k;
-										echo '<td data-id="'.$k.'" class="cf7toanyapi_dataid"></td>';
+										echo '<tr>';
+										
+										$row_id = $k;
+										//Display edit entry icon
+										
 										foreach ($fields as $k2 => $v2) {
 											//Get fields related values
 											$_value = ((isset($v[$k2])) ? $v[$k2] : '&nbsp;');
@@ -97,11 +92,9 @@
 													</td><?php
 												}
 											}
-											else if($Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v2) == 'submitted_from'){
-												echo '<td data-head="'.$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v2).'"><a href="'.get_the_permalink($_value).'" target="_blank">'.get_the_title($_value).'</a></td>';
-											}
 											else{
 												$_value = esc_html(html_entity_decode($_value));
+												//var_dump(($_value)); var_dump(strlen($_value)); exit;
 												if(strlen($_value) > $display_character){
 
 													echo '<td data-head="'.$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v2).'">'.esc_html(substr($_value, 0, $display_character)).'...</td>';
@@ -112,8 +105,6 @@
 										}//Close foreach
 										echo '</tr>';
 									}//Close foreach
-								
-								
 								}
 							?>
 						</tbody>

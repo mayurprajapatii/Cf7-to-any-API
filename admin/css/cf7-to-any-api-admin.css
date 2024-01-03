@@ -3,6 +3,14 @@
  * included in this file.
  */
 
+.dt-button{
+    height: auto;
+    width: 10%;
+    padding: 10px;
+    margin: 10px;
+    background-color: #D0D3D4 !important;
+    color: black !important;
+}
 .cf7anyapi_bulk_log_delete{
     margin-left: 4px;
     padding: 4px 8px;
@@ -100,6 +108,78 @@
 
 .cf7anyapi_documentation h2{ font-size: 28px; }
 .cf7anyapi_documentation p, .cf7anyapi_documentation code{ font-size: 16px; line-height: 1; }
+
+
+/*CF7 Entries CSS*/
+.cf7_to_any_api_page_cf7anyapi_entries #wpwrap{
+    background-color: #F0F0F1 !important;
+}
+.cf7toanyapi_entries{
+    margin-top: 40px;
+}
+.cf7toanyapi_select_form{
+    margin-right: 40px !important;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 10px 10px;
+    vertical-align: middle;
+}
+.cf7toanyapi_forms{
+    background-color: #fff !important;
+    background-image: none !important;
+    border: 1px solid #ccc !important;
+    border-radius: 0 !important;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 8%) inset !important;
+    color: #555 !important;
+    font-size: 14px !important;
+    height: 34px !important;
+    line-height: 1.42857 !important;
+    margin: 0 !important;
+    padding: 6px 12px !important;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s !important;
+    width: 200px !important;
+}
+.cf_entries .buttons-csv, .cf_entries .buttons-excel, .cf_entries .buttons-pdf, .cf_entries .buttons-print{
+    border: 1px solid #0073aa;
+    background-color: #0073aa !important;
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+.cf_entries .dataTables_length, .cf_entries .dataTables_info{
+    display: inline-block;
+    margin: 15px;
+    padding: 0 !important;
+}
+.cf_entries .dataTables_length label{
+    word-spacing: 5px;
+}
+.cf_entries .dataTables_filter, .cf_entries .dataTables_paginate{
+    display: flex;
+    float: right;
+    margin: 15px !important;
+}
+.cf_entries .cf7toanyapi_table{
+    border: 1px solid #c3c4c7;
+    background: #fff;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
+    width: 100%;
+    overflow-x: scroll;
+}
+.cf_entries .cf7toanyapi_table thead{
+    border: 1px solid #c3c4c7 !important;
+}
+.cf_entries .cf7toanyapi_table tr, .cf_entries .cf7toanyapi_table th, .cf_entries .cf7toanyapi_table td{font-size: 15px;}
+
+.cf7toanyapi_table_wrap {display: flex; align-items: center;}
+.cf7toanyapi_table_wrap .dt-buttons{width: 80%;}
+.cf7toanyapi_table_wrap .dataTables_length, .cf7toanyapi_table_wrap .cf7toanyapi_table_filter{width: 10%;}
+
+/*CF7 Entries CSS*/
+
 @media screen and (max-width:782px){
     .post-type-cf7_to_any_api div#cf7anyapi-form-fields{
         grid-template-columns: 1fr;

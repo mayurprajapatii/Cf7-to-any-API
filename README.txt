@@ -1,20 +1,20 @@
 === Contact Form to Any API ===
 Contributors: itpathsolutions,vickymakwana1111,mayur8991
-Tags: rest api, api, contact form, crm, lead, contact form 7
+Tags: rest api, api, contact form, crm, lead, database, export, contact form 7
 Requires at least: 4.7 or higher
 Tested up to: 6.1
 Requires PHP: 5.6 or higher
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Contact form 7 to Any API is most powerful plugin to send cf7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings
+Contact form 7 to Any API is most powerful plugin to send cf7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings. It also Save Contact Form 7 form submitted data to the database with advanced features like search and export data to csv or excel.
 
 == Description ==
 
 https://youtu.be/1K-JdXwDH_k
 
-Contact form 7 to Any API is most powerful plugin to send cf7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings
+Contact form 7 to Any API is most powerful plugin to send cf7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings. It also Save Contact Form 7 form submitted data to the database with advanced features like search and export data to csv or excel.
 
 = Features =
 * Send CF7 Leads to Remote API's such as CRM and other API using POST/GET
@@ -24,7 +24,8 @@ Contact form 7 to Any API is most powerful plugin to send cf7 data to any third 
 * Supports Basic Auth
 * Supports Bearer Auth
 * Logs Management
-
+* Save Contact Form 7 form submitted data to the database.
+* Export Contact Form 7 Data in CSV , EXCEL , PDF , Print
 
 == Set your own Header Request Parameter ==
 
@@ -87,6 +88,11 @@ Absolutely. Please Connect with us on <a href="mailto:info@itpathsolutions.com">
 2. Logs Management
 
 == Changelog ==
+
+= 1.0.5 =
+* New - Save Contact Form 7 form submitted data to the database.
+* New - Export Contact Form 7 Data in CSV , EXCEL , PDF , Print
+* New - Search feature for cf7 submitted data
 
 = 1.0.4 =
 * New - Added delete all log feature

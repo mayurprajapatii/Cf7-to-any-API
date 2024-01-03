@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -222,6 +221,15 @@ class Cf7_To_Any_Api_Admin {
 	        array(&$this,'cf7anyapi_submenu_callback')
 	    );
 
+		add_submenu_page(
+	        'edit.php?post_type=cf7_to_any_api',
+	        __('Entries', 'contact-form-to-any-api'),
+	        __('Entries', 'contact-form-to-any-api'),
+	        'manage_options',
+	        'cf7anyapi_entries',
+	        array(&$this,'cf7anyapi_entries_callback')
+	    );
+
 	    add_submenu_page(
 	        'edit.php?post_type=cf7_to_any_api',
 	        __('Documentation', 'contact-form-to-any-api'),
@@ -271,6 +279,15 @@ class Cf7_To_Any_Api_Admin {
 	public static function cf7anyapi_settings() {
 		include dirname(__FILE__).'/partials/cf7-to-any-api-admin-display.php';
 	}
+
+	/**
+	 * Registered Entries Fields
+	 *
+	 * @since    1.0.0
+	 */
+	public static function cf7anyapi_entries_callback(){
+		include dirname(__FILE__).'/partials/cf7-to-any-api-admin-entries.php';
+	 }
 
 	/**
 	 * Update the Metaboxes value on Post Save
@@ -347,6 +364,35 @@ class Cf7_To_Any_Api_Admin {
 		echo json_encode($html);
 		exit();
 	}
+
+	public function cf7toanyapi_add_new_table(){
+		global $wpdb;
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		$table = $wpdb->prefix.'cf7anyapi_entry_id';
+		if($wpdb->get_var(sprintf("SHOW TABLES LIKE '%s%s'", $wpdb->prefix, 'cf7anyapi_entry_id')) != $wpdb->prefix . 'cf7anyapi_entry_id'){
+	        $charset_collate = $wpdb->get_charset_collate();
+	        $qry = "CREATE TABLE IF NOT EXISTS " . $table . " (
+	            id int(11)  PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	            Created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+	        )$charset_collate;";
+	        dbDelta($qry);
+	    }
+
+	    if($wpdb->get_var(sprintf("SHOW TABLES LIKE '%s%s'", $wpdb->prefix, 'cf_entries')) != $wpdb->prefix . 'cf_entries'){
+	    	$charset_collate = $wpdb->get_charset_collate();
+	        $table_name2 = $wpdb->prefix.'cf7anyapi_entries';
+	        $query = "CREATE TABLE IF NOT EXISTS " . $table_name2 . " (
+	            id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	            form_id int(11) ,
+	            data_id int(11),
+	            field_name varchar(50),
+	            field_value varchar(50),
+	            date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	            FOREIGN KEY (data_id) REFERENCES ".$table."(id)
+	        )$charset_collate;";
+	        dbDelta($query);
+	    }
+	}
 	
 	/**
 	 * Sanitize Array Value
@@ -375,6 +421,8 @@ class Cf7_To_Any_Api_Admin {
 		$submission = WPCF7_Submission::get_instance();
 		$posted_data = $submission->get_posted_data();
 		$form_id = (int)stripslashes($_POST['_wpcf7']);
+		$posted_data['submit_time'] = date('Y-m-d H:i:s');
+		self::cf7anyapi_save_form_submit_data($form_id,$posted_data);
 		$args = array(
 			'post_type' => 'cf7_to_any_api',
 			'post_status' => 'publish',
@@ -415,6 +463,29 @@ class Cf7_To_Any_Api_Admin {
 		    }
 		}
 		wp_reset_postdata();
+	}
+
+	public static function cf7anyapi_save_form_submit_data($form_id,$posted_data){
+		global $wpdb;
+		$table = $wpdb->prefix.'cf7anyapi_entry_id';
+		$table2 = $wpdb->prefix.'cf7anyapi_entries';
+
+		$wpdb->insert($table,array('Created' => date("Y-m-d H:i:s")));
+		$data_id = (int)$wpdb->insert_id;
+
+		foreach($posted_data as $field => $value){
+			$posted_value = (is_array($value) ? implode(',',$value) : $value);
+			$wpdb->insert(
+				$table2,
+				array(
+					'form_id' => $form_id,
+					'data_id' => $data_id,
+					'field_name' => $field,
+					'field_value' => $posted_value
+				),
+				array('%s')
+			);
+		}
 	}
 
 	/**
@@ -505,6 +576,7 @@ class Cf7_To_Any_Api_Admin {
       		}
       		
       		$result = wp_remote_post($url, $args);
+      		
       		self::Cf7_To_Any_Api_save_response_in_log($post_id, $form_id, $result['body']);
 		}
 	}
