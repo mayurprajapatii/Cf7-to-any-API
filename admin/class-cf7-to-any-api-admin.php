@@ -366,8 +366,18 @@ class Cf7_To_Any_Api_Admin {
 	}
 
 	public function cf7toanyapi_add_new_table(){
-		global $wpdb;
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		global $wpdb;
+
+		if($wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix."cf7anyapi_logs'") == $wpdb->prefix."cf7anyapi_logs"){
+			$sql = "SELECT COUNT(*) AS a FROM information_schema.COLUMNS WHERE TABLE_NAME = '". $wpdb->prefix."cf7anyapi_logs' AND COLUMN_NAME =  'form_data'";
+			$query_data = $wpdb->get_results($sql);
+			if($query_data[0]->a == 0){
+				$sql2 = 'ALTER TABLE `'.$wpdb->prefix.'cf7anyapi_logs` ADD `form_data` TEXT NOT NULL AFTER `post_id`';
+				$wpdb->query($sql2);
+			}
+		}
+
 		$table = $wpdb->prefix.'cf7anyapi_entry_id';
 		if($wpdb->get_var(sprintf("SHOW TABLES LIKE '%s%s'", $wpdb->prefix, 'cf7anyapi_entry_id')) != $wpdb->prefix . 'cf7anyapi_entry_id'){
 	        $charset_collate = $wpdb->get_charset_collate();
@@ -421,6 +431,8 @@ class Cf7_To_Any_Api_Admin {
 		$submission = WPCF7_Submission::get_instance();
 		$posted_data = $submission->get_posted_data();
 		$form_id = (int)stripslashes($_POST['_wpcf7']);
+		$post_id = $submission->get_meta('container_post_id');
+		$posted_data['submitted_from'] = $post_id;
 		$posted_data['submit_time'] = date('Y-m-d H:i:s');
 		self::cf7anyapi_save_form_submit_data($form_id,$posted_data);
 		$args = array(
@@ -456,10 +468,15 @@ class Cf7_To_Any_Api_Admin {
 				$cf7anyapi_header_request = get_post_meta(get_the_ID(),'cf7anyapi_header_request',true);
 
 		        foreach($cf7anyapi_form_field as $key => $value){
-		        	$api_post_array[$value] = (is_array($posted_data[$key]) ? implode(',', self::Cf7_To_Any_Api_sanitize_array($posted_data[$key])) : sanitize_text_field($posted_data[$key]));
+		        	if(is_numeric($posted_data[$key]) && !is_array($posted_data[$key])){
+		        		$api_post_array[$value] = (int)sanitize_text_field($posted_data[$key]);
+		        	}
+		        	else{
+		        		$api_post_array[$value] = (is_array($posted_data[$key]) ? implode(',', self::Cf7_To_Any_Api_sanitize_array($posted_data[$key])) : sanitize_text_field($posted_data[$key]));
+		        	}
 		        }
 		        
-		        self::cf7anyapi_send_lead($api_post_array, $cf7anyapi_base_url, $cf7anyapi_input_type, $cf7anyapi_method, $form_id, get_the_ID(), $cf7anyapi_basic_auth, $cf7anyapi_bearer_auth,$cf7anyapi_header_request);
+		        self::cf7anyapi_send_lead($api_post_array, $cf7anyapi_base_url, $cf7anyapi_input_type, $cf7anyapi_method, $form_id, get_the_ID(), $cf7anyapi_basic_auth, $cf7anyapi_bearer_auth,$cf7anyapi_header_request, $posted_data);
 		    }
 		}
 		wp_reset_postdata();
@@ -493,7 +510,7 @@ class Cf7_To_Any_Api_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function cf7anyapi_send_lead($data, $url, $input_type, $method, $form_id, $post_id, $basic_auth = '', $bearer_auth = '',$header_request = ''){
+	public static function cf7anyapi_send_lead($data, $url, $input_type, $method, $form_id, $post_id, $basic_auth = '', $bearer_auth = '',$header_request = '', $posted_data = ''){
 		
 		if($method == 'GET' && ($input_type == 'params' || $input_type == 'json')){
 			$args = array(
@@ -529,8 +546,8 @@ class Cf7_To_Any_Api_Admin {
         		}
 			}
 			
-			$result = wp_remote_get($url, $args);
-      		self::Cf7_To_Any_Api_save_response_in_log($post_id, $form_id, $result['body']);
+			$result = wp_remote_retrieve_body(wp_remote_get($url, $args));
+      		self::Cf7_To_Any_Api_save_response_in_log($post_id, $form_id, $result, $posted_data);
 		}
 		else{
 			$args = array(
@@ -575,9 +592,8 @@ class Cf7_To_Any_Api_Admin {
     			}
       		}
       		
-      		$result = wp_remote_post($url, $args);
-      		
-      		self::Cf7_To_Any_Api_save_response_in_log($post_id, $form_id, $result['body']);
+      		$result = wp_remote_retrieve_body(wp_remote_post($url, $args));
+      		self::Cf7_To_Any_Api_save_response_in_log($post_id, $form_id, $result, $posted_data);
 		}
 	}
 
@@ -595,12 +611,14 @@ class Cf7_To_Any_Api_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-  	public static function Cf7_To_Any_Api_save_response_in_log($post_id, $form_id, $response){
+  	public static function Cf7_To_Any_Api_save_response_in_log($post_id, $form_id, $response, $posted_data){
   		global $wpdb;
   		$table = $wpdb->prefix.'cf7anyapi_logs';
+  		$form_data = json_encode($posted_data);
   		$data = array(
   			'form_id' => $form_id,
   			'post_id' => $post_id,
+  			'form_data' => $form_data,
   			'log' => $response,
   		);
 

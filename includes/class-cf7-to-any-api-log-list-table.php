@@ -24,6 +24,7 @@ class cf7anyapi_List_Table extends WP_List_Table{
         		return '<a href="'.site_url()."/wp-admin/admin.php?page=wpcf7&post=".$item[ $column_name ]."&action=edit".'" target="_blank">'.get_the_title($item[$column_name]).'</a>';
         	case 'post_id':
         		return '<a href="'.get_edit_post_link($item[$column_name]).'" target="_blank">'.get_the_title($item[$column_name]).'</a>';
+        	case 'form_data':
         	case 'log':
             case 'created_date':
             	return $item[ $column_name ];
@@ -36,7 +37,8 @@ class cf7anyapi_List_Table extends WP_List_Table{
         $columns = array(
             'form_id' => __( 'Form Name', 'contact-form-to-any-api' ),
             'post_id' => __( 'API Name', 'contact-form-to-any-api' ),
-            'log' => __( 'Log', 'contact-form-to-any-api' ),
+            'form_data' => __( 'Submitted Data', 'contact-form-to-any-api' ),
+            'log' => __( 'API Response', 'contact-form-to-any-api' ),
             'created_date' => __( 'Created Date', 'contact-form-to-any-api' )
         );
         return $columns;

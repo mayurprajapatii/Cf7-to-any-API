@@ -55,7 +55,7 @@
 							<tr>
 								<?php
 									foreach ($fields as $k => $v){
-										echo '<th class="manage-column" data-key="'.esc_html($v).'">'.$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v).'</th>';
+										echo '<th class="manage-column" data-key="'.esc_html($v).'">'.ucfirst(str_replace('_',' ',$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v))).'</th>';
 									}
 								?>
 							</tr>
@@ -93,9 +93,11 @@
 													</td><?php
 												}
 											}
+											else if($Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v2) == 'submitted_from'){
+												echo '<td data-head="'.$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v2).'"><a href="'.get_the_permalink($_value).'" target="_blank">'.get_the_title($_value).'</a></td>';
+											}
 											else{
 												$_value = esc_html(html_entity_decode($_value));
-												//var_dump(($_value)); var_dump(strlen($_value)); exit;
 												if(strlen($_value) > $display_character){
 
 													echo '<td data-head="'.$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v2).'">'.esc_html(substr($_value, 0, $display_character)).'...</td>';
