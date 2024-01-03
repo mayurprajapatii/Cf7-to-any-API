@@ -1,10 +1,10 @@
 === Contact Form to Any API ===
 Contributors: itpathsolutions,mayur8991,pateljaymin,vickymakwana1111
-Tags: rest api, api, contact form, crm, lead, database, export, contact form 7
-Requires at least: 4.7 or higher
-Tested up to: 6.2
-Requires PHP: 5.6 or higher
-Stable tag: 1.1.3
+Tags: rest api, api, contact form, crm, lead, pro, export, contact form 7
+Requires at least: 6.0
+Tested up to: 6.3
+Requires PHP: 7.4
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,8 +28,10 @@ Contact form 7 to Any API is most powerful plugin to send cf7 data to any third 
 * Save Contact Form 7 form submitted data to the database.
 * Export Contact Form 7 Data in CSV , EXCEL , PDF , Print
 * Single Or Multiple delete cf7 entries
+* Option to Choose when to send data to API - Before cf7 mail sent OR After mail sent <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * File input supported - Uploaded file will convert into BASE64 and send to API <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Priority Support <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
+* Paid Plugin customization support based on Requirment <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 
 = Set your own Header Request Parameter =
 
@@ -54,6 +56,8 @@ Contact Form to any API plugin is also available in a professional version which
 * Send data to multiple API 
 * File input supported - Uploaded file will convert into BASE64 and send to API
 * Priority Support
+* Choose when to send data to API
+* Paid plugin customization support
 
 
 == Support ==
@@ -125,6 +129,9 @@ For plugin integration, we provide premium support for free to help connect your
 3. Entries
 
 == Changelog ==
+
+= 1.1.4 =
+* Improvement - Compatible with latest WordPress version 6.3
 
 = 1.1.3 =
 * Fix - Security update
