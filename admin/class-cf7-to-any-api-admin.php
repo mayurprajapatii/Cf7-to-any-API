@@ -313,7 +313,7 @@ class Cf7_To_Any_Api_Admin {
 				$options['cf7anyapi_header_request'] = sanitize_textarea_field($_POST['cf7anyapi_header_request']);
 
 				foreach($options as $options_key => $options_value){
-        				$response = update_post_meta( $cf7_to_any_api_id, $options_key, $options_value );
+					$response = update_post_meta( $cf7_to_any_api_id, $options_key, $options_value );
     			}
 				if($response){
 					$status = 'true';
@@ -346,7 +346,7 @@ class Cf7_To_Any_Api_Admin {
 				if($form_fields_value->basetype != 'submit'){
 					$html .= '<div class="cf7anyapi_field">';
 						$html .= '<label for="cf7anyapi_'.$form_fields_value->raw_name.'">'.$form_fields_value->name.'</label>';
-						$html .= '<input type="text" id="cf7anyapi_'.$form_fields_value->raw_name.'" name="cf7anyapi_form_field['.$form_fields_value->name.']" value="'.$post_form_field[$form_fields_value->raw_name].'" placeholder="'. __( 'Enter Mapping Key Field Name', 'contact-form-to-any-api' ). '">'; 
+						$html .= '<input type="text" id="cf7anyapi_'.$form_fields_value->raw_name.'" name="cf7anyapi_form_field['.$form_fields_value->name.']" value="'.$post_form_field[$form_fields_value->raw_name].'" data-basetype="'.$form_fields_value->basetype.'" placeholder="'. __( 'Enter Mapping Key Field Name', 'contact-form-to-any-api' ). '">'; 
 					$html .= '</div>';
 				}
 			}
@@ -356,7 +356,7 @@ class Cf7_To_Any_Api_Admin {
 				if($form_fields_value->basetype != 'submit'){
 					$html .= '<div class="cf7anyapi_field">';
 						$html .= '<label for="cf7anyapi_'.$form_fields_value->raw_name.'">'.$form_fields_value->name.'</label>';
-						$html .= '<input type="text" id="cf7anyapi_'.$form_fields_value->raw_name.'" name="cf7anyapi_form_field['.$form_fields_value->name.']" placeholder="'. __( 'Enter Mapping Key Field Name', 'contact-form-to-any-api' ). '">'; 
+						$html .= '<input type="text" id="cf7anyapi_'.$form_fields_value->raw_name.'" name="cf7anyapi_form_field['.$form_fields_value->name.']" data-basetype="'.$form_fields_value->basetype.'" placeholder="'. __( 'Enter Mapping Key Field Name', 'contact-form-to-any-api' ). '">'; 
 					$html .= '</div>';
 				}
 			}
@@ -428,14 +428,36 @@ class Cf7_To_Any_Api_Admin {
 	 */
 	public static function cf7_to_any_api_send_data_to_api($WPCF7_ContactForm){
 		global $wpdb;
+		$cf7_uploads_dir = trailingslashit( wp_upload_dir()['basedir'] ) . 'cf7-to-any-api-uploads';
+		$form_id = (int)stripslashes($_POST['_wpcf7']);
+		if (! is_dir($cf7_uploads_dir)) {
+			wp_mkdir_p( $cf7_uploads_dir );
+		}
 		$submission = WPCF7_Submission::get_instance();
 		$posted_data = $submission->get_posted_data();
-		$form_id = (int)stripslashes($_POST['_wpcf7']);
+		$cf7files = $submission->uploaded_files();
+		if( !empty($cf7files)){
+			foreach ($cf7files as $key => $cf7file) {
+				$ext = pathinfo($cf7file[0], PATHINFO_EXTENSION);
+				$f_name = pathinfo($cf7file[0], PATHINFO_FILENAME );
+				$fileName = 'cf7-'.$form_id.'-'.time().'.'.$ext;
+				copy($cf7file[0], $cf7_uploads_dir.'/'.$fileName);	
+				$posted_data[$key] = '<a href="'.wp_upload_dir()['baseurl'] . '/cf7-to-any-api-uploads/'.$fileName.'" target="_blank">'.$fileName.'</a>';
+			}
+		}
 		$post_id = $submission->get_meta('container_post_id');
 		$posted_data['submitted_from'] = $post_id;
 		$posted_data['submit_time'] = date('Y-m-d H:i:s');
 		$posted_data['User_IP'] = $_SERVER['REMOTE_ADDR'];		
 		self::cf7anyapi_save_form_submit_data($form_id,$posted_data);
+
+		//Image set base64 encode
+		if( !empty($cf7files)){
+			foreach ($cf7files as $key => $cf7file) {
+				$posted_data[$key] = base64_encode(file_get_contents($cf7file[0]));
+			}
+		}
+
 		$args = array(
 			'post_type' => 'cf7_to_any_api',
 			'post_status' => 'publish',
@@ -594,6 +616,7 @@ class Cf7_To_Any_Api_Admin {
       		}
       		
       		$result = wp_remote_retrieve_body(wp_remote_post($url, $args));
+
       		self::Cf7_To_Any_Api_save_response_in_log($post_id, $form_id, $result, $posted_data);
 		}
 	}
@@ -615,6 +638,16 @@ class Cf7_To_Any_Api_Admin {
   	public static function Cf7_To_Any_Api_save_response_in_log($post_id, $form_id, $response, $posted_data){
   		global $wpdb;
   		$table = $wpdb->prefix.'cf7anyapi_logs';
+
+  		// Base64 image get only 10 characters
+  		if(isset($posted_data)){
+  			foreach($posted_data as $key => $arr){
+				if(strstr($key, 'file-')){
+					$posted_data[$key] = substr($arr, 0, 10).'...';
+			    }
+			}
+  		}
+  		
   		$form_data = json_encode($posted_data);
   		$data = array(
   			'form_id' => $form_id,

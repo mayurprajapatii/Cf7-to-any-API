@@ -57,6 +57,7 @@ class Cf7_To_Any_Api_Activator {
             id int(11) NOT NULL AUTO_INCREMENT,
             form_id int(11) NOT NULL,
             post_id int(11) NOT NULL,
+            form_data text NOT NULL,
             log text NOT NULL,
             created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY  (id)
