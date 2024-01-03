@@ -173,6 +173,7 @@ class Cf7_To_Any_Api {
 		$this->loader->add_action('manage_cf7_to_any_api_posts_custom_column',$plugin_admin,'cf7_to_any_api_table_content',10,2);
 		$this->loader->add_filter('manage_edit-cf7_to_any_api_sortable_columns',$plugin_admin,'cf7_to_any_api_sortable_columns');
 		$this->loader->add_action('plugins_loaded',$plugin_admin,'cf7toanyapi_add_new_table',10, 2);
+		$this->loader->add_action('wp_ajax_delete_records',$plugin_admin,'delete_cf7_records',10, 2);
 	}
 
 	/**
@@ -302,14 +303,10 @@ class Cf7_To_Any_Api {
 	    global $wpdb;
 		$fid = (int)$fid;
 		$data_entry_table_name = sanitize_text_field($wpdb->prefix.'cf7anyapi_entries');
-
-	    $sql = $wpdb->prepare("SELECT `field_name` FROM `{$data_entry_table_name}` WHERE form_id = %d GROUP BY `field_name`", $fid);
+	    $sql = $wpdb->prepare("SELECT `field_name` FROM `{$data_entry_table_name}` WHERE form_id = %d GROUP BY `field_name` ORDER BY `id`", $fid);
 	    $data = $wpdb->get_results($sql);
-
-		//Set each field value in array
 	    $fields = array();
 		if(!empty($data)){
-
 			foreach ($data as $k => $v) {
 				if(defined('vsz_cf7_display_ip')){
 					if($v->field_name != 'submit_ip'){

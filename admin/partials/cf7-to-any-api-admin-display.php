@@ -111,6 +111,7 @@ All your header Parameters set here.', 'contact-form-to-any-api' ); ?>
         </select>
     </div>
 </div>
+
 <div class="cf7anyapi-form-mapping-fields">
     <h3><?php esc_html_e( 'Map your Fields', 'contact-form-to-any-api' ); ?></h3>
     <hr>
@@ -128,5 +129,16 @@ All your header Parameters set here.', 'contact-form-to-any-api' ); ?>
             }
         ?>
     </div>
+</div>
+
+<div class="cf7anyapi-bottom-image">
+    <a href="https://www.itpathsolutions.com/contact-us/" target="_blank">
+        <img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/need-help-with-your-website.jpg';?>" alt="need help with your website">
+    </a>
+</div>
+<div class="cf7anyapi-right-image">
+    <a href="https://www.itpathsolutions.com/contact-us/" target="_blank">
+        <img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/need-help-with-your-website2.jpg';?>" alt="need help with your website">
+    </a>
 </div>
 <?php } ?>

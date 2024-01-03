@@ -86,16 +86,66 @@
 		}
 
 		if(jQuery('#cf7toanyapi_table').length){
-			jQuery('#cf7toanyapi_table').DataTable({
+			var table = jQuery('#cf7toanyapi_table').DataTable({
+				'columnDefs': [
+					{
+					   'targets': 0,
+					   'checkboxes': {
+						  'selectRow': true
+					   },
+					   className: 'cf7toanyapi-form-checkbox',
+					}
+					
+				 ],
+				 'select': {
+					'style': 'multi'
+				 },
+				 'order': [[1, 'asc']],
 				dom: 'Blfrtip',
 			    autoWidth: false,
 				scrollX: true,
 				order: [],
 		        buttons: [
+					{
+						text: 'Delete',
+						className: 'cf7toanyapi-btn-delete',
+						action: function(){
+							var array = [];
+							jQuery('.cf7toanyapi_dataid.selected').each(function(i){
+								array.push($(this).attr('data-id'));
+							});
+							//console.log(array);
+							let data_ids = array.toString();
+							if(confirm("Are you Sure you want to delete selected records?") == true)
+							{
+
+								return jQuery.ajax({
+							            type: "POST",
+							            url:ajax_object.ajax_url,
+							            dataType: "json",
+							            data:{
+	      									action : 'delete_records',
+								            id : data_ids,
+								        },
+							            success: function (data) {
+	        								var status = data['status'];
+	        								if(status == 1)
+	        								{
+	        									window.location.reload();
+	        								}
+
+	      								},
+									    error: function (jqXHR, textStatus, errorThrown) {
+									        console.log(jqXHR + " :: " + textStatus + " :: " + errorThrown);
+									    },
+							       });
+							}
+						}
+					},
 		            'csv', 'excel', 'pdf', 'print'
 		        ]
 			});
-			// merge filter , buttons , search into one div
+			// merge filter ,  uttons , search into one div
 			jQuery('.dt-buttons, .dataTables_length, .dataTables_filter').wrapAll( jQuery('<div>').addClass('cf7toanyapi_table_wrap') );
 
 		}

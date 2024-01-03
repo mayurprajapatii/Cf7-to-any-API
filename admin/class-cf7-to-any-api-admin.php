@@ -434,6 +434,7 @@ class Cf7_To_Any_Api_Admin {
 		$post_id = $submission->get_meta('container_post_id');
 		$posted_data['submitted_from'] = $post_id;
 		$posted_data['submit_time'] = date('Y-m-d H:i:s');
+		$posted_data['User_IP'] = $_SERVER['REMOTE_ADDR'];		
 		self::cf7anyapi_save_form_submit_data($form_id,$posted_data);
 		$args = array(
 			'post_type' => 'cf7_to_any_api',
@@ -623,5 +624,20 @@ class Cf7_To_Any_Api_Admin {
   		);
 
   		$wpdb->insert($table,$data);
+  	}
+  	public static function delete_cf7_records(){
+  		$record_id = $_POST['id'];
+  		$ids = explode(',',$record_id);
+  		global $wpdb;
+    	$table_entries = $wpdb->prefix.'cf7anyapi_entries';
+    	$table = $wpdb->prefix.'cf7anyapi_entry_id';
+	    $wpdb->query("DELETE FROM ".$table_entries." WHERE data_id IN($record_id)" );
+	    $result = $wpdb->query("DELETE FROM ".$table." WHERE id IN($record_id)" );
+  		if(!empty($result)){
+  			echo json_encode(array('status'=>1,'Message'=>'Success'));
+  		}else{
+  			echo json_encode(array('status'=>-1,'Message'=>'Failed'));
+  		}
+  		exit();
   	}
 }

@@ -139,7 +139,7 @@
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s !important;
     width: 200px !important;
 }
-.cf_entries .buttons-csv, .cf_entries .buttons-excel, .cf_entries .buttons-pdf, .cf_entries .buttons-print{
+.cf_entries .buttons-csv, .cf_entries .buttons-excel, .cf_entries .buttons-pdf, .cf_entries .buttons-print, .cf7toanyapi-btn-delete{
     border: 1px solid #0073aa;
     background-color: #0073aa !important;
     color: #fff !important;
@@ -178,8 +178,30 @@
 .cf7toanyapi_table_wrap .dt-buttons{width: 80%;}
 .cf7toanyapi_table_wrap .dataTables_length, .cf7toanyapi_table_wrap .cf7toanyapi_table_filter{width: 10%;}
 
+.cf7anyapi-bottom-image {
+    margin-top: 50px;
+    padding: 0 20px 20px;
+}
+.cf7anyapi-bottom-image img {
+    width: 100%;
+}
+.cf7anyapi-right-image {
+    position: absolute;
+    right: -297px;
+    bottom: 0;
+}
+.cf7anyapi-right-image img {
+    width: 270px;
+    object-fit: contain;
+    max-height: 541px;
+}
+.dataTables_info .select-info{display: none;}
 /*CF7 Entries CSS*/
-
+@media screen and (max-width: 1500px){
+    .cf7anyapi-right-image img {
+        max-height: 400px;
+    }
+}
 @media screen and (max-width:782px){
     .post-type-cf7_to_any_api div#cf7anyapi-form-fields{
         grid-template-columns: 1fr;
@@ -188,3 +210,4 @@
         grid-template-columns: 1fr;
     }
 }
+

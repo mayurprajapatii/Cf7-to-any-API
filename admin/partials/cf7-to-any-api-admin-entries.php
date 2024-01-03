@@ -9,6 +9,9 @@
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.6.1/js/dataTables.select.min.js"></script>
+<script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+
 <?php
 	global $wpdb;
 	$Cf7_To_Any_Api = new Cf7_To_Any_Api();
@@ -39,21 +42,24 @@
 		if(isset($cf_id) && $cf_id != ''){
 			
 			$result = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cf7anyapi_entries WHERE `form_id` = '.$cf_id.' AND data_id IN( SELECT * FROM ( SELECT data_id FROM '.$wpdb->prefix.'cf7anyapi_entries WHERE 1 = 1 AND `form_id` = '.$cf_id.' GROUP BY `data_id` ORDER BY `data_id` DESC) temp_table) ORDER BY `data_id` DESC');
-
+			
 			$data_sorted = $Cf7_To_Any_Api->cf7toanyapi_sortdata($result);
-
 			$fields = $Cf7_To_Any_Api->cf7toanyapi_get_db_fields($cf_id);
-
 			$display_character = (int) apply_filters('cf7toanyapi_display_character_count',30);
 			$arr_field_type_info = $Cf7_To_Any_Api->cf7toanyapi_field_type_info($cf_id);
 
 			if($result){
+				
 			?>
+				
 				<div id="table_data">
+				<!-- <input type="submit" class="btn-delete cf7toanyapi_btn_delete" value="Delete"> -->
 					<table class="tbl table table-striped table-bordered cf7toanyapi_table" id="cf7toanyapi_table">
 						<thead>
-							<tr>
+							<tr class="cf7toanyapi_dataid_all">								
 								<?php
+								
+										echo '<th class="manage-column">checkbox</th>';
 									foreach ($fields as $k => $v){
 										echo '<th class="manage-column" data-key="'.esc_html($v).'">'.ucfirst(str_replace('_',' ',$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v))).'</th>';
 									}
@@ -62,14 +68,12 @@
 						</thead>
 						<tbody>
 							<?php
+							
 								if(!empty($data_sorted)){
-									foreach ($data_sorted as $k => $v) {
+									foreach ($data_sorted as $k => $v )   {					
+										echo '<tr data-id="'.$k.'" class="cf7toanyapi_dataid">';
 										$k = (int)$k;
-										echo '<tr>';
-										
-										$row_id = $k;
-										//Display edit entry icon
-										
+										echo '<td data-id="'.$k.'" class="cf7toanyapi_dataid"></td>';
 										foreach ($fields as $k2 => $v2) {
 											//Get fields related values
 											$_value = ((isset($v[$k2])) ? $v[$k2] : '&nbsp;');
@@ -108,6 +112,8 @@
 										}//Close foreach
 										echo '</tr>';
 									}//Close foreach
+								
+								
 								}
 							?>
 						</tbody>
