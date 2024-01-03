@@ -60,7 +60,7 @@ else{
     <div class="cf7anyapi_field">
         <?php wp_nonce_field('cf7_to_any_api_cpt_nonce','cf7_to_any_api_cpt_nonce' ); ?>
         <label for="cf7anyapi_selected_form">Select Contact Form</label>
-        <select name="cf7anyapi_selected_form" id="cf7anyapi_selected_form"> 
+        <select name="cf7anyapi_selected_form" id="cf7anyapi_selected_form" required> 
             <option value="">Select Form</option>
             <?php
                 $posts = get_posts(
@@ -80,7 +80,7 @@ else{
 
     <div class="cf7anyapi_field">
         <label for="cf7anyapi_base_url">API url</label>
-        <input type="text" id="cf7anyapi_base_url" name="cf7anyapi_base_url" value="<?php echo esc_url($cf7anyapi_base_url); ?>" placeholder="Enter Your API URL">
+        <input type="text" id="cf7anyapi_base_url" name="cf7anyapi_base_url" value="<?php echo esc_url($cf7anyapi_base_url); ?>" placeholder="Enter Your API URL" required>
     </div>
 
     <div class="cf7anyapi_full_width">
@@ -94,21 +94,9 @@ All your header Parameters set here.
 "><?php echo esc_textarea($cf7anyapi_header_request); if($cf7anyapi_basic_auth){ echo "Authorization : Basic ".esc_html($cf7anyapi_basic_auth); } if($cf7anyapi_bearer_auth){ echo "Authorization : Bearer ".esc_html($cf7anyapi_bearer_auth); }?></textarea>
     </div>
 
-    
-
-    <?php /*<div class="cf7anyapi_field">
-        <label for="cf7anyapi_basic_auth">Basic auth</label>
-        <input type="text" id="cf7anyapi_basic_auth" name="cf7anyapi_basic_auth" value="<?php echo esc_html($cf7anyapi_basic_auth); ?>" placeholder="e.g. user:secret">
-    </div>
-
-    <div class="cf7anyapi_field">
-        <label for="cf7anyapi_bearer_auth">Bearer auth key</label>
-        <input type="text" id="cf7anyapi_bearer_auth" name="cf7anyapi_bearer_auth" value="<?php echo esc_html($cf7anyapi_bearer_auth); ?>" placeholder="e.g. a94a8fe5ccb19ba61c4c0873d391e987982fbbd3">
-    </div> */ ?>
-
     <div class="cf7anyapi_field">
         <label for="cf7anyapi_input_type">Input type</label>
-        <select id="cf7anyapi_input_type" name="cf7anyapi_input_type">
+        <select id="cf7anyapi_input_type" name="cf7anyapi_input_type" required>
             <option value="params" <?php echo ($cf7anyapi_input_type == 'params' ? esc_html('selected="selected"') : ''); ?>>Parameters - GET/POST</option>
             <option value="json" <?php echo ($cf7anyapi_input_type == 'json' ? esc_html('selected="selected"') : ''); ?>>json</option>
         </select>
@@ -116,7 +104,7 @@ All your header Parameters set here.
 
     <div class="cf7anyapi_field">
         <label for="cf7anyapi_method">Method</label>
-        <select id="cf7anyapi_method" name="cf7anyapi_method">
+        <select id="cf7anyapi_method" name="cf7anyapi_method" required>
             <option value="">Select Method</option>
             <option value="GET" <?php echo ($cf7anyapi_method == 'GET' ? esc_html('selected="selected"') : ''); ?>>GET</option>
             <option value="POST" <?php echo ($cf7anyapi_method == 'POST' ? esc_html('selected="selected"') : ''); ?>>POST</option>

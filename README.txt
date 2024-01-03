@@ -1,14 +1,17 @@
 === Contact Form to Any API ===
 Contributors: itpathsolutions,vickymakwana1111,mayur8991
-Tags: Contact form to CRM , Contact form to Rest API , Contact form
+Tags: rest api, api, Contact form, crm, lead
 Requires at least: 4.7 or higher
 Tested up to: 6.1
 Requires PHP: 5.6 or higher
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
+
+https://youtu.be/1K-JdXwDH_k
+
 Contact form 7 to Any API is most powerful plugin to send cf7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings
 
 = Features =
@@ -67,14 +70,26 @@ We are committed to top-notch Community and Customer support because we know if 
 3. You will find CF7 to Any API in your WordPress admin screen.
 
 == Frequently Asked Questions ==
-= <span id="faq">How many API connection i can add?</span> =
+= How many API connection i can add? =
 Unlimited, There is no limit of creation of API you can send data to CRM and any other API url. You can even use same form to send data to multiple api.
+
+= Where i can find documentation for plugin usage ? =
+Once you activate the plugin you will find documentation link.
+
+= Can I Customize this Plugin ? =
+Absolutely. Please Connect with us on <a href="mailto:info@itpathsolutions.com">info@itpathsolutions.com</a>
+
 
 == Screenshots ==
 1. Contact Form 7 to Any API settings
 2. Logs Management
 
 == Changelog ==
+
+= 1.0.3 =
+* Field map issue with GET method fixes and update
+* Validation added for major fields
+* Sanitization function updates
 
 = 1.0.2 =
 * Fatal error fixes while activating the plugin for some users

@@ -246,22 +246,6 @@ class Cf7_To_Any_Api {
 	}
 
 	/**
-	 * Sanitize Array Value
-	 *
-	 * @since     1.0.0
-	 * @return    string
-	 */
-	public function Cf7_To_Any_Api_sanitize_array($array){
-		$sanitize_array = array();
-
-		foreach($array as $key => $value) {
-			$sanitize_array[sanitize_text_field($key)] = sanitize_text_field($value);
-		}
-
-		return $sanitize_array;
-	}
-
-	/**
 	 * Saved Form Fields show by default
 	 *
 	 * @since     1.0.0

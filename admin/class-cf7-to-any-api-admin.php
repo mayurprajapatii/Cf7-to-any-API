@@ -228,18 +228,21 @@ class Cf7_To_Any_Api_Admin {
 	 * @since    1.0.0
 	 */
 	public static function cf7anyapi_update_settings($cf7_to_any_api_id,$cf7_to_any_api){
-		$Cf7_To_Any_Api = new Cf7_To_Any_Api;
 		if($cf7_to_any_api->post_type == 'cf7_to_any_api'){
 			$status = 'false';
 			if(isset($_POST['cf7_to_any_api_cpt_nonce']) && wp_verify_nonce($_POST['cf7_to_any_api_cpt_nonce'], 'cf7_to_any_api_cpt_nonce')){
 
 				$options['cf7anyapi_selected_form'] = (int)stripslashes($_POST['cf7anyapi_selected_form']);
 				$options['cf7anyapi_base_url'] = sanitize_url($_POST['cf7anyapi_base_url']);
-				$options['cf7anyapi_basic_auth'] = sanitize_text_field($_POST['cf7anyapi_basic_auth']);
-				$options['cf7anyapi_bearer_auth'] = sanitize_text_field($_POST['cf7anyapi_bearer_auth']);
+				if(isset($_POST['cf7anyapi_basic_auth'])){
+					$options['cf7anyapi_basic_auth'] = sanitize_text_field($_POST['cf7anyapi_basic_auth']);
+				}
+				if(isset($_POST['cf7anyapi_bearer_auth'])){
+					$options['cf7anyapi_bearer_auth'] = sanitize_text_field($_POST['cf7anyapi_bearer_auth']);
+				}
 				$options['cf7anyapi_input_type'] = sanitize_text_field($_POST['cf7anyapi_input_type']);
 				$options['cf7anyapi_method'] = sanitize_text_field($_POST['cf7anyapi_method']);
-				$options['cf7anyapi_form_field'] = $Cf7_To_Any_Api->Cf7_To_Any_Api_sanitize_array($_POST['cf7anyapi_form_field']);
+				$options['cf7anyapi_form_field'] = self::Cf7_To_Any_Api_sanitize_array($_POST['cf7anyapi_form_field']);
 				$options['cf7anyapi_header_request'] = sanitize_textarea_field($_POST['cf7anyapi_header_request']);
 
 				foreach($options as $options_key => $options_value){
@@ -278,6 +281,23 @@ class Cf7_To_Any_Api_Admin {
 		}
 		echo json_encode($html);
 		exit();
+	}
+
+	/**
+	 * Sanitize Array Value
+	 *
+	 * @since     1.0.0
+	 * @return    string
+	 */
+	public static function Cf7_To_Any_Api_sanitize_array($array){
+		
+		$sanitize_array = array();
+
+		foreach($array as $key => $value) {
+			$sanitize_array[sanitize_text_field($key)] = sanitize_text_field($value);
+		}
+
+		return $sanitize_array;
 	}
 
 	/**
@@ -323,7 +343,7 @@ class Cf7_To_Any_Api_Admin {
 				$cf7anyapi_header_request = get_post_meta(get_the_ID(),'cf7anyapi_header_request',true);
 
 		        foreach($cf7anyapi_form_field as $key => $value){
-		        	$api_post_array[$value] = (is_array($posted_data[$key]) ? implode(',', Cf7_To_Any_Api::Cf7_To_Any_Api_sanitize_array($posted_data[$key])) : sanitize_text_field($posted_data[$key]));
+		        	$api_post_array[$value] = (is_array($posted_data[$key]) ? implode(',', self::Cf7_To_Any_Api_sanitize_array($posted_data[$key])) : sanitize_text_field($posted_data[$key]));
 		        }
 		        
 		        self::cf7anyapi_send_lead($api_post_array, $cf7anyapi_base_url, $cf7anyapi_input_type, $cf7anyapi_method, $form_id, get_the_ID(), $cf7anyapi_basic_auth, $cf7anyapi_bearer_auth,$cf7anyapi_header_request);
@@ -359,7 +379,7 @@ class Cf7_To_Any_Api_Admin {
 			if($input_type == 'params'){
 				$data_string = http_build_query($data);
 
-        		$url = strpos( '?' , $url ) ? $url.'&'.$data_string : $url.'?'.$data_string;
+        		$url = stripos($url,'?') !== false ? $url.'&'.$data_string : $url.'?'.$data_string;
 			}
 			else{
 				$args['headers']['Content-Type'] = 'application/json';
