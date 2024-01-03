@@ -109,10 +109,18 @@ class Cf7_To_Any_Api_Admin {
 	 * @since    1.0.0
 	 */
 	public function cf7_to_any_api_verify_dependencies(){
-		if(!is_plugin_active('contact-form-7/wp-contact-form-7.php')){
-      		echo '<div class="notice notice-warning is-dismissible">
-	             <p>'.esc_html_e( 'Contact form 7 api integrations requires CONTACT FORM 7 Plugin to be installed and active', 'contact-form-to-any-api' ).'</p>
-	         </div>';
+		if(is_multisite()){
+			if(!is_plugin_active_for_network('contact-form-7/wp-contact-form-7.php')){
+				echo '<div class="notice notice-warning is-dismissible">
+	            	 <p>'.__( 'Contact form 7 API integrations requires CONTACT FORM 7 Plugin to be installed and active', 'contact-form-to-any-api' ).'</p>
+	         	</div>';
+			}
+		}else{
+			if(!is_plugin_active('contact-form-7/wp-contact-form-7.php')){
+      			echo '<div class="notice notice-warning is-dismissible">
+	            	 <p>'.__( 'Contact form 7 API integrations requires CONTACT FORM 7 Plugin to be installed and active', 'contact-form-to-any-api' ).'</p>
+	         	</div>';
+    		}
     	}
 	}
 
@@ -491,12 +499,19 @@ class Cf7_To_Any_Api_Admin {
 				$cf7anyapi_header_request = get_post_meta(get_the_ID(),'cf7anyapi_header_request',true);
 
 		        foreach($cf7anyapi_form_field as $key => $value){
-		        	if(is_numeric($posted_data[$key]) && !is_array($posted_data[$key])){
-		        		$api_post_array[$value] = (int)sanitize_text_field($posted_data[$key]);
-		        	}
-		        	else{
-		        		$api_post_array[$value] = (is_array($posted_data[$key]) ? implode(',', self::Cf7_To_Any_Api_sanitize_array($posted_data[$key])) : sanitize_text_field($posted_data[$key]));
-		        	}
+
+		        	// if you would like to check if the submitted data is numeric or not 
+		        	
+		        	// if(is_numeric($posted_data[$key]) && !is_array($posted_data[$key])){
+		        	// 	$api_post_array[$value] = (int)sanitize_text_field($posted_data[$key]);
+		        	// }
+		        	// else{
+		        	// 	$api_post_array[$value] = (is_array($posted_data[$key]) ? implode(',', self::Cf7_To_Any_Api_sanitize_array($posted_data[$key])) : sanitize_text_field($posted_data[$key]));
+		        	// }
+		        	
+                    //Submitted data as string only
+		        	$api_post_array[$value] = (is_array($posted_data[$key]) ? implode(',', self::Cf7_To_Any_Api_sanitize_array($posted_data[$key])) : sanitize_text_field($posted_data[$key]));
+
 		        }
 		        
 		        self::cf7anyapi_send_lead($api_post_array, $cf7anyapi_base_url, $cf7anyapi_input_type, $cf7anyapi_method, $form_id, get_the_ID(), $cf7anyapi_basic_auth, $cf7anyapi_bearer_auth,$cf7anyapi_header_request, $posted_data);

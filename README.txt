@@ -4,7 +4,7 @@ Tags: rest api, api, contact form, crm, lead, database, export, contact form 7
 Requires at least: 4.7 or higher
 Tested up to: 6.2
 Requires PHP: 5.6 or higher
-Stable tag: 1.0.9
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,7 +27,8 @@ Contact form 7 to Any API is most powerful plugin to send cf7 data to any third 
 * Save Contact Form 7 form submitted data to the database.
 * Export Contact Form 7 Data in CSV , EXCEL , PDF , Print
 * Single Or Multiple delete cf7 entries
-* File input supported - Uploaded file will convert into BASE64 and send to API 
+* File input supported - Uploaded file will convert into BASE64 and send to API
+* Multisite support 
 
 == Set your own Header Request Parameter ==
 
@@ -91,6 +92,11 @@ Absolutely. Please Connect with us on <a href="mailto:info@itpathsolutions.com">
 3. Entries
 
 == Changelog ==
+
+= 1.1.0 =
+* Fix - Multisite installation bug fix and update
+* Fix - Admin notice issue fix for some users
+* Fix - API issue fix for phone field  
 
 = 1.0.9 =
 * New - File input supported Uploaded file will convert into BASE64 and send to API
