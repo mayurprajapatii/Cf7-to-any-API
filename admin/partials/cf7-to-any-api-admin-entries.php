@@ -17,9 +17,9 @@
 
 <div class="cf_entries" id="cf_entries">
 	<form name="form_entries" id="form_entries" class="cf7toanyapi_entries" method="get">
-		<label for="form" class="cf7toanyapi_select_form">Choose a form:</label>
+		<label for="form" class="cf7toanyapi_select_form"><?php esc_html_e( 'Choose a form:', 'contact-form-to-any-api' ); ?></label>
 		<select name="form" id="form_id" class="form_id cf7toanyapi_forms">
-			<option value="">Select Form</option>
+			<option value=""><?php esc_html_e( 'Select Form', 'contact-form-to-any-api' ); ?></option>
 			<?php
 			$posts = get_posts(
                 array(
@@ -37,7 +37,8 @@
 	</form>
 	<?php
 		if(isset($cf_id) && $cf_id != ''){
-			$result = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cf7anyapi_entries WHERE `form_id` = '.$cf_id.' AND data_id IN( SELECT * FROM ( SELECT data_id FROM '.$wpdb->prefix.'cf7anyapi_entry_id WHERE 1 = 1 AND `form_id` = '.$cf_id.' GROUP BY `data_id` ORDER BY `data_id` DESC) temp_table) ORDER BY `data_id` DESC');
+			
+			$result = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cf7anyapi_entries WHERE `form_id` = '.$cf_id.' AND data_id IN( SELECT * FROM ( SELECT data_id FROM '.$wpdb->prefix.'cf7anyapi_entries WHERE 1 = 1 AND `form_id` = '.$cf_id.' GROUP BY `data_id` ORDER BY `data_id` DESC) temp_table) ORDER BY `data_id` DESC');
 
 			$data_sorted = $Cf7_To_Any_Api->cf7toanyapi_sortdata($result);
 
@@ -54,7 +55,7 @@
 							<tr>
 								<?php
 									foreach ($fields as $k => $v){
-										echo '<th class="manage-column" data-key="'.esc_html($v).'">'.vsz_cf7_admin_get_field_name($v).'</th>';
+										echo '<th class="manage-column" data-key="'.esc_html($v).'">'.$Cf7_To_Any_Api->cf7toanyapi_admin_get_field_name($v).'</th>';
 									}
 								?>
 							</tr>

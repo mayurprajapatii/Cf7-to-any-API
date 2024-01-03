@@ -385,8 +385,8 @@ class Cf7_To_Any_Api_Admin {
 	            id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	            form_id int(11) ,
 	            data_id int(11),
-	            field_name varchar(50),
-	            field_value varchar(50),
+	            field_name varchar(255),
+	            field_value varchar(255),
 	            date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	            FOREIGN KEY (data_id) REFERENCES ".$table."(id)
 	        )$charset_collate;";

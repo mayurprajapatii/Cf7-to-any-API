@@ -4,7 +4,7 @@ Tags: rest api, api, contact form, crm, lead, database, export, contact form 7
 Requires at least: 4.7 or higher
 Tested up to: 6.1
 Requires PHP: 5.6 or higher
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,10 @@ Absolutely. Please Connect with us on <a href="mailto:info@itpathsolutions.com">
 2. Logs Management
 
 == Changelog ==
+
+= 1.0.6 =
+* Fix - Database entries not visible for some users
+* Fix - I18N issue fix for entries
 
 = 1.0.5 =
 * New - Save Contact Form 7 form submitted data to the database.
