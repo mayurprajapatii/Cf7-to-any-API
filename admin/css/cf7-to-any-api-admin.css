@@ -197,6 +197,50 @@
 }
 .dataTables_info .select-info{display: none;}
 /*CF7 Entries CSS*/
+
+/* CF7 documentation CSS */
+.cf7_to_any_api_page_cf7anyapi_docs .contact_us {
+    margin: 12px;
+}
+.cf7_to_any_api_page_cf7anyapi_docs .nav-pills .nav-link.active{
+    background-color: #2271b1 !important;
+} 
+.cf7_to_any_api_page_cf7anyapi_docs .cf7anyapi_doc{
+    font-size: 17px;
+    padding: 40px;
+}  
+.cf7_to_any_api_page_cf7anyapi_docs .row{
+    margin-top: 25px;
+    border: 1px solid #ccc;
+}
+.cf7_to_any_api_page_cf7anyapi_docs .col-2.tab{
+    border: 1px solid #ccc;
+    padding: 0px;
+    background-color: #eeebe6;
+}
+.cf7_to_any_api_page_cf7anyapi_docs .nav.flex-column.nav-pills a:hover {
+    background-color: #ddd;
+  }
+.cf7_to_any_api_page_cf7anyapi_docs .col-7.tab{
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+.cf7_to_any_api_page_cf7anyapi_docs .col-3.image{
+    padding-left: inherit;
+    padding-right: inherit;
+}
+.cf7_to_any_api_page_cf7anyapi_docs .contact_us.contact_image{
+    margin: 0px;
+}
+.cf7_to_any_api_page_cf7anyapi_docs .contact_us.contact_image {
+    width: 100%;
+}
+
+
+.cf7_to_any_api_page_cf7anyapi_docs .cf7anyapi_full_width pre { margin:15px 15px; }
+.cf7_to_any_api_page_cf7anyapi_docs .cf7anyapi_full_width ol li{margin-bottom:15px;  }
+.cf7_to_any_api_page_cf7anyapi_docs .cf7anyapi_full_width {  }
+/* CF7 documentation CSS */
 @media screen and (max-width: 1500px){
     .cf7anyapi-right-image img {
         max-height: 400px;
@@ -210,4 +254,5 @@
         grid-template-columns: 1fr;
     }
 }
+
 

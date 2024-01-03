@@ -4,7 +4,7 @@ Tags: rest api, api, contact form, crm, lead, database, export, contact form 7
 Requires at least: 4.7 or higher
 Tested up to: 6.2
 Requires PHP: 5.6 or higher
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,10 @@ Absolutely. Please Connect with us on <a href="mailto:info@itpathsolutions.com">
 3. Entries
 
 == Changelog ==
+
+= 1.1.1 =
+* Improvement - Plugin configuration documentation improvement 
+* Enhancement - Performance update 
 
 = 1.1.0 =
 * Fix - Multisite installation bug fix and update

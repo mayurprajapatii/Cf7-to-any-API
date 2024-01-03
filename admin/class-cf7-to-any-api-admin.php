@@ -354,7 +354,7 @@ class Cf7_To_Any_Api_Admin {
 				if($form_fields_value->basetype != 'submit'){
 					$html .= '<div class="cf7anyapi_field">';
 						$html .= '<label for="cf7anyapi_'.$form_fields_value->raw_name.'">'.$form_fields_value->name.'</label>';
-						$html .= '<input type="text" id="cf7anyapi_'.$form_fields_value->raw_name.'" name="cf7anyapi_form_field['.$form_fields_value->name.']" value="'.$post_form_field[$form_fields_value->raw_name].'" data-basetype="'.$form_fields_value->basetype.'" placeholder="'. __( 'Enter Mapping Key Field Name', 'contact-form-to-any-api' ). '">'; 
+						$html .= '<input type="text" id="cf7anyapi_'.$form_fields_value->raw_name.'" name="cf7anyapi_form_field['.$form_fields_value->name.']" value="'.$post_form_field[$form_fields_value->raw_name].'" data-basetype="'.$form_fields_value->basetype.'" placeholder="'. __( 'Enter your API side mapping key', 'contact-form-to-any-api' ). '">'; 
 					$html .= '</div>';
 				}
 			}
@@ -364,7 +364,7 @@ class Cf7_To_Any_Api_Admin {
 				if($form_fields_value->basetype != 'submit'){
 					$html .= '<div class="cf7anyapi_field">';
 						$html .= '<label for="cf7anyapi_'.$form_fields_value->raw_name.'">'.$form_fields_value->name.'</label>';
-						$html .= '<input type="text" id="cf7anyapi_'.$form_fields_value->raw_name.'" name="cf7anyapi_form_field['.$form_fields_value->name.']" data-basetype="'.$form_fields_value->basetype.'" placeholder="'. __( 'Enter Mapping Key Field Name', 'contact-form-to-any-api' ). '">'; 
+						$html .= '<input type="text" id="cf7anyapi_'.$form_fields_value->raw_name.'" name="cf7anyapi_form_field['.$form_fields_value->name.']" data-basetype="'.$form_fields_value->basetype.'" placeholder="'. __( 'Enter your API side mapping key', 'contact-form-to-any-api' ). '">'; 
 					$html .= '</div>';
 				}
 			}

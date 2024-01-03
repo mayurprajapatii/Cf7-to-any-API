@@ -122,7 +122,7 @@ All your header Parameters set here.', 'contact-form-to-any-api' ); ?>
         ?>
                     <div class="cf7anyapi_field">
                         <label for="cf7anyapi_<?php echo esc_html($cf7anyapi_form_field_key); ?>"><?php echo esc_html($cf7anyapi_form_field_key); ?></label>
-                        <input type="text" id="cf7anyapi_<?php echo esc_html($cf7anyapi_form_field_key); ?>" name="cf7anyapi_form_field[<?php echo esc_html($cf7anyapi_form_field_key); ?>]" value="<?php echo esc_html($cf7anyapi_form_field_value); ?>" placeholder="<?php esc_attr_e( 'Enter Mapping Key Field Name', 'contact-form-to-any-api' ); ?>"> 
+                        <input type="text" id="cf7anyapi_<?php echo esc_html($cf7anyapi_form_field_key); ?>" name="cf7anyapi_form_field[<?php echo esc_html($cf7anyapi_form_field_key); ?>]" value="<?php echo esc_html($cf7anyapi_form_field_value); ?>" placeholder="<?php esc_attr_e( 'Enter your API side mapping key', 'contact-form-to-any-api' ); ?>"> 
                     </div>
         <?php
                 }
