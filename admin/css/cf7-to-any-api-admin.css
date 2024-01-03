@@ -332,6 +332,12 @@ ul#cf7-any-api-list li.reason.email {
 ul#cf7-any-api-list {
     margin-bottom: 13px;
 }
+.pro_feature_list, .pro_crm_list { list-style: disc;margin-left: 30px; }
+p.pro_tab_description { font-size: 17px; line-height: 24px; }
+.pro_tab_title { font-weight: bold; }
+.get_pro_version { margin-top: 40px; }
+.get_pro_version a{ font-size: 18px;background: #000;padding: 10px 20px;color:#fff;text-decoration: none;border-radius: 20px; }
+.get_pro_version:hover a{ background:#172646;text-decoration: none;color:#fff; }
 /* CF7 documentation CSS */
 @media screen and (max-width: 1500px){
     

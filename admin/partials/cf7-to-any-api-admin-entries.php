@@ -15,7 +15,7 @@
 <?php
 	global $wpdb;
 	$Cf7_To_Any_Api = new Cf7_To_Any_Api();
-	$cf_id = (isset($_GET['form_id']) && $_GET['form_id'] != '' ? $_GET['form_id'] : '');
+	$cf_id = (isset($_GET['form_id']) && is_numeric($_GET['form_id']) ? intval($_GET['form_id']) : 0);
 ?>
 
 <div class="cf_entries" id="cf_entries">
@@ -27,7 +27,8 @@
 			$posts = get_posts(
                 array(
                     'post_type'     => 'wpcf7_contact_form',
-                    'numberposts'   => -1
+                    'numberposts'   => -1,
+                    'suppress_filters' => false
                 )
             );
             foreach($posts as $post){
@@ -40,15 +41,31 @@
 	</form>
 	<?php
 		if(isset($cf_id) && $cf_id != ''){
-			
-			$result = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'cf7anyapi_entries WHERE `form_id` = '.$cf_id.' AND data_id IN( SELECT * FROM ( SELECT data_id FROM '.$wpdb->prefix.'cf7anyapi_entries WHERE 1 = 1 AND `form_id` = '.$cf_id.' GROUP BY `data_id` ORDER BY `data_id` DESC) temp_table) ORDER BY `data_id` DESC');
-			
+
+		    $cf7_entries_sql = $wpdb->prepare(
+		        'SELECT * FROM ' . $wpdb->prefix . 'cf7anyapi_entries 
+		        WHERE `form_id` = %d 
+		        AND data_id IN( 
+		            SELECT * FROM ( 
+		                SELECT data_id FROM ' . $wpdb->prefix . 'cf7anyapi_entries 
+		                WHERE 1 = 1 
+		                AND `form_id` = %d 
+		                GROUP BY `data_id` 
+		                ORDER BY `data_id` DESC
+		            ) temp_table
+		        ) 
+		        ORDER BY `data_id` DESC',
+		        $cf_id,
+		        $cf_id
+		    );
+			$result = $wpdb->get_results($cf7_entries_sql);
+
+			if($result){
 			$data_sorted = $Cf7_To_Any_Api->cf7toanyapi_sortdata($result);
 			$fields = $Cf7_To_Any_Api->cf7toanyapi_get_db_fields($cf_id);
 			$display_character = (int) apply_filters('cf7toanyapi_display_character_count',500);
 			$arr_field_type_info = $Cf7_To_Any_Api->cf7toanyapi_field_type_info($cf_id);
-
-			if($result){?>				
+			?>				
 				<div id="table_data">
 				<!-- <input type="submit" class="btn-delete cf7toanyapi_btn_delete" value="Delete"> -->
 					<table class="tbl table table-striped table-bordered cf7toanyapi_table" id="cf7toanyapi_table">

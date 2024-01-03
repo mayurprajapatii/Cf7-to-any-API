@@ -4,7 +4,7 @@ Tags: rest api, api, contact form, crm, lead, database, export, contact form 7
 Requires at least: 4.7 or higher
 Tested up to: 6.2
 Requires PHP: 5.6 or higher
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,18 +19,19 @@ Contact form 7 to Any API is most powerful plugin to send cf7 data to any third 
 = Features =
 * Send CF7 Leads to Remote API's such as CRM and other API using POST/GET
 * Create unlimited connection with any API
-* Send data to multiple API 
-* Supports JSON
+* Send data to multiple API <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
+* Supports Simple & Fixed Format of JSON
+* Support Multi Level or Any Format of JSON	<strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Supports Basic Auth
 * Supports Bearer Auth
 * Logs Management
 * Save Contact Form 7 form submitted data to the database.
 * Export Contact Form 7 Data in CSV , EXCEL , PDF , Print
 * Single Or Multiple delete cf7 entries
-* File input supported - Uploaded file will convert into BASE64 and send to API
-* Multisite support 
+* File input supported - Uploaded file will convert into BASE64 and send to API <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
+* Priority Support <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 
-== Set your own Header Request Parameter ==
+= Set your own Header Request Parameter =
 
 Authorization: MY_API_KEY
 Authorization : Bearer xxxxxxx
@@ -38,15 +39,26 @@ Authorization : Basic xxxxxx
 Content-Type: application/json
 
 
-<strong> NOTE  : Basic & Bearer Authentication can be set from Header Request Parameter input. </strong>
+<p> NOTE  : Basic & Bearer Authentication can be set from Header Request Parameter input. </p>
 
 <strong>Do you want Custom Development for any API/CRM from our Development Team ? Please connect with us <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a></strong>
 
 
+&#9658; [GET PREMIUM VERSION NOW](https://www.contactformtoapi.com/pricing/)
+
+== Contact form 7 to Any API PRO ==
+
+Contact Form to any API plugin is also available in a professional version which includes more features that can work with any Premium CRM/API.
+
+* Support Multi Level or Any Format of JSON
+* Send data to multiple API 
+* File input supported - Uploaded file will convert into BASE64 and send to API
+* Priority Support
+
 
 == Support ==
 
-Contact Form to Any API is developed and supported by <a target="_blank" href="https://profiles.wordpress.org/itpathsolutions/">IT Path Solutions</a>. If you don't find an answer of your Query/Doubt/Problem in <a href="#faq">FAQs</a> or Support forum, feel free to get in touch with us.  <a target="_blank" href="https://www.itpathsolutions.com/contact-us/">Click here</a>
+Contact Form to Any API is developed and supported by <a target="_blank" href="https://profiles.wordpress.org/itpathsolutions/">IT Path Solutions</a>. If you don't find an answer of your Query/Doubt/Problem in <a href="#faq">FAQs</a> or Support forum, feel free to get in touch with us.  <a target="_blank" href="https://www.contactformtoapi.com/#contact_us">Click here</a>
 
 Contact Form to Any API needs your support WordPress thrives on community. And, you are a part of community. So, we kindly request you to support Contact Form to Any API. And, there are many ways to support, both technical and non-technical.
 
@@ -58,7 +70,7 @@ Contact Form to Any API needs your support WordPress thrives on community. And, 
 
 * <strong> Report Security Issues:</strong> If you have noticed any security glitches in Contact Form to Any API, we encourage you to report it from <a target="_blank" href="https://make.wordpress.org/core/handbook/testing/reporting-security-vulnerabilities">Click here</a>
 
-* <strong>Provide Suggestions:</strong> If you have any suggestions for Contact Form to Any API, we would be grateful if you share it with us. <a target="_blank" href="https://www.itpathsolutions.com/contact-us/">Click here</a> to submit a suggestion.
+* <strong>Provide Suggestions:</strong> If you have any suggestions for Contact Form to Any API, we would be grateful if you share it with us. <a target="_blank" href="https://www.contactformtoapi.com/#contact_us">Click here</a> to submit a suggestion.
 
 *  <strong>Help in Support forum:</strong> Being an active WordPress Community member, you can answer to others' queries on Support forum. Please visit Support forum of <a href="https://wordpress.org/support/plugin/contact-form-to-any-api/">Contact Form to Any API</a>.
 
@@ -76,14 +88,35 @@ We are committed to top-notch Community and Customer support because we know if 
 3. You will find CF7 to Any API in your WordPress admin screen.
 
 == Frequently Asked Questions ==
-= How many API connection i can add? =
-Unlimited, There is no limit of creation of API you can send data to CRM and any other API url. You can even use same form to send data to multiple api.
+= What is Contact Form To Any API? =
+Contact Form to Any API is a service that allows you to easily integrate contact forms of your WordPress website with external APIs. We have a free plugin available on <a href="https://wordpress.org/plugins/contact-form-to-any-api/" target="_blank">wordpress.org</a>.
 
-= Where i can find documentation for plugin usage ? =
-Once you activate the plugin you will find documentation link.
+= How can I connect my contact form 7 with my CRM using APIs? =
+The detailed guide for connecting is given on our wordpress.org plugin page. You can also watch this video for easy integration – https://youtu.be/1K-JdXwDH_k
 
-= Can I Customize this Plugin ? =
-Absolutely. Please Connect with us on <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com`</a>
+= Which platforms can I connect my contact form 7 using your plugin? =
+Any platform. That’s the magic of our plugin. Using this plugin, you can connect your contact form 7 to any third party platform like Mailbluster, Mailchimp, Zapier, Pilotsolution, Virtuagym, Salesforce, Odoo, Sage CRM and many more. You can also connect to your custom CRMs or ERPs using APIs.
+
+= Is there any limitation on how many platforms I can connect? =
+No limitation. You can connect any number of platforms and there is no limit on the number of API calls. The plugin is completely free.
+
+= Is contact Form To Any API secure? =
+Yes, Contact Form to Any API uses industry-standard encryption protocols to ensure the security of your data.
+
+= Can I use Contact Form To Any API with my existing Contact forms? = 
+Yes, Contact Form to Any API provides a simple integration process that allows you to connect your existing contact form with your preferred API.
+
+= Is it actually free to use your plugin or there are any hidden charges? = 
+No hidden charges. The plugin is absolutely free to download and install. If you are happy with the plugin, leave us a 5 star review on our WordPress plugin profile.
+
+= Does your plugin store data? = 
+None. The plugin only acts as an interface to connect your contact forms to your APIs helping to capture and sync data easily.
+
+= I am facing issue connecting my contact form 7 to my CRM. What should I do? = 
+Try checking logs to identify the issue. Also check if the APIs are working fine in postman. In case you still require help, feel free to reach out at mailto:support@contactformtoapi.com and we would help you out.
+
+= Do you provide any support on my plugin integration? Can you help me with some updates on my WordPress website? =
+For plugin integration, we provide premium support for free to help connect your WordPress site forms with your APIs. However if you are looking for additional work on your WordPress site, feel free to reach out on <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a> and we will provide a free quote for your work.
 
 
 == Screenshots ==
@@ -92,6 +125,11 @@ Absolutely. Please Connect with us on <a href="mailto:support@contactformtoapi.c
 3. Entries
 
 == Changelog ==
+
+= 1.1.3 =
+* Fix - Security update
+* Improvement - Plugin configuration documentation improvement
+* Enhancement - Performance update
 
 = 1.1.2 =
 * Fix - Minor fixes and update 

@@ -11,7 +11,7 @@
         <a class="nav-link" id="v-pills-logs-tab" data-toggle="pill" href="#v-pills-logs" role="tab" aria-controls="v-pills-logs" aria-selected="false"><?php esc_html_e( 'Logs', 'contact-form-to-any-api' ); ?></a>
         <a class="nav-link" id="v-pills-entries-tab" data-toggle="pill" href="#v-pills-entries" role="tab" aria-controls="v-pills-entries" aria-selected="false"><?php esc_html_e( 'Entries', 'contact-form-to-any-api' ); ?></a>
         <a class="nav-link" id="v-pills-json-format-tab" data-toggle="pill" href="#v-pills-json-format" role="tab" aria-controls="v-pills-json-format" aria-selected="false"><?php esc_html_e( 'Supported JSON Format', 'contact-form-to-any-api' ); ?></a>
-        
+        <a class="nav-link" id="v-pills-pro-tab" data-toggle="pill" href="#v-pills-pro" role="tab" aria-controls="v-pills-pro" aria-selected="false"><?php esc_html_e( 'Contact form to any API PRO', 'contact-form-to-any-api' ); ?></a>
         <a class="nav-link" id="v-pills-contact-us-tab" data-toggle="pill" href="#v-pills-contact-us" role="tab" aria-controls="v-pills-contact-us" aria-selected="false"><?php esc_html_e( 'Contact Us', 'contact-form-to-any-api' ); ?></a>
         </div>
     </div>
@@ -95,7 +95,7 @@
                 </code>
                     </li>
 
-                    <li><b>Unsupported JSON Format</b></br>
+                    <li><b>Unsupported JSON Format:</b> Required <a href="https://www.contactformtoapi.com/pricing/#pricing" class="cf7_to_any_api_doc_link"><strong>Pro Version</strong></a></br>
                     <code>
             <pre>
     {
@@ -110,7 +110,7 @@
             </pre>
                 </code>
 
-                <h5><b>Your API has Unsupported format of json ?? Dont worry our development team can customize our plugin as per your need</b> <a target="_blank" href="https://www.itpathsolutions.com/contact-us/">Click here to contact us </a></h5>
+                <h5><b>Your API has Unsupported format of json ?? Dont worry our development team can customize our plugin as per your need</b> <a target="_blank" href="https://www.contactformtoapi.com/#contact_us">Click here to contact us </a></h5>
                 </li>
             </ol>
         </div>
@@ -119,28 +119,57 @@
             <h5>CF7 to any API video tutorial</h5>
             <iframe width="550" height="330" src="https://www.youtube.com/embed/1K-JdXwDH_k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
+
+          <!-- Pro Version -->
+          <div class="tab-pane fade cf7anyapi_full_width" id="v-pills-pro" role="tabpanel" aria-labelledby="v-pills-pro-tab">
+          <p class="pro_tab_description">Still not convinced? Here is the list of features that shows how Contact Form to Any API is the best plugin to connect any contact form with your CRM or any other third party services.</p>
+             <h5 class="pro_tab_title">Pro Version Features:</h5>
+             <ul class="pro_feature_list">
+                 <li>Support Multi Level or Any Format of JSON</li>
+                 <li>Send data to multiple API</li>
+                 <li>File input supported – Uploaded file will convert into BASE64 and send to API</li>
+                 <li>Priority Support</li>
+             </ul>
+          
+             <h5 class="pro_tab_title">Supported CRM/API:</h5>
+             <ul class="pro_crm_list">
+                 <li>Sage CRM</li>
+                 <li>Mail chimp</li>
+                 <li>Zapier</li>
+                 <li>Odoo CRM/ERP system</li>
+                 <li>Mailbluster</li>
+                 <li>Lead Post Api</li>
+                 <li>Pilotsolution</li>
+                 <li>Virtuagym API</li>
+                 <li>Clio Grow</li>
+                 <li>And many more</li>
+             </ul>
+
+             <p class="get_pro_version"><a href="https://www.contactformtoapi.com/pricing/#pricing" target="_blank">Get Pro Version</a></p>
+          </div>
+        
          <!-- contact us -->
          <div class="tab-pane fade cf7anyapi_full_width" id="v-pills-contact-us" role="tabpanel" aria-labelledby="v-pills-contact-us-tab">
         <h5>Contact Us</h5> <br>
            <h5>Email : <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a></h5>
-           <p>Need Help with Plugin Integration ? <a target="_blank" href="https://www.itpathsolutions.com/contact-us/"> Click to Connect us</a></p>
+           <p>Need Help with Plugin Integration ? <a target="_blank" href="https://www.contactformtoapi.com/#contact_us"> Click to Connect us</a></p>
         </div>
         </div>
     </div>
     <div class="col-3 image">
         <div class="tab-content" id="v-pills-tabContent">
-        <a href="https://www.itpathsolutions.com/contact-us/" target="_blank">
-            <img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/need-help-with-your-website2.jpg';?>" alt="" style="width:100%;">
+        <a href="https://www.contactformtoapi.com/#contact_us" target="_blank">
+            <img src="<?php echo CF7_CURL_DOMAIN.'/cf7-imges/right_image_1.jpg';?>" alt="" style="width:100%;">
         </a>
         <a href="https://wordpress.org/support/plugin/contact-form-to-any-api/reviews/" target="_blank">
-        <img height="400" width="100%" src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/rating.png';?>" alt="rating.png">
+        <img height="400" width="100%" src="<?php echo CF7_CURL_DOMAIN.'/cf7-imges/right_image_2.png';?>" alt="rating.png">
         </a>
         </div>
     </div>
     <!-- contact-us image -->
     <div class="contact_us contact_image">
-        <a href="https://www.itpathsolutions.com/contact-us/" target="_blank">
-            <img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/need-help-with-your-website.jpg';?>" alt="" style="width:100%;">
+        <a href="https://www.contactformtoapi.com/#contact_us" target="_blank">
+            <img src="<?php echo CF7_CURL_DOMAIN.'/cf7-imges/bottom_image.jpg';?>" alt="" style="width:100%;">
         </a>
     </div>
     
