@@ -38,7 +38,7 @@
             </code>
             <p><b><?php esc_html_e( 'Authorization having Username & Password with Base64 ?', 'contact-form-to-any-api' ); ?></br>
 
-               <?php __( 'To convert online <a href="https://www.base64encode.net/" target="_blank"> click here </a> and put it in the header.', 'contact-form-to-any-api' ); ?></b></p>
+               <?php echo __( 'To convert online <a href="https://www.base64encode.net/" target="_blank"> click here </a> and put it in the header.', 'contact-form-to-any-api' ); ?></b></p>
             <b><?php esc_html_e( 'Example', 'contact-form-to-any-api' ); ?></b><code>
                 <pre>
     Authorization: Basic ' . base64_encode( YOUR_USERNAME . ':' . YOUR_PASSWORD )
@@ -62,9 +62,9 @@
         <div class="tab-pane fade cf7anyapi_full_width" id="v-pills-logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
         <h5><?php esc_html_e( 'Logs', 'contact-form-to-any-api' ); ?></h5>
             <ol>
-                <li><?php __( 'After submitting data you can see your data in <b>Logs</b> tab.', 'contact-form-to-any-api' ); ?></li>
+                <li><?php echo __( 'After submitting data you can see your data in <b>Logs</b> tab.', 'contact-form-to-any-api' ); ?></li>
                 <li><?php esc_html_e( 'You can see your API logs and its data which is submitted by user', 'contact-form-to-any-api' ); ?></li>
-                <li><?php __( 'You can see your <b>API response too</b>.', 'contact-form-to-any-api'); ?></li>
+                <li><?php echo __( 'You can see your <b>API response too</b>.', 'contact-form-to-any-api'); ?></li>
                 <?php esc_html_e( 'Ex. ', 'contact-form-to-any-api' ); ?><img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/logs.png';?>" alt="" style="height:100%; width:100%;">
             </ol>
         </div>
@@ -74,7 +74,7 @@
         <h5><?php esc_html_e( 'Entries', 'contact-form-to-any-api' ); ?></h5>
             <ol>
                 <li><?php esc_html_e( 'Select the form and its data will display.', 'contact-form-to-any-api' ); ?></li>               
-                <li><?php __( 'You can download your data in <b>CSV</b>, <b>Excel</b>, <b>PDF</b> and also you can <b>Print</b> your data.', 'contact-form-to-any-api' ); ?></li>
+                <li><?php echo __( 'You can download your data in <b>CSV</b>, <b>Excel</b>, <b>PDF</b> and also you can <b>Print</b> your data.', 'contact-form-to-any-api' ); ?></li>
                 <?php esc_html_e( 'Ex. ', 'contact-form-to-any-api' ); ?><img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/entries.png';?>" alt="" style="height:100%; width:100%;">
             </ol>
             
@@ -84,7 +84,7 @@
         <div class="tab-pane fade cf7anyapi_full_width" id="v-pills-json-format" role="tabpanel" aria-labelledby="v-pills-json-format-tab">
         <h5><?php esc_html_e( 'Supported JSON format', 'contact-form-to-any-api' ); ?></h5>
             <ol>
-                <li><b><?php esc_html_e( 'Supported JSON format by CF7 to any API', 'contact-form-to-any-api' ); ?></b></br>
+                <li><b><?php esc_html_e( 'Supported JSON format by Free Version', 'contact-form-to-any-api' ); ?></b></br>
                 <code>
             <pre>
     {
@@ -97,7 +97,7 @@
                 </code>
                     </li>
 
-                    <li><?php __( '<b>Unsupported JSON Format:</b> Required <a href="https://www.contactformtoapi.com/pricing/#pricing" class="cf7_to_any_api_doc_link" target="_blank"><strong>Pro Version</strong></a>', 'contact-form-to-any-api' ); ?></br>
+                    <li><?php echo __( '<b>Nested JSON Format Required </b><a href="https://www.contactformtoapi.com/pricing/#pricing" class="cf7_to_any_api_doc_link" target="_blank"><strong>Pro Version</strong></a>', 'contact-form-to-any-api' ); ?></br>
                     <code>
             <pre>
     {
@@ -112,7 +112,7 @@
             </pre>
                 </code>
 
-                <h5><?php __( '<b>Your API has Unsupported format of json ?? Don\'t worry our development team can customize our plugin as per your need</b> <a target="_blank" href="https://www.itpathsolutions.com/contact-us/">Click here to contact us</a>', 'contact-form-to-any-api' ); ?></h5>
+                <h5><?php echo __( '<b>Your API has Nested or Multilevel format of json ?? Don\'t worry our development team can customize our plugin as per your need</b> <a target="_blank" href="https://www.itpathsolutions.com/contact-us/">Click here to contact us</a>', 'contact-form-to-any-api' ); ?></h5>
                 </li>
             </ol>
         </div>
@@ -139,6 +139,9 @@
                  <li><?php esc_html_e( 'Send data to multiple API', 'contact-form-to-any-api' ); ?></li>
                  <li><?php esc_html_e( 'File input supported – Uploaded file will convert into BASE64 and send to API', 'contact-form-to-any-api' ); ?></li>
                  <li><?php esc_html_e( 'Option to Choose when to send data to API – Before cf7 mail sent OR After mail sent', 'contact-form-to-any-api' ); ?></li>
+                 <li><?php esc_html_e( 'Send attachments to any API', 'contact-form-to-any-api' ); ?></li>
+                 <li><?php esc_html_e( 'Option to choose Numerical Fields / Integer Fields', 'contact-form-to-any-api' ); ?></li>
+                 <li><?php esc_html_e( 'Compatible with Multiline files upload for contact form 7 Plugin', 'contact-form-to-any-api' ); ?></li>
                  <li><?php esc_html_e( 'Priority Support', 'contact-form-to-any-api' ); ?></li>
                  <li><?php esc_html_e( 'Paid plugin customization support', 'contact-form-to-any-api' ); ?></li>
                  <li><?php esc_html_e( 'Paid oauth 2.0 API Integration support', 'contact-form-to-any-api' ); ?></li>
@@ -159,6 +162,12 @@
                  <li><?php esc_html_e( 'Samdock CRM', 'contact-form-to-any-api' ); ?></li>
                  <li><?php esc_html_e( 'FRS Labs API', 'contact-form-to-any-api' ); ?></li>
                  <li><?php esc_html_e( 'Mikrowisp', 'contact-form-to-any-api' ); ?></li>
+                 <li><?php esc_html_e( 'Network Worldfilia', 'contact-form-to-any-api' ); ?></li>
+                 <li><?php esc_html_e( 'Hubspot', 'contact-form-to-any-api' ); ?></li>
+                 <li><?php esc_html_e( 'GorillaDesk API', 'contact-form-to-any-api' ); ?></li>
+                 <li><?php esc_html_e( 'Superoffice CRM', 'contact-form-to-any-api' ); ?></li>
+                 <li><?php esc_html_e( 'Sembark API', 'contact-form-to-any-api' ); ?></li>
+                 <li><?php esc_html_e( 'SingleOps', 'contact-form-to-any-api' ); ?></li>
                  <li><?php esc_html_e( 'And many more', 'contact-form-to-any-api' ); ?></li>
              </ul>
 
@@ -168,8 +177,8 @@
          <!-- contact us -->
          <div class="tab-pane fade cf7anyapi_full_width" id="v-pills-contact-us" role="tabpanel" aria-labelledby="v-pills-contact-us-tab">
         <h5><?php esc_html_e( 'Contact Us', 'contact-form-to-any-api' ); ?></h5><br>
-           <h5><?php __( 'Email : <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a>', 'contact-form-to-any-api' ); ?></h5>
-           <p><?php __( 'Need Help with Plugin Integration ? <a target="_blank" href="https://www.contactformtoapi.com/#contact_us">Click to Connect us</a>', 'contact-form-to-any-api' ); ?></p>
+           <h5><?php echo __( 'Email : <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a>', 'contact-form-to-any-api' ); ?></h5>
+           <p><?php echo __( 'Need Help with Plugin Integration ? <a target="_blank" href="https://www.contactformtoapi.com/#contact_us">Click to Connect us</a>', 'contact-form-to-any-api' ); ?></p>
         </div>
         </div>
     </div>

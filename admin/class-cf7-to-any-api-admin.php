@@ -110,7 +110,7 @@ class Cf7_To_Any_Api_Admin {
 	 */
 	public function cf7_to_any_api_verify_dependencies(){
 		if(is_multisite()){
-			if(!is_plugin_active_for_network('contact-form-7/wp-contact-form-7.php')){
+			if(!is_plugin_active_for_network('contact-form-7/wp-contact-form-7.php') && !is_plugin_active('contact-form-7/wp-contact-form-7.php')){
 
 	         	echo '<div class="notice notice-warning is-dismissible"><p>'.esc_html__( 'Contact form 7 API integrations requires CONTACT FORM 7 Plugin to be installed and active', 'contact-form-to-any-api' ).'</p></div>';
 			}
@@ -313,7 +313,7 @@ class Cf7_To_Any_Api_Admin {
 			if(isset($_POST['cf7_to_any_api_cpt_nonce']) && wp_verify_nonce($_POST['cf7_to_any_api_cpt_nonce'], 'cf7_to_any_api_cpt_nonce')){
 
 				$options['cf7anyapi_selected_form'] = (int)stripslashes($_POST['cf7anyapi_selected_form']);
-				$options['cf7anyapi_base_url'] = esc_url($_POST['cf7anyapi_base_url']);
+				$options['cf7anyapi_base_url'] = esc_url_raw($_POST['cf7anyapi_base_url']);
 				if(isset($_POST['cf7anyapi_basic_auth'])){
 					$options['cf7anyapi_basic_auth'] = sanitize_text_field($_POST['cf7anyapi_basic_auth']);
 				}
@@ -346,8 +346,8 @@ class Cf7_To_Any_Api_Admin {
 			exit();
 		}
 		$html = '';
-		$form_ID     = (int)stripslashes($_POST['form_id']); # change the 80 to your CF7 form ID 
-		$post_id     = (int)stripslashes($_POST['post_id']); # change the 80 to your CF7 form ID 
+		$form_ID     = (int)stripslashes($_POST['form_id']);
+		$post_id     = (int)stripslashes($_POST['post_id']);
 		$ContactForm = WPCF7_ContactForm::get_instance($form_ID);
 		$form_fields = $ContactForm->scan_form_tags();
 
@@ -512,7 +512,8 @@ class Cf7_To_Any_Api_Admin {
 		        $cf7anyapi_input_type = get_post_meta(get_the_ID(),'cf7anyapi_input_type',true);
 				$cf7anyapi_method = get_post_meta(get_the_ID(),'cf7anyapi_method',true);
 
-				$cf7anyapi_header_request = get_post_meta(get_the_ID(),'cf7anyapi_header_request',true);
+				$header_request 		= get_post_meta(get_the_ID(),'cf7anyapi_header_request' ,true);
+				$cf7anyapi_header_request = apply_filters( 'cf7anyapi_header_request', $header_request, get_the_ID(), $form_id);
 
 		        foreach($cf7anyapi_form_field as $key => $value){
 
@@ -652,7 +653,7 @@ class Cf7_To_Any_Api_Admin {
 	 * @since    1.0.0
 	 */
 	public static function Cf7_To_Any_Api_parse_json($string){
-		return json_encode($string);
+		return json_encode($string, JSON_UNESCAPED_UNICODE);
   	}
 
   	/**
@@ -668,14 +669,14 @@ class Cf7_To_Any_Api_Admin {
   		if(isset($posted_data)){
   			foreach($posted_data as $key => $arr){
 				if(strstr($key, 'file-')){
-					$posted_data[$key] = substr($arr, 0, 10).'...';
+					$posted_data[$key] = mb_substr($arr, 0, 10).'...';
 			    }
 			}
   		}
   		
-  		$form_data = json_encode($posted_data);
+  		$form_data = json_encode($posted_data, JSON_UNESCAPED_UNICODE);
   		if (gettype($response) != 'string') {
-			$response = json_encode($response);
+			$response = json_encode($response, JSON_UNESCAPED_UNICODE);
 		}
   		$data = array(
   			'form_id' => $form_id,

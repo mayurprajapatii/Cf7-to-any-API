@@ -1,10 +1,10 @@
 === Contact Form to Any API ===
 Contributors: itpathsolutions,mayur8991,pateljaymin,thakordarshil
-Tags: rest api, api, contact form, crm, lead, pro, export, entries, contact form 7
+Tags: rest api, api, contact form, crm, lead
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.1.9
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,10 @@ Contact Form to any API plugin is also available in a professional version which
 * Get Cobra by ArcaMax
 * Network Worldfilia
 * One Page CRM
+* SingleOps
+* GorillaDesk API
+* Hubspot
+* Sembark API
 * And many more
 
 
@@ -162,6 +166,11 @@ For plugin integration, we provide premium support for free to help connect your
 3. Entries
 
 == Changelog ==
+
+= 1.2.0 =
+* New - UTF8 support
+* New - Special string UTF-8 allows in JSON
+* Fix - Multi-site installation error
 
 = 1.1.9 =
 * Fix - Basic fixes and updates

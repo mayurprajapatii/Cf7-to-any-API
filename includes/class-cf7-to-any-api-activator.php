@@ -31,7 +31,7 @@ class Cf7_To_Any_Api_Activator {
 	 */
 	public static function activate() {
         if(is_multisite()){
-            if(!is_plugin_active_for_network('contact-form-7/wp-contact-form-7.php')){
+            if(!is_plugin_active_for_network('contact-form-7/wp-contact-form-7.php') && !in_array( 'contact-form-7/wp-contact-form-7.php', apply_filters( 'active_plugins', get_option('active_plugins')))){
                 deactivate_plugins(plugin_basename( __FILE__));
                  wp_die( __( 'Please activate <a href="https://wordpress.org/plugins/contact-form-7/" target="_blank">Contact Form 7.</a>', 'contact-form-to-any-api' ), 'Plugin dependency check', array( 'back_link' => true ) );
             }
