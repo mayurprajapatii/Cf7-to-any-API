@@ -453,11 +453,13 @@ class Cf7_To_Any_Api_Admin {
 		$cf7files = $submission->uploaded_files();
 		if( !empty($cf7files)){
 			foreach ($cf7files as $key => $cf7file) {
-				$ext = pathinfo($cf7file[0], PATHINFO_EXTENSION);
-				$f_name = pathinfo($cf7file[0], PATHINFO_FILENAME );
-				$fileName = 'cf7-'.$form_id.'-'.time().'.'.$ext;
-				copy($cf7file[0], $cf7_uploads_dir.'/'.$fileName);	
-				$posted_data[$key] = '<a href="'.wp_upload_dir()['baseurl'] . '/cf7-to-any-api-uploads/'.$fileName.'" target="_blank">'.$fileName.'</a>';
+				if(!empty($cf7file)){
+					$ext = pathinfo($cf7file[0], PATHINFO_EXTENSION);
+					$f_name = pathinfo($cf7file[0], PATHINFO_FILENAME );
+					$fileName = 'cf7-'.$form_id.'-'.time().'.'.$ext;
+					copy($cf7file[0], $cf7_uploads_dir.'/'.$fileName);	
+					$posted_data[$key] = '<a href="'.wp_upload_dir()['baseurl'] . '/cf7-to-any-api-uploads/'.$fileName.'" target="_blank">'.$fileName.'</a>';
+			    }
 			}
 		}
 		$post_id = $submission->get_meta('container_post_id');
@@ -469,8 +471,10 @@ class Cf7_To_Any_Api_Admin {
 		//Image set base64 encode
 		if( !empty($cf7files)){
 			foreach ($cf7files as $key => $cf7file) {
-				$posted_data[$key] = base64_encode(file_get_contents($cf7file[0]));
-			}
+				if(!empty($cf7file)){
+				   $posted_data[$key] = base64_encode(file_get_contents($cf7file[0]));
+				}
+			}   
 		}
 
 		$args = array(

@@ -2,9 +2,9 @@
 Contributors: itpathsolutions,mayur8991,pateljaymin,vickymakwana1111
 Tags: rest api, api, contact form, crm, lead, pro, export, contact form 7
 Requires at least: 6.0
-Tested up to: 6.3
+Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,7 +32,10 @@ Contact form 7 to Any API is most powerful plugin to send cf7 data to any third 
 * Option to Choose when to send data to API - Before cf7 mail sent OR After mail sent <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * File input supported - Uploaded file will convert into BASE64 and send to API <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Priority Support <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
-* Paid Plugin customization support based on Requirment <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
+* Multi File Upload Support <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(Coming Soon with PRO)</a></strong>
+* Save CF7 Entries Directly on Google Sheet <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(Coming Soon with PRO)</a></strong>
+* Paid Plugin customization support based on Requirment <strong><a href="https://www.contactformtoapi.com/#contact_us" target="_blank">(Contact us)</a></strong>
+* Paid oauth 2.0 API Integration based on Requirment <strong><a href="https://www.contactformtoapi.com/#contact_us" target="_blank">(Contact us)</a></strong>
 
 = Set your own Header Request Parameter =
 
@@ -59,6 +62,8 @@ Contact Form to any API plugin is also available in a professional version which
 * Priority Support
 * Choose when to send data to API
 * Paid plugin customization support
+* Paid oauth 2.0 API Integration support
+
 
 
 == Supported CRM/API with PRO ==
@@ -73,6 +78,10 @@ Contact Form to any API plugin is also available in a professional version which
 * Pilotsolution
 * Clio Grow
 * OS Ticket
+* Samdock CRM
+* Mikrowisp
+* Bats CRM
+* FRS Labs API
 * And many more
 
 
@@ -145,6 +154,10 @@ For plugin integration, we provide premium support for free to help connect your
 3. Entries
 
 == Changelog ==
+
+= 1.1.6 =
+* Fix - Error fix for file upload field
+* Fix - I18N issue fix
 
 = 1.1.5 =
 * Fix - API Response not visible for some APIs
