@@ -56,8 +56,11 @@
 		});
 
 		$('.cf7anyapi_bulk_log_delete').on('click',function(){
+
+			var cf_to_any_api_log_del_nonce = jQuery(".cf7_to_any_api_page_cf7anyapi_logs #cf_to_any_api_log_del_nonce").val();
 			var data = {
-	                'action': 'cf7_to_any_api_bulk_log_delete'
+	                'action': 'cf7_to_any_api_bulk_log_delete',
+	                'cf_to_any_api_log_del_nonce' : cf_to_any_api_log_del_nonce,
 	            };
 
 			var cf7anyapi_response = cf7anyapi_ajax_request(data);

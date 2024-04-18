@@ -13,10 +13,9 @@
 <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
 
 <?php
-	global $wpdb;
-	$Cf7_To_Any_Api = new Cf7_To_Any_Api();
-	$cf_id = (isset($_GET['form_id']) && is_numeric($_GET['form_id']) ? intval($_GET['form_id']) : 0);
-?>
+global $wpdb;
+$Cf7_To_Any_Api = new Cf7_To_Any_Api();
+$cf_id = (isset($_GET['form_id']) && is_numeric($_GET['form_id']) ? intval($_GET['form_id']) : 0); ?>
 
 <div class="cf_entries" id="cf_entries">
 	<form name="form_entries" id="form_entries" class="cf7toanyapi_entries" method="get">
@@ -31,12 +30,16 @@
                     'suppress_filters' => false
                 )
             );
+            $count = 0;
             foreach($posts as $post){
+            	$selected = ( $cf_id === 0 && $count == 0 ) ? 'selected="selected"' : ($post->ID === $cf_id ? 'selected="selected"' : ''); 
+            	( $cf_id === 0  && $count == 0 ) ? $cf_id = $post->ID :  0; 
                 ?>
-                <option value="<?php echo esc_html($post->ID); ?>" <?php echo ($post->ID == $cf_id ? esc_html('selected="selected"') : ''); ?>><?php echo esc_html($post->post_title.'('.$post->ID.')'); ?> </option>
-                <?php
-            }
-            ?>
+                <option value="<?php echo esc_attr($post->ID); ?>" <?php echo $selected; ?>>
+                	<?php echo esc_html($post->post_title.'('.$post->ID.')'); ?> 
+                </option>
+                <?php $count++;
+            } ?>
 		</select>
 	</form>
 	<?php

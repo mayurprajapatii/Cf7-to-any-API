@@ -256,6 +256,7 @@ class Cf7_To_Any_Api_Admin {
 	public function cf7anyapi_submenu_callback(){
 		$myListTable = new cf7anyapi_List_Table();
 	  	echo '<div class="wrap"><h2>' . __( 'CF7 To Any API Log Data', 'contact-form-to-any-api' ) . '</h2>';
+    	  	echo wp_nonce_field('cf_to_any_api_log_del_nonce','cf_to_any_api_log_del_nonce' );
 	  		echo '<div class="cf7anyapi_log_button">';
 	  			echo '<a href="javascript:void(0);" class="cf7anyapi_bulk_log_delete">'.__( 'Delete All Log', 'contact-form-to-any-api' ).'</a>';
 	  		echo '</div>';
@@ -270,8 +271,11 @@ class Cf7_To_Any_Api_Admin {
 	 * @since    1.0.0
 	 */
 	public static function cf7_to_any_api_bulk_log_delete_function(){
-		global $wpdb;
-		$wpdb->query('TRUNCATE TABLE '.$wpdb->prefix.'cf7anyapi_logs');
+		if(isset($_POST['cf_to_any_api_log_del_nonce']) && wp_verify_nonce($_POST['cf_to_any_api_log_del_nonce'],'cf_to_any_api_log_del_nonce') )
+		{
+			global $wpdb;
+			$wpdb->query('TRUNCATE TABLE '.$wpdb->prefix.'cf7anyapi_logs');
+		}
 		exit();
 	}
 
