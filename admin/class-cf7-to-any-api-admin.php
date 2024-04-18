@@ -381,8 +381,15 @@ class Cf7_To_Any_Api_Admin {
 			$sql = "SELECT COUNT(*) AS a FROM information_schema.COLUMNS WHERE TABLE_NAME = '". $wpdb->prefix."cf7anyapi_logs' AND COLUMN_NAME =  'form_data'";
 			$query_data = $wpdb->get_results($sql);
 			if($query_data[0]->a == 0){
-				$sql2 = 'ALTER TABLE `'.$wpdb->prefix.'cf7anyapi_logs` ADD `form_data` TEXT NOT NULL AFTER `post_id`';
+				$sql2 = 'ALTER TABLE `'.$wpdb->prefix.'cf7anyapi_logs` ADD `form_data` LONGTEXT NOT NULL AFTER `post_id`';
 				$wpdb->query($sql2);
+			}else{
+				$data_type_query = "SHOW COLUMNS FROM `".$wpdb->prefix."cf7anyapi_logs` LIKE 'form_data'";
+				$form_data_type = $wpdb->get_row($data_type_query);
+				if ($form_data_type && $form_data_type->Type === 'text') {
+					$formdata_datatype = "ALTER TABLE `".$wpdb->prefix."cf7anyapi_logs` MODIFY `form_data` LONGTEXT NOT NULL";
+					$wpdb->query($formdata_datatype);
+				}
 			}
 		}
 
@@ -631,9 +638,11 @@ class Cf7_To_Any_Api_Admin {
           			$args['body'] = $json;
     			}
       		}
-      		
-      		$result = wp_remote_retrieve_body(wp_remote_post($url, $args));
-
+      		$result = wp_remote_post($url, $args);
+      		$result_body = wp_remote_retrieve_body($result);
+			if(!empty($result_body)){
+				$result = $result_body;
+			}
       		self::Cf7_To_Any_Api_save_response_in_log($post_id, $form_id, $result, $posted_data);
 		}
 	}
@@ -666,6 +675,9 @@ class Cf7_To_Any_Api_Admin {
   		}
   		
   		$form_data = json_encode($posted_data);
+  		if (gettype($response) != 'string') {
+			$response = json_encode($response);
+		}
   		$data = array(
   			'form_id' => $form_id,
   			'post_id' => $post_id,

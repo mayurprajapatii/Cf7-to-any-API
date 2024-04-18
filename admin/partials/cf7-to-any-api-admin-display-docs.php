@@ -11,6 +11,7 @@
         <a class="nav-link" id="v-pills-logs-tab" data-toggle="pill" href="#v-pills-logs" role="tab" aria-controls="v-pills-logs" aria-selected="false"><?php esc_html_e( 'Logs', 'contact-form-to-any-api' ); ?></a>
         <a class="nav-link" id="v-pills-entries-tab" data-toggle="pill" href="#v-pills-entries" role="tab" aria-controls="v-pills-entries" aria-selected="false"><?php esc_html_e( 'Entries', 'contact-form-to-any-api' ); ?></a>
         <a class="nav-link" id="v-pills-json-format-tab" data-toggle="pill" href="#v-pills-json-format" role="tab" aria-controls="v-pills-json-format" aria-selected="false"><?php esc_html_e( 'Supported JSON Format', 'contact-form-to-any-api' ); ?></a>
+        <a class="nav-link" id="v-pills-cf7-hidden-field-tab" data-toggle="pill" href="#v-pills-cf7-hidden-field" role="tab" aria-controls="v-pills-cf7-hidden-field" aria-selected="false"><?php esc_html_e( 'CF7 Hidden Fields', 'contact-form-to-any-api' ); ?></a>
         <a class="nav-link" id="v-pills-pro-tab" data-toggle="pill" href="#v-pills-pro" role="tab" aria-controls="v-pills-pro" aria-selected="false"><?php esc_html_e( 'Contact form to any API PRO', 'contact-form-to-any-api' ); ?></a>
         <a class="nav-link" id="v-pills-contact-us-tab" data-toggle="pill" href="#v-pills-contact-us" role="tab" aria-controls="v-pills-contact-us" aria-selected="false"><?php esc_html_e( 'Contact Us', 'contact-form-to-any-api' ); ?></a>
         </div>
@@ -114,6 +115,14 @@
                 </li>
             </ol>
         </div>
+        <!-- CF7 Hidden field -->
+         <div class="tab-pane fade cf7anyapi_full_width" id="v-pills-cf7-hidden-field" role="tabpanel" aria-labelledby="v-pills-cf7-hidden-field">
+            <h5><?php esc_html_e( 'How to use CF7 Hidden fields', 'contact-form-to-any-api' ); ?></h5><br>
+            <p class="pro_tab_description">Hidden field without value :  <strong> [hidden tracking-id] </strong></p>
+            <p class="pro_tab_description">Hidden field with Default value : <strong>[hidden tracking-id default "12345"] </strong></p>
+            <p class="pro_tab_description">Hidden field with fix/static value : <strong> [hidden tracking-id "12345"] </strong> </p>
+            <p class="pro_tab_description">Hidden field is important part whenver we want to send data to API. Many API has parameter that need to send with static value in that case we can create hidden field and put static value and simply Map Hidden field with API mapping Key</p>
+         </div>
         <!-- video tutorial -->
         <div class="tab-pane fade cf7anyapi_full_width tab" id="v-pills-video" role="tabpanel" aria-labelledby="v-pills-video-tab">
             <h5>CF7 to any API video tutorial</h5>
@@ -128,7 +137,9 @@
                  <li>Support Multi Level or Any Format of JSON</li>
                  <li>Send data to multiple API</li>
                  <li>File input supported – Uploaded file will convert into BASE64 and send to API</li>
+                 <li>Option to Choose when to send data to API – Before cf7 mail sent OR After mail sent</li>
                  <li>Priority Support</li>
+                 <li>Paid plugin customization support</li>
              </ul>
           
              <h5 class="pro_tab_title">Supported CRM/API:</h5>
@@ -142,6 +153,7 @@
                  <li>Pilotsolution</li>
                  <li>Virtuagym API</li>
                  <li>Clio Grow</li>
+                 <li>OS Ticket</li>
                  <li>And many more</li>
              </ul>
 

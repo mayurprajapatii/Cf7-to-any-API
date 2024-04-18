@@ -4,7 +4,7 @@ Tags: rest api, api, contact form, crm, lead, pro, export, contact form 7
 Requires at least: 6.0
 Tested up to: 6.3
 Requires PHP: 7.4
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,10 +24,11 @@ Contact form 7 to Any API is most powerful plugin to send cf7 data to any third 
 * Support Multi Level or Any Format of JSON	<strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Supports Basic Auth
 * Supports Bearer Auth
-* Logs Management
+* API Logs Management with submitted data and API response 
 * Save Contact Form 7 form submitted data to the database.
 * Export Contact Form 7 Data in CSV , EXCEL , PDF , Print
 * Single Or Multiple delete cf7 entries
+* Send attachments to any API <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Option to Choose when to send data to API - Before cf7 mail sent OR After mail sent <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * File input supported - Uploaded file will convert into BASE64 and send to API <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Priority Support <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
@@ -58,6 +59,21 @@ Contact Form to any API plugin is also available in a professional version which
 * Priority Support
 * Choose when to send data to API
 * Paid plugin customization support
+
+
+== Supported CRM/API with PRO ==
+
+* Sage CRM
+* Mail chimp
+* Zapier
+* Odoo CRM/ERP System
+* Mailbluster
+* Lead Post API
+* Virtuagym API
+* Pilotsolution
+* Clio Grow
+* OS Ticket
+* And many more
 
 
 == Support ==
@@ -129,6 +145,12 @@ For plugin integration, we provide premium support for free to help connect your
 3. Entries
 
 == Changelog ==
+
+= 1.1.5 =
+* Fix - API Response not visible for some APIs
+* Fix - Logs page updates for file types
+* Fix - Submitted data column update for base64 data
+* Improvement - Documentation updates for CF7 Hidden fields
 
 = 1.1.4 =
 * Improvement - Compatible with latest WordPress version 6.3
