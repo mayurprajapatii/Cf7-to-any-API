@@ -561,7 +561,7 @@ class Cf7_To_Any_Api_Admin {
 
 		if($method == 'GET' && ($input_type == 'params' || $input_type == 'json')){
 			$args = array(
-				'timeout'     => 5,
+				'timeout'     => 30,
 				'redirection' => 5,
 				'httpversion' => '1.0',
 				'user-agent'  => 'WordPress/' . $wp_version . '; ' . home_url(),
@@ -598,7 +598,7 @@ class Cf7_To_Any_Api_Admin {
 		}
 		else{
 			$args = array(
-				'timeout'     => 5,
+				'timeout'     => 30,
 				'redirection' => 5,
 				'httpversion' => '1.0',
 				'user-agent'  => 'WordPress/' . $wp_version . '; ' . home_url(),

@@ -2,9 +2,9 @@
 Contributors: itpathsolutions,mayur8991,pateljaymin,thakordarshil
 Tags: rest api, api, contact form, crm, lead
 Requires at least: 6.0
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,7 +50,7 @@ Content-Type: application/json
 
 <p> NOTE  : Basic & Bearer Authentication can be set from Header Request Parameter input. </p>
 
-<strong>Do you want Custom Development for any API/CRM from our Development Team ? Please connect with us <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a></strong>
+<strong>Are you in need of custom development for any API/CRM that requires OAuth2 integration? Our skilled development team is ready to assist you. Feel free to connect with us to discuss your requirements  <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a></strong>
 
 
 &#9658; [GET PREMIUM VERSION NOW](https://www.contactformtoapi.com/pricing/)
@@ -74,7 +74,7 @@ Contact Form to any API plugin is also available in a professional version which
 == Supported CRM/API with PRO ==
 
 * Sage CRM
-* Mail chimp
+* Mail Chimp
 * Zapier
 * Odoo CRM/ERP System
 * Mailbluster
@@ -94,6 +94,10 @@ Contact Form to any API plugin is also available in a professional version which
 * GorillaDesk API
 * Hubspot
 * Sembark API
+* Superoffice CRM
+* Flowdesk
+* JobAdder  
+* Unlatch CRM
 * And many more
 
 
@@ -138,6 +142,9 @@ The detailed guide for connecting is given on our wordpress.org plugin page. You
 = Which platforms can I connect my contact form 7 using your plugin? =
 Any platform. That’s the magic of our plugin. Using this plugin, you can connect your contact form 7 to any third party platform like Mailbluster, Mailchimp, Zapier, Pilotsolution, Virtuagym, Salesforce, Odoo, Sage CRM and many more. You can also connect to your custom CRMs or ERPs using APIs.
 
+= Does your plugin support OAuth2 integration?
+Yes, we offer paid plugin customization for APIs that require OAuth2 integration. Our development team will tailor the plugin to fit your API specifications and provide you with an updated version.For more details, please connect with us on email <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a>.
+
 = Is there any limitation on how many platforms I can connect? =
 No limitation. You can connect any number of platforms and there is no limit on the number of API calls. The plugin is completely free.
 
@@ -166,6 +173,10 @@ For plugin integration, we provide premium support for free to help connect your
 3. Entries
 
 == Changelog ==
+
+= 1.2.1 =
+* Improvement – Compatible with latest WordPress version 6.5
+* Fix - Timeout issue for some users
 
 = 1.2.0 =
 * New - UTF8 support
