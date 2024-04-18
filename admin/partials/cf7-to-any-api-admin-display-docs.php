@@ -37,7 +37,8 @@
         </pre>
             </code>
             <p><b><?php esc_html_e( 'Authorization having Username & Password with Base64 ?', 'contact-form-to-any-api' ); ?></br>
-               <?php printf(esc_html__( 'to convert online %1$sclick here%2$s and put it on header ', 'contact-form-to-any-api' ),'<a href="https://www.base64encode.net/" target="_blank">','</a>'); ?></b></p>
+
+               <?php __( 'To convert online <a href="https://www.base64encode.net/" target="_blank"> click here </a> and put it in the header.', 'contact-form-to-any-api' ); ?></b></p>
             <b><?php esc_html_e( 'Example', 'contact-form-to-any-api' ); ?></b><code>
                 <pre>
     Authorization: Basic ' . base64_encode( YOUR_USERNAME . ':' . YOUR_PASSWORD )
@@ -61,9 +62,9 @@
         <div class="tab-pane fade cf7anyapi_full_width" id="v-pills-logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
         <h5><?php esc_html_e( 'Logs', 'contact-form-to-any-api' ); ?></h5>
             <ol>
-                <li><?php printf(esc_html__( 'After submitting data you can see your data in %1$sLogs%2$s tab.', 'contact-form-to-any-api' ),'<b>','</b>'); ?></li>
+                <li><?php __( 'After submitting data you can see your data in <b>Logs</b> tab.', 'contact-form-to-any-api' ); ?></li>
                 <li><?php esc_html_e( 'You can see your API logs and its data which is submitted by user', 'contact-form-to-any-api' ); ?></li>
-                <li><?php printf(esc_html__( 'You can see your %1$sAPI response too%2$s.', 'contact-form-to-any-api' ),'<b>','</b>'); ?></li>
+                <li><?php __( 'You can see your <b>API response too</b>.', 'contact-form-to-any-api'); ?></li>
                 <?php esc_html_e( 'Ex. ', 'contact-form-to-any-api' ); ?><img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/logs.png';?>" alt="" style="height:100%; width:100%;">
             </ol>
         </div>
@@ -73,7 +74,7 @@
         <h5><?php esc_html_e( 'Entries', 'contact-form-to-any-api' ); ?></h5>
             <ol>
                 <li><?php esc_html_e( 'Select the form and its data will display.', 'contact-form-to-any-api' ); ?></li>               
-                <li><?php printf(esc_html__( 'You can download your data in %1$sCSV%2$s, %1$sExcel%2$s, %1$sPDF%2$s and also you can %1$sPrint%2$s your data.', 'contact-form-to-any-api' ),'<b>','</b>'); ?></li>
+                <li><?php __( 'You can download your data in <b>CSV</b>, <b>Excel</b>, <b>PDF</b> and also you can <b>Print</b> your data.', 'contact-form-to-any-api' ); ?></li>
                 <?php esc_html_e( 'Ex. ', 'contact-form-to-any-api' ); ?><img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/entries.png';?>" alt="" style="height:100%; width:100%;">
             </ol>
             
@@ -96,7 +97,7 @@
                 </code>
                     </li>
 
-                    <li><?php printf(esc_html__( '%1$sUnsupported JSON Format:%2$s Required %3$s%4$sPro Version%5$s%6$s', 'contact-form-to-any-api' ),'<b>','</b>','<a href="https://www.contactformtoapi.com/pricing/#pricing" class="cf7_to_any_api_doc_link" target="_blank">','<strong>','</strong>','</a>'); ?></br>
+                    <li><?php __( '<b>Unsupported JSON Format:</b> Required <a href="https://www.contactformtoapi.com/pricing/#pricing" class="cf7_to_any_api_doc_link" target="_blank"><strong>Pro Version</strong></a>', 'contact-form-to-any-api' ); ?></br>
                     <code>
             <pre>
     {
@@ -111,7 +112,7 @@
             </pre>
                 </code>
 
-                <h5><?php printf(esc_html__( '%1$sYour API has Unsupported format of json ?? Don\'t worry our development team can customize our plugin as per your need%2$s %3$sClick here to contact us%4$s', 'contact-form-to-any-api' ),'<b>','</b>','<a target="_blank" href="https://www.itpathsolutions.com/contact-us/">','</a>'); ?></h5>
+                <h5><?php __( '<b>Your API has Unsupported format of json ?? Don\'t worry our development team can customize our plugin as per your need</b> <a target="_blank" href="https://www.itpathsolutions.com/contact-us/">Click here to contact us</a>', 'contact-form-to-any-api' ); ?></h5>
                 </li>
             </ol>
         </div>
@@ -167,8 +168,8 @@
          <!-- contact us -->
          <div class="tab-pane fade cf7anyapi_full_width" id="v-pills-contact-us" role="tabpanel" aria-labelledby="v-pills-contact-us-tab">
         <h5><?php esc_html_e( 'Contact Us', 'contact-form-to-any-api' ); ?></h5><br>
-           <h5><?php printf(esc_html__( 'Email : %1$ssupport@contactformtoapi.com%2$s', 'contact-form-to-any-api' ),'<a href="mailto:support@contactformtoapi.com">','</a>'); ?></h5>
-           <p><?php printf(esc_html__( 'Need Help with Plugin Integration ? %1$sClick to Connect us%2$s', 'contact-form-to-any-api' ),'<a target="_blank" href="https://www.contactformtoapi.com/#contact_us">','</a>'); ?></p>
+           <h5><?php __( 'Email : <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a>', 'contact-form-to-any-api' ); ?></h5>
+           <p><?php __( 'Need Help with Plugin Integration ? <a target="_blank" href="https://www.contactformtoapi.com/#contact_us">Click to Connect us</a>', 'contact-form-to-any-api' ); ?></p>
         </div>
         </div>
     </div>

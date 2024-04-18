@@ -111,15 +111,15 @@ class Cf7_To_Any_Api_Admin {
 	public function cf7_to_any_api_verify_dependencies(){
 		if(is_multisite()){
 			if(!is_plugin_active_for_network('contact-form-7/wp-contact-form-7.php')){
-				echo '<div class="notice notice-warning is-dismissible">
-	            	 <p>'.__( 'Contact form 7 API integrations requires CONTACT FORM 7 Plugin to be installed and active', 'contact-form-to-any-api' ).'</p>
-	         	</div>';
+
+	         	echo '<div class="notice notice-warning is-dismissible"><p>'.esc_html__( 'Contact form 7 API integrations requires CONTACT FORM 7 Plugin to be installed and active', 'contact-form-to-any-api' ).'</p></div>';
 			}
 		}else{
-			if(!is_plugin_active('contact-form-7/wp-contact-form-7.php')){
-      			echo '<div class="notice notice-warning is-dismissible">
-	            	 <p>'.__( 'Contact form 7 API integrations requires CONTACT FORM 7 Plugin to be installed and active', 'contact-form-to-any-api' ).'</p>
-	         	</div>';
+			if(!is_plugin_active('contact-form-7/wp-contact-form-7.php')){	         	
+	         	echo '<div class="notice notice-warning is-dismissible">
+			         <p>' . esc_html__( 'Contact form 7 API integrations requires CONTACT FORM 7 Plugin to be installed and active', 'contact-form-to-any-api' ) . '</p>
+			      </div>';
+
     		}
     	}
 	}
@@ -203,7 +203,8 @@ class Cf7_To_Any_Api_Admin {
 		if($column_name == 'cf7form'){
 	    	$form_name = get_post_meta($post_id,'cf7anyapi_selected_form',true);
 	    	if($form_name){
-	    		echo '<a href="'.site_url()."/wp-admin/admin.php?page=wpcf7&post=".$form_name."&action=edit".'" target="_blank">'.get_the_title($form_name).'</a>';
+	    		echo '<a href="' . esc_url( site_url() . '/wp-admin/admin.php?page=wpcf7&post=' . $form_name . '&action=edit' ) . '" target="_blank">' . esc_html( get_the_title( $form_name ) ) . '</a>';
+
 	    	}
 	      	
 	    }
@@ -312,7 +313,7 @@ class Cf7_To_Any_Api_Admin {
 			if(isset($_POST['cf7_to_any_api_cpt_nonce']) && wp_verify_nonce($_POST['cf7_to_any_api_cpt_nonce'], 'cf7_to_any_api_cpt_nonce')){
 
 				$options['cf7anyapi_selected_form'] = (int)stripslashes($_POST['cf7anyapi_selected_form']);
-				$options['cf7anyapi_base_url'] = sanitize_url($_POST['cf7anyapi_base_url']);
+				$options['cf7anyapi_base_url'] = esc_url($_POST['cf7anyapi_base_url']);
 				if(isset($_POST['cf7anyapi_basic_auth'])){
 					$options['cf7anyapi_basic_auth'] = sanitize_text_field($_POST['cf7anyapi_basic_auth']);
 				}
@@ -407,7 +408,7 @@ class Cf7_To_Any_Api_Admin {
 	        dbDelta($qry);
 	    }
 
-	    if($wpdb->get_var(sprintf("SHOW TABLES LIKE '%s%s'", $wpdb->prefix, 'cf_entries')) != $wpdb->prefix . 'cf_entries'){
+	    if($wpdb->get_var(sprintf("SHOW TABLES LIKE '%s%s'", $wpdb->prefix, 'cf7anyapi_entries')) != $wpdb->prefix . 'cf7anyapi_entries'){
 	    	$charset_collate = $wpdb->get_charset_collate();
 	        $table_name2 = $wpdb->prefix.'cf7anyapi_entries';
 	        $query = "CREATE TABLE IF NOT EXISTS " . $table_name2 . " (
@@ -515,16 +516,6 @@ class Cf7_To_Any_Api_Admin {
 
 		        foreach($cf7anyapi_form_field as $key => $value){
 
-		        	// if you would like to check if the submitted data is numeric or not 
-		        	
-		        	// if(is_numeric($posted_data[$key]) && !is_array($posted_data[$key])){
-		        	// 	$api_post_array[$value] = (int)sanitize_text_field($posted_data[$key]);
-		        	// }
-		        	// else{
-		        	// 	$api_post_array[$value] = (is_array($posted_data[$key]) ? implode(',', self::Cf7_To_Any_Api_sanitize_array($posted_data[$key])) : sanitize_text_field($posted_data[$key]));
-		        	// }
-		        	
-                    //Submitted data as string only
 		        	$api_post_array[$value] = (is_array($posted_data[$key]) ? implode(',', self::Cf7_To_Any_Api_sanitize_array($posted_data[$key])) : sanitize_text_field($posted_data[$key]));
 
 		        }
@@ -695,31 +686,30 @@ class Cf7_To_Any_Api_Admin {
 
   		$wpdb->insert($table,$data);
   	}
+
   	public static function delete_cf7_records(){
-	    global $wpdb;
-	    // Get user input from the HTTP request
-	    $record_id = $_POST['id'];
-	    // Use prepare() to create a prepared statement
-	    $table_entries = $wpdb->prefix.'cf7anyapi_entries';
-	    $table = $wpdb->prefix.'cf7anyapi_entry_id';
-	   	if ( !empty($record_id) && ( isset($_POST['cf_to_any_api_entrie_del_nonce']) && wp_verify_nonce($_POST['cf_to_any_api_entrie_del_nonce'],'cf_to_any_api_entrie_del_nonce') )  ) {
-		    // Use $wpdb->prepare() to safely insert user input into the query
-		    $query_entries = $wpdb->prepare("DELETE FROM $table_entries WHERE data_id IN ($record_id)", $record_id);
-		    $query_id = $wpdb->prepare("DELETE FROM $table WHERE id IN ($record_id)", $record_id);
-		    // Execute the prepared statements
-		    $result_entries = $wpdb->query($query_entries);
-		    $result_id = $wpdb->query($query_id);
+
+  		if ( !empty($_POST['id']) && ( isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'],'cf_to_any_api_entrie_del_nonce') )  ) {
+		    global $wpdb;
+		    $record_id = isset($_POST['id']) ? $_POST['id'] : array();
+			$placeholders = implode(',', array_fill(0, count($record_id), '%d'));
+
+		    $table_entries = $wpdb->prefix.'cf7anyapi_entries';
+		    $table = $wpdb->prefix.'cf7anyapi_entry_id';
+
+		    $result_entries = $wpdb->query($wpdb->prepare("DELETE FROM $table_entries WHERE data_id IN ($placeholders)", $record_id));
+		    $result_id = $wpdb->query($wpdb->prepare("DELETE FROM $table WHERE id IN ($placeholders)", $record_id));
 		    if ($record_id !== false) {
 		        echo json_encode(array('status' => 1, 'Message' => 'Success'));
 		    }else {
-	        echo json_encode(array('status' => -1, 'Message' => 'Failed'));
+	        	echo json_encode(array('status' => -1, 'Message' => 'Failed'));
 	    	}
 		}else {
 	        echo json_encode(array('status' => -1, 'Message' => 'Invalid'));
 	    }
-
 	    exit();
 	}
+
   	public function _cf7_api_deactivation_feedback_popup(){
 		$screen = get_current_screen();
 		if ($screen->base === 'plugins') {

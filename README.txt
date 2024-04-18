@@ -1,10 +1,10 @@
 === Contact Form to Any API ===
-Contributors: itpathsolutions,mayur8991,pateljaymin,vickymakwana1111
-Tags: rest api, api, contact form, crm, lead, pro, export, contact form 7
+Contributors: itpathsolutions,mayur8991,pateljaymin,thakordarshil
+Tags: rest api, api, contact form, crm, lead, pro, export, entries, contact form 7
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.1.8
+Stable tag: 1.1.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,8 @@ Contact form 7 to Any API is most powerful plugin to send cf7 data to any third 
 * Priority Support <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Multi File Upload Support <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Compatible with Multiline files upload for contact form 7 Plugin <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
+* Option to choose Numerical Fields / Integer Fields <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
+* Option to choose Multiple File upload fields <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Save CF7 Entries Directly on Google Sheet <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(Coming Soon with PRO)</a></strong>
 * Paid Plugin customization support based on Requirment <strong><a href="https://www.contactformtoapi.com/#contact_us" target="_blank">(Contact us)</a></strong>
 * Paid oauth 2.0 API Integration based on Requirment <strong><a href="https://www.contactformtoapi.com/#contact_us" target="_blank">(Contact us)</a></strong>
@@ -63,6 +65,8 @@ Contact Form to any API plugin is also available in a professional version which
 * Priority Support
 * Compatible with Multiline files upload for contact form 7 Plugin
 * Choose when to send data to API
+* Option to choose Numerical Fields / Integer Fields
+* Option to choose Multiple File upload fields
 * Paid plugin customization support
 * Paid oauth 2.0 API Integration support
 
@@ -83,6 +87,9 @@ Contact Form to any API plugin is also available in a professional version which
 * Mikrowisp
 * Bats CRM
 * FRS Labs API
+* Get Cobra by ArcaMax
+* Network Worldfilia
+* One Page CRM
 * And many more
 
 
@@ -155,6 +162,10 @@ For plugin integration, we provide premium support for free to help connect your
 3. Entries
 
 == Changelog ==
+
+= 1.1.9 =
+* Fix - Basic fixes and updates
+* New - More API's support added
 
 = 1.1.8 =
 * Fix - Security Updates

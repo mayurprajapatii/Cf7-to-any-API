@@ -56,17 +56,18 @@
 		});
 
 		$('.cf7anyapi_bulk_log_delete').on('click',function(){
+			if(confirm("Are you Sure you want to delete all logs records?") == true){
+				var cf_to_any_api_log_del_nonce = jQuery(".cf7_to_any_api_page_cf7anyapi_logs #cf_to_any_api_log_del_nonce").val();
+				var data = {
+		                'action': 'cf7_to_any_api_bulk_log_delete',
+		                'cf_to_any_api_log_del_nonce' : cf_to_any_api_log_del_nonce,
+		            };
 
-			var cf_to_any_api_log_del_nonce = jQuery(".cf7_to_any_api_page_cf7anyapi_logs #cf_to_any_api_log_del_nonce").val();
-			var data = {
-	                'action': 'cf7_to_any_api_bulk_log_delete',
-	                'cf_to_any_api_log_del_nonce' : cf_to_any_api_log_del_nonce,
-	            };
-
-			var cf7anyapi_response = cf7anyapi_ajax_request(data);
-			cf7anyapi_response.done(function(result){
-				window.location.reload();
-			});
+				var cf7anyapi_response = cf7anyapi_ajax_request(data);
+				cf7anyapi_response.done(function(result){
+					window.location.reload();
+				});
+			}
 		});
 
 		if($('#form_id').length){
@@ -113,13 +114,13 @@
 						text: 'Delete',
 						className: 'cf7toanyapi-btn-delete',
 						action: function(){
-							var array = [];
+							var data_ids = [];
 							jQuery('.cf7toanyapi_dataid.selected').each(function(i){
-								array.push($(this).attr('data-id'));
+								data_ids.push($(this).attr('data-id'));
 							});
 							//console.log(array);
-							var cf_to_any_api_entrie_del_nonce = jQuery('#cf_to_any_api_entrie_del_nonce').val();
-							let data_ids = array.toString();
+							var nonce = jQuery('#cf_to_any_api_entrie_del_nonce').val();
+							//let data_ids = array.toString();
 							if(confirm("Are you Sure you want to delete selected records?") == true)
 							{
 
@@ -129,7 +130,7 @@
 							            dataType: "json",
 							            data:{
 	      									action : 'delete_records',
-	      									cf_to_any_api_entrie_del_nonce : cf_to_any_api_entrie_del_nonce,
+	      									nonce : nonce,
 								            id : data_ids,
 								        },
 							            success: function (data) {
