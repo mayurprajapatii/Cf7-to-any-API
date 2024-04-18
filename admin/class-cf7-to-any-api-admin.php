@@ -696,20 +696,30 @@ class Cf7_To_Any_Api_Admin {
   		$wpdb->insert($table,$data);
   	}
   	public static function delete_cf7_records(){
-  		$record_id = $_POST['id'];
-  		$ids = explode(',',$record_id);
-  		global $wpdb;
-    	$table_entries = $wpdb->prefix.'cf7anyapi_entries';
-    	$table = $wpdb->prefix.'cf7anyapi_entry_id';
-	    $wpdb->query("DELETE FROM ".$table_entries." WHERE data_id IN($record_id)" );
-	    $result = $wpdb->query("DELETE FROM ".$table." WHERE id IN($record_id)" );
-  		if(!empty($result)){
-  			echo json_encode(array('status'=>1,'Message'=>'Success'));
-  		}else{
-  			echo json_encode(array('status'=>-1,'Message'=>'Failed'));
-  		}
-  		exit();
-  	}
+	    global $wpdb;
+	    // Get user input from the HTTP request
+	    $record_id = $_POST['id'];
+	    // Use prepare() to create a prepared statement
+	    $table_entries = $wpdb->prefix.'cf7anyapi_entries';
+	    $table = $wpdb->prefix.'cf7anyapi_entry_id';
+	   	if ( !empty($record_id) && ( isset($_POST['cf_to_any_api_entrie_del_nonce']) && wp_verify_nonce($_POST['cf_to_any_api_entrie_del_nonce'],'cf_to_any_api_entrie_del_nonce') )  ) {
+		    // Use $wpdb->prepare() to safely insert user input into the query
+		    $query_entries = $wpdb->prepare("DELETE FROM $table_entries WHERE data_id IN ($record_id)", $record_id);
+		    $query_id = $wpdb->prepare("DELETE FROM $table WHERE id IN ($record_id)", $record_id);
+		    // Execute the prepared statements
+		    $result_entries = $wpdb->query($query_entries);
+		    $result_id = $wpdb->query($query_id);
+		    if ($record_id !== false) {
+		        echo json_encode(array('status' => 1, 'Message' => 'Success'));
+		    }else {
+	        echo json_encode(array('status' => -1, 'Message' => 'Failed'));
+	    	}
+		}else {
+	        echo json_encode(array('status' => -1, 'Message' => 'Invalid'));
+	    }
+
+	    exit();
+	}
   	public function _cf7_api_deactivation_feedback_popup(){
 		$screen = get_current_screen();
 		if ($screen->base === 'plugins') {

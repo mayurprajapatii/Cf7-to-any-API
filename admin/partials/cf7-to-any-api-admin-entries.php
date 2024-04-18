@@ -72,6 +72,7 @@ $cf_id = (isset($_GET['form_id']) && is_numeric($_GET['form_id']) ? intval($_GET
 				<div id="table_data">
 				<!-- <input type="submit" class="btn-delete cf7toanyapi_btn_delete" value="Delete"> -->
 					<table class="tbl table table-striped table-bordered cf7toanyapi_table" id="cf7toanyapi_table">
+						<?php  echo wp_nonce_field('cf_to_any_api_entrie_del_nonce','cf_to_any_api_entrie_del_nonce' ); ?>
 						<thead>
 							<tr class="cf7toanyapi_dataid_all">								
 								<?php

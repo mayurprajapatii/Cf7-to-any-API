@@ -118,6 +118,7 @@
 								array.push($(this).attr('data-id'));
 							});
 							//console.log(array);
+							var cf_to_any_api_entrie_del_nonce = jQuery('#cf_to_any_api_entrie_del_nonce').val();
 							let data_ids = array.toString();
 							if(confirm("Are you Sure you want to delete selected records?") == true)
 							{
@@ -128,6 +129,7 @@
 							            dataType: "json",
 							            data:{
 	      									action : 'delete_records',
+	      									cf_to_any_api_entrie_del_nonce : cf_to_any_api_entrie_del_nonce,
 								            id : data_ids,
 								        },
 							            success: function (data) {
