@@ -96,17 +96,15 @@ All your header Parameters set here.', 'contact-form-to-any-api' ); ?>
 
     <div class="cf7anyapi_field">
         <label for="cf7anyapi_input_type"><?php esc_html_e( 'Input type', 'contact-form-to-any-api' ); ?></label>
-        <select id="cf7anyapi_input_type" name="cf7anyapi_input_type" required>
-            <option value="params" <?php echo ($cf7anyapi_input_type == 'params' ? esc_html('selected="selected"') : ''); ?>><?php esc_html_e( 'Parameters - GET/POST', 'contact-form-to-any-api' ); ?></option>
-            <option value="json" <?php echo ($cf7anyapi_input_type == 'json' || $cf7anyapi_input_type == '' ? esc_html('selected="selected"') : ''); ?>><?php esc_html_e( 'json', 'contact-form-to-any-api' ); ?></option>
+        <select id="cf7anyapi_input_type" name="cf7anyapi_input_type" required>         
+            <option value="json" <?php echo ($cf7anyapi_input_type == 'json' || $cf7anyapi_input_type == '' ? esc_html('selected="selected"') : ''); ?>><?php esc_html_e( 'Raw (application/json)', 'contact-form-to-any-api' ); ?></option>
+            <option value="params" <?php echo ($cf7anyapi_input_type == 'params' ? esc_html('selected="selected"') : ''); ?>><?php esc_html_e( 'Parameters - GET/POST ( Available in PRO Version Only )', 'contact-form-to-any-api' ); ?></option>
         </select>
     </div>
 
     <div class="cf7anyapi_field">
         <label for="cf7anyapi_method"><?php esc_html_e( 'Method', 'contact-form-to-any-api' ); ?></label>
         <select id="cf7anyapi_method" name="cf7anyapi_method" required>
-            <option value=""><?php esc_html_e( 'Select Method', 'contact-form-to-any-api' ); ?></option>
-            <option value="GET" <?php echo ($cf7anyapi_method == 'GET' ? esc_html('selected="selected"') : ''); ?>>GET</option>
             <option value="POST" <?php echo ($cf7anyapi_method == 'POST' || $cf7anyapi_method == '' ? esc_html('selected="selected"') : ''); ?>>POST</option>
         </select>
     </div>
@@ -114,6 +112,15 @@ All your header Parameters set here.', 'contact-form-to-any-api' ); ?>
 
 <div class="cf7anyapi-form-mapping-fields">
     <h3><?php esc_html_e( 'Map your Fields', 'contact-form-to-any-api' ); ?></h3>
+    <span>
+    <?php
+    printf(
+        esc_html__('Supports only a fixed format of JSON. Requires the %1$sPRO Version%2$s for Nested or Multi Level JSON', 'contact-form-to-any-api'),
+        '<a href="' . esc_url('https://contactformtoapi.com/pricing/') . '" target="_blank">',
+        '</a>'
+    );
+    ?>
+</span>
     <hr>
     <div id="cf7anyapi-form-fields" class="form-fields">        
         <?php

@@ -1,44 +1,47 @@
 === Contact Form to Any API ===
 Contributors: itpathsolutions,mayur8991,pateljaymin,thakordarshil
-Tags: rest api, api, contact form, crm, lead
+Tags: contact form 7 to api, contactform to api, api, contact form, crm, lead
 Requires at least: 6.0
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Contact form 7 to Any API is most powerful plugin to send cf7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings. It also Save Contact Form 7 form submitted data to the database with advanced features like search and export data to csv or excel.
+Contact form 7 to Any API is most powerful plugin to send CF7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings. It also Save Contact Form 7 form submitted data to the database with advanced features like search and export data to csv or excel.
 
 == Description ==
 
 https://youtu.be/1K-JdXwDH_k
 
-Contact form 7 to Any API is most powerful plugin to send cf7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings. It also Save Contact Form 7 form submitted data to the database with advanced features like search and export data to csv or excel.
+Contact form 7 to Any API is most powerful plugin to send CF7 data to any third party services. It can be use to send data to CRM or any REST API. Easy to use and User friendly settings. It also Save Contact Form 7 form submitted data to the database with advanced features like search and export data to csv or excel.
+
+It's the only plugin that works with over 150+ APIs.
 
 = Features =
-* Send CF7 Leads to Remote API's such as CRM and other API using POST/GET
+* Send CF7 Leads to Remote API's such as CRM and other Extrenal API using POST/GET
 * Create unlimited connection with any API
-* Send data to multiple API <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Supports Simple & Fixed Format of JSON
-* Support Multi Level or Any Format of JSON	<strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Supports Basic Auth
 * Supports Bearer Auth
 * API Logs Management with submitted data and API response 
 * Save Contact Form 7 form submitted data to the database.
 * Export Contact Form 7 Data in CSV , EXCEL , PDF , Print
-* Single Or Multiple delete cf7 entries
+* Single Or Multiple delete CF7 entries
+* Send data to multiple API <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
+* Support Multi Level or Any Format of JSON	<strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Send attachments to any API <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
-* Option to Choose when to send data to API - Before cf7 mail sent OR After mail sent <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
+* Option to Choose when to send data to API - Before CF7 mail sent OR After mail sent <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * File input supported - Uploaded file will convert into BASE64 and send to API <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Priority Support <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Multi File Upload Support <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Compatible with Multiline files upload for contact form 7 Plugin <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Option to choose Numerical Fields / Integer Fields <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
 * Option to choose Multiple File upload fields <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(PRO)</a></strong>
-* Save CF7 Entries Directly on Google Sheet <strong><a href="https://www.contactformtoapi.com/pricing/" target="_blank">(Coming Soon with PRO)</a></strong>
-* Paid Plugin customization support based on Requirment <strong><a href="https://www.contactformtoapi.com/#contact_us" target="_blank">(Contact us)</a></strong>
-* Paid oauth 2.0 API Integration based on Requirment <strong><a href="https://www.contactformtoapi.com/#contact_us" target="_blank">(Contact us)</a></strong>
+* Paid plugin customization support for JWT Token Integration with Any API <strong><a href="https://www.contactformtoapi.com/#contact_us" target="_blank">(Contact us)</a></strong>
+* Paid plugin customization support for oauth 2.0 API Integration <strong><a href="https://www.contactformtoapi.com/#contact_us" target="_blank">(Contact us)</a></strong>
+* Paid Plugin customization support for any API <strong><a href="https://www.contactformtoapi.com/#contact_us" target="_blank">(Contact us)</a></strong>
+* WPForms to Any API Plugin <strong><a href="https://www.contactformtoapi.com/" target="_blank">(NEW Plugin - Coming Soon)</a></strong>
 
 = Set your own Header Request Parameter =
 
@@ -67,8 +70,10 @@ Contact Form to any API plugin is also available in a professional version which
 * Choose when to send data to API
 * Option to choose Numerical Fields / Integer Fields
 * Option to choose Multiple File upload fields
-* Paid plugin customization support
-* Paid oauth 2.0 API Integration support
+* Paid plugin customization support for JWT Token Integration with Any API
+* Paid plugin customization support for oauth 2.0 API Integration
+* Paid plugin customization support for any third party api
+* Works with over 150+ APIs
 
 
 == Supported CRM/API with PRO ==
@@ -98,6 +103,12 @@ Contact Form to any API plugin is also available in a professional version which
 * Flowdesk
 * JobAdder  
 * Unlatch CRM
+* Mail2many
+* Workato
+* Jetbrains / Intellij Space API
+* Fincenfetch
+* Lead Docket
+* Agendor API
 * And many more
 
 
@@ -168,14 +179,17 @@ For plugin integration, we provide premium support for free to help connect your
 
 
 == Screenshots ==
-1. Contact Form 7 to Any API settings
-2. Logs Management
-3. Entries
+1. Contact Form 7 to Any API Configurations
+2. API Response Logs Management
+3. Contact Form 7 Submitted Entries
 
 == Changelog ==
 
+= 1.2.2 =
+* Enhancement - Compatible with latest WordPress version 6.6
+
 = 1.2.1 =
-* Improvement – Compatible with latest WordPress version 6.5
+* Enhancement – Compatible with latest WordPress version 6.5
 * Fix - Timeout issue for some users
 
 = 1.2.0 =
