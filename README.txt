@@ -1,10 +1,10 @@
 === Contact Form to Any API ===
 Contributors: itpathsolutions,mayur8991,pateljaymin,thakordarshil
-Tags: contact form 7 to api, contactform to api, api, contact form, crm, lead
+Tags: contact form 7 to api, contactform to api, api, contact form, crm
 Requires at least: 6.0
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 1.2.2
+Stable tag: 1.2.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -184,6 +184,18 @@ For plugin integration, we provide premium support for free to help connect your
 3. Contact Form 7 Submitted Entries
 
 == Changelog ==
+
+= 1.2.6 =
+* Fix - Vulnerability & security fixes
+
+= 1.2.5 =
+* Fix - Vulnerability & security fixes
+
+= 1.2.4 =
+* Fix - Vulnerability & security fixes
+
+= 1.2.3 =
+* Fix - Vulnerability & security fixes
 
 = 1.2.2 =
 * Enhancement - Compatible with latest WordPress version 6.6

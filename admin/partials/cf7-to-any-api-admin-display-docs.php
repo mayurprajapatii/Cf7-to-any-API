@@ -37,8 +37,9 @@
         </pre>
             </code>
             <p><b><?php esc_html_e( 'Authorization having Username & Password with Base64 ?', 'contact-form-to-any-api' ); ?></br>
-
-               <?php echo __( 'To convert online <a href="https://www.base64encode.net/" target="_blank"> click here </a> and put it in the header.', 'contact-form-to-any-api' ); ?></b></p>
+               <?php
+               echo wp_kses( 'To convert online <a href="https://www.base64encode.net/" target="_blank">click here</a> and put it in the header.', array('a' => array('href' => array(), 'target' => array() ) ) );?></b></p>
+               
             <b><?php esc_html_e( 'Example', 'contact-form-to-any-api' ); ?></b><code>
                 <pre>
     Authorization: Basic ' . base64_encode( YOUR_USERNAME . ':' . YOUR_PASSWORD )
@@ -52,7 +53,8 @@
     Content-Type: application/json
                 </pre>
             </code> 
-            <li><?php esc_html_e( 'Then you have to select your Input Type JSON OR GET/POST', 'contact-form-to-any-api' ); ?></li>
+            <ol>
+                <li><?php esc_html_e( 'Then you have to select your Input Type JSON OR GET/POST', 'contact-form-to-any-api' ); ?></li>
                 <li><?php esc_html_e( 'Select your API Method POST or GET', 'contact-form-to-any-api' ); ?></li>
                 <li><?php esc_html_e( 'Map your Fields with your API KEYS', 'contact-form-to-any-api' ); ?> </li>
                 <li><?php esc_html_e( 'Save your API configuration', 'contact-form-to-any-api' ); ?> </li>
@@ -62,10 +64,10 @@
         <div class="tab-pane fade cf7anyapi_full_width" id="v-pills-logs" role="tabpanel" aria-labelledby="v-pills-logs-tab">
         <h5><?php esc_html_e( 'Logs', 'contact-form-to-any-api' ); ?></h5>
             <ol>
-                <li><?php echo __( 'After submitting data you can see your data in <b>Logs</b> tab.', 'contact-form-to-any-api' ); ?></li>
+                <li><?php echo wp_kses(__( 'After submitting data you can see your data in <b>Logs</b> tab.', 'contact-form-to-any-api' ), array('b' => array()) ); ?></li>
                 <li><?php esc_html_e( 'You can see your API logs and its data which is submitted by user', 'contact-form-to-any-api' ); ?></li>
-                <li><?php echo __( 'You can see your <b>API response too</b>.', 'contact-form-to-any-api'); ?></li>
-                <?php esc_html_e( 'Ex. ', 'contact-form-to-any-api' ); ?><img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/logs.png';?>" alt="" style="height:100%; width:100%;">
+                <li><?php echo wp_kses(__( 'You can see your <b>API response too</b>.', 'contact-form-to-any-api' ), array('b' => array() ) ); ?></li>
+                <?php esc_html_e( 'Ex. ', 'contact-form-to-any-api' ); ?><img src="<?php echo esc_url( plugin_dir_url( __DIR__ ).'images/logs.png' ); ?>" alt="logs list" style="height:100%; width:100%;">
             </ol>
         </div>
 
@@ -74,8 +76,8 @@
         <h5><?php esc_html_e( 'Entries', 'contact-form-to-any-api' ); ?></h5>
             <ol>
                 <li><?php esc_html_e( 'Select the form and its data will display.', 'contact-form-to-any-api' ); ?></li>               
-                <li><?php echo __( 'You can download your data in <b>CSV</b>, <b>Excel</b>, <b>PDF</b> and also you can <b>Print</b> your data.', 'contact-form-to-any-api' ); ?></li>
-                <?php esc_html_e( 'Ex. ', 'contact-form-to-any-api' ); ?><img src="<?php echo plugins_url().'/contact-form-to-any-api/admin/images/entries.png';?>" alt="" style="height:100%; width:100%;">
+                <li> <?php echo wp_kses(__( 'You can download your data in <b>CSV</b>, <b>Excel</b>, <b>PDF</b> and also you can <b>Print</b> your data.', 'contact-form-to-any-api' ), array('b' => array() ) ); ?></li>
+                <?php esc_html_e( 'Ex. ', 'contact-form-to-any-api' ); ?><img src="<?php echo esc_url( plugin_dir_url( __DIR__ ).'images/entries.png');?>" alt="entries list" style="height:100%; width:100%;">
             </ol>
             
         </div>
@@ -97,7 +99,7 @@
                 </code>
                     </li>
 
-                    <li><?php echo __( '<b>Nested JSON Format Required </b><a href="https://www.contactformtoapi.com/pricing/#pricing" class="cf7_to_any_api_doc_link" target="_blank"><strong>Pro Version</strong></a>', 'contact-form-to-any-api' ); ?></br>
+                    <li><?php echo wp_kses(__( '<b>Nested JSON Format Required </b><a href="https://www.contactformtoapi.com/pricing/#pricing" class="cf7_to_any_api_doc_link" target="_blank"><strong>Pro Version</strong></a>', 'contact-form-to-any-api' ), array('b' => array(), 'a' => array('href' => array(), 'class' => array(), 'target' => array() ), 'strong' => array() ) ); ?></br>
                     <code>
             <pre>
     {
@@ -112,7 +114,7 @@
             </pre>
                 </code>
 
-                <h5><?php echo __( '<b>Your API has Nested or Multilevel format of json ?? Don\'t worry our development team can customize our plugin as per your need</b> <a target="_blank" href="https://www.itpathsolutions.com/contact-us/">Click here to contact us</a>', 'contact-form-to-any-api' ); ?></h5>
+                <h5><?php echo wp_kses(__( '<b>Your API has Nested or Multilevel format of json ?? Don\'t worry our development team can customize our plugin as per your need</b> <a target="_blank" href="https://www.itpathsolutions.com/contact-us/">Click here to contact us</a>', 'contact-form-to-any-api' ), array('b' => array(), 'a' => array('href' => array(), 'target' => array() ) ) ); ?></h5>
                 </li>
             </ol>
         </div>
@@ -177,25 +179,25 @@
          <!-- contact us -->
          <div class="tab-pane fade cf7anyapi_full_width" id="v-pills-contact-us" role="tabpanel" aria-labelledby="v-pills-contact-us-tab">
         <h5><?php esc_html_e( 'Contact Us', 'contact-form-to-any-api' ); ?></h5><br>
-           <h5><?php echo __( 'Email : <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a>', 'contact-form-to-any-api' ); ?></h5>
-           <p><?php echo __( 'Need Help with Plugin Integration ? <a target="_blank" href="https://www.contactformtoapi.com/#contact_us">Click to Connect us</a>', 'contact-form-to-any-api' ); ?></p>
+           <h5><?php echo wp_kses(__( 'Email : <a href="mailto:support@contactformtoapi.com">support@contactformtoapi.com</a>', 'contact-form-to-any-api' ), array('a' => array('href' => array() ) ) ); ?></h5>
+           <p><?php echo wp_kses(__( 'Need Help with Plugin Integration ? <a target="_blank" href="https://www.contactformtoapi.com/#contact_us">Click to Connect us</a>', 'contact-form-to-any-api' ), array('a' => array('href' => array(), 'target' => array() ) ) ); ?></p>
         </div>
         </div>
     </div>
     <div class="col-3 image">
         <div class="tab-content" id="v-pills-tabContent">
         <a href="https://www.contactformtoapi.com/#contact_us" target="_blank">
-            <img src="<?php echo CF7_CURL_DOMAIN.'/cf7-imges/right_image_1.jpg';?>" alt="" style="width:100%;">
+            <img src="<?php echo esc_url(CF7_CURL_DOMAIN.'/cf7-imges/right_image_1.jpg'); ?>" alt="" style="width:100%;">
         </a>
         <a href="https://wordpress.org/support/plugin/contact-form-to-any-api/reviews/" target="_blank">
-        <img height="400" width="100%" src="<?php echo CF7_CURL_DOMAIN.'/cf7-imges/right_image_2.png';?>" alt="rating.png">
+        <img height="400" width="100%" src="<?php echo esc_url(CF7_CURL_DOMAIN.'/cf7-imges/right_image_2.png');?>" alt="rating.png">
         </a>
         </div>
     </div>
     <!-- contact-us image -->
     <div class="contact_us contact_image">
         <a href="https://www.contactformtoapi.com/#contact_us" target="_blank">
-            <img src="<?php echo CF7_CURL_DOMAIN.'/cf7-imges/bottom_image.jpg';?>" alt="" style="width:100%;">
+            <img src="<?php echo esc_url(CF7_CURL_DOMAIN.'/cf7-imges/bottom_image.jpg');?>" alt="" style="width:100%;">
         </a>
     </div>
     

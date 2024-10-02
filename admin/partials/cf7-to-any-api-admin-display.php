@@ -106,6 +106,7 @@ All your header Parameters set here.', 'contact-form-to-any-api' ); ?>
         <label for="cf7anyapi_method"><?php esc_html_e( 'Method', 'contact-form-to-any-api' ); ?></label>
         <select id="cf7anyapi_method" name="cf7anyapi_method" required>
             <option value="POST" <?php echo ($cf7anyapi_method == 'POST' || $cf7anyapi_method == '' ? esc_html('selected="selected"') : ''); ?>>POST</option>
+            <option value="GET" <?php echo ($cf7anyapi_method == 'GET' || $cf7anyapi_method == '' ? esc_html('selected="selected"') : ''); ?>>GET</option>
         </select>
     </div>
 </div>
@@ -140,15 +141,15 @@ All your header Parameters set here.', 'contact-form-to-any-api' ); ?>
 
 <div class="cf7anyapi-bottom-image">
     <a href="https://www.itpathsolutions.com/contact-us/" target="_blank">
-        <img src="<?php echo CF7_CURL_DOMAIN.'/cf7-imges/bottom_image.jpg';?>" alt="need help with your website">
+        <img src="<?php echo esc_url(CF7_CURL_DOMAIN.'/cf7-imges/bottom_image.jpg');?>" alt="need help with your website">
     </a>
 </div>
 <div class="cf7anyapi-right-image">
     <a href="https://www.itpathsolutions.com/contact-us/" target="_blank">
-        <img src="<?php echo CF7_CURL_DOMAIN.'/cf7-imges/right_image_1.jpg';?>" alt="plugin ratings">
+        <img src="<?php echo esc_url(CF7_CURL_DOMAIN.'/cf7-imges/right_image_1.jpg');?>" alt="plugin ratings">
     </a>
     <a href="https://wordpress.org/support/plugin/contact-form-to-any-api/reviews/" target="_blank">
-        <img src="<?php echo CF7_CURL_DOMAIN.'/cf7-imges/right_image_2.png';?>" alt="plugin review">
+        <img src="<?php echo esc_url(CF7_CURL_DOMAIN.'/cf7-imges/right_image_2.png');?>" alt="plugin review">
     </a>
 </div>
 <?php } ?>

@@ -340,10 +340,45 @@ p.pro_tab_description { font-size: 17px; line-height: 24px; }
 .get_pro_version:hover a{ background:#172646;text-decoration: none;color:#fff; }
 /* CF7 documentation CSS */
 .cf7_to_any_api_page_cf7anyapi_logs #the-list td.form_data.column-form_data {
-    max-height: 200px;
     overflow: auto;
     display: block;
     height: 100%;
+}
+.cf7anyapi_logs td.log.column-log pre, .cf7anyapi_logs .column-form_data pre {
+    white-space: pre-wrap;
+    margin: 0;
+}
+
+#cf7anyapi-log-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#cf7anyapi-log-popup .close-popup {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.cf7anyapi_logs span.view_more {
+    color: #2271b1;
+    font-weight: 500;
+    cursor: pointer;
+}
+.cf7anyapi-log-content pre{
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 @media screen and (max-width: 1500px){
     
@@ -361,5 +396,3 @@ p.pro_tab_description { font-size: 17px; line-height: 24px; }
         grid-template-columns: 1fr;
     }
 }
-
-
